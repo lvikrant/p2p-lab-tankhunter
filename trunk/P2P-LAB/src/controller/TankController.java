@@ -107,7 +107,7 @@ public class TankController implements ITankController {
 
 	public void destroy(NetworkTarget nt){
 		 Sound.play("unitDown");
-		//TODO destroy
+		 gc.gameWindow.gp.destroyTank(nt);
 	}
 	
 }
