@@ -1,6 +1,7 @@
 package view;
 
 
+
 import interfaces.GameVisualisation;
 
 import java.awt.Color;
@@ -10,29 +11,20 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
-
-
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 import javax.swing.border.Border;
-
 import comparator.NTComparator;
 import comparator.PointComparator;
-
 import model.NetworkTarget;
-import model.PowerUp;
-import model.Tank;
 
 
 
-public class GamePanel extends JPanel implements ActionListener{
+public class GamePanel extends JPanel implements ActionListener,GameVisualisation{
 	private static final long serialVersionUID = 1L;
 	
 	// green tank images
@@ -113,12 +105,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	 
 	  }
 	  
-	   /** 
-	    * addPowerUp method sets a new label with powerUp-Image on the position (x,y).
-	    * 
-	    * @param point, position of the powerUp
-	    * @param parPowerUp, name of the powerUp as String
-	    */
+	  
 	   public void addPowerUp(Point point, String parPowerUp){
 		   JLabel label = new JLabel();
 		   label.setSize(32,32);
@@ -141,27 +128,13 @@ public class GamePanel extends JPanel implements ActionListener{
 		   powerupMap.put(point, label);
 
 	   }
-   
-	   /** 
-	    *  removePowerUp removes the label with powerUp-Image from the panel.
-	    * 
-	    * @param powerUpID the ID of the powerUp
-	    */  
+    
 	   public void remove(Point point){
 		   powerupMap.get(point).setVisible(false);
 		   remove(powerupMap.get(point));
 		   powerupMap.remove(point);
 	   }
      
-	  /** 
-	   * addTank method sets a new label with tank-Image on the position (x,y).
-	   * New label is then added to the tankLabels array on the position tankID
-	   * 
-	   * @param tankID ID of the tank
-	   * @param posX x-coordinate position in fields
-	   * @param posY y-coordinate position in fields
-	   * @param angle the direction of the tank {0,90,180,270}
-	   */
 	   public void addTank(NetworkTarget nt,Point point, int angle){
 		   TankLabel tl = new TankLabel(point,this);
 		   tankMap.put(nt, tl);
@@ -171,12 +144,6 @@ public class GamePanel extends JPanel implements ActionListener{
 		   setVisible(true);
 	   }
 	   
-	   /** 
-	    *  rotateTank changes the direction (image) of the tank.
-	    * 
-	    * @param tankID ID of the tank
-	    * @param angle the direction of the tank {0,90,180,270}
-	    */
 	   public void rotateTank(NetworkTarget nt, int angle){
 		   TankLabel tl = tankMap.get(nt);
 		   
@@ -213,12 +180,6 @@ public class GamePanel extends JPanel implements ActionListener{
 		   }
 	   }
 	   
-	   /** 
-	    *  moveTank increases the field position of tank by 1 in angle direction.
-	    * 
-	    * @param tankID ID of the tank
-	    * @param angle the direction of the tank {0,90,180,270}
-	    */
 	   public void moveTank(NetworkTarget nt, int angle){
 		   	   TankLabel tl = tankMap.get(nt);
 		   	   tl.setAngle(angle);
@@ -268,12 +229,6 @@ public class GamePanel extends JPanel implements ActionListener{
 	    }
 	   
 	   
-	   /**
-	    *  destroyTank starts the animation of tank distraction. 
-	    *  The label with tank image will be removed from panel and tankLabel array.  
-	    *  
-	    * @param tankID ID of the tank
-	    */
 	   public void destroyTank(NetworkTarget nt){
 		   tankMap.get(nt).setDead(true);
 		   tankMap.get(nt).getDestroyTimer().start();
