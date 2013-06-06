@@ -2,6 +2,8 @@ package interfaces;
 
 import java.awt.Point;
 
+import model.NetworkTarget;
+
 
 public interface GameVisualisation {
 	
@@ -14,7 +16,7 @@ public interface GameVisualisation {
 	   * @param posY y-coordinate position in fields
 	   * @param angle the direction of the tank {0,90,180,270}
 	   */
-	void addTank(int tankID, int posX, int posY, int angle);
+	 public void addTank(NetworkTarget nt,Point point, int angle);
 	
 	   /** 
 	    *  rotate tank with ID = tankID in direction = angle
@@ -22,7 +24,7 @@ public interface GameVisualisation {
 	    * @param tankID ID of the tank
 	    * @param angle the direction of the tank {0,90,180,270}
 	    */
-	void rotateTank(int tankID, int angle);
+	 public void rotateTank(NetworkTarget nt, int angle);
 	
 	   /** 
 	    *  move tank with ID = tankID in direction = angle
@@ -30,21 +32,21 @@ public interface GameVisualisation {
 	    * @param tankID ID of the tank
 	    * @param angle the direction of the tank {0,90,180,270}
 	    */
-	void moveTank(int tankID, int angle);
+	 public void moveTank(NetworkTarget nt, int angle);
 	 
 	   /**
 	    * remove tank with ID = tankID
 	    *  
 	    * @param tankID ID of the tank
 	    */
-	void removeTank(int tankID);
+	 public void removeTank(NetworkTarget nt);
 	
 	   /**
 	    * Method destroyTank starts the animation of tank distraction.  
 	    *  
 	    * @param tankID ID of the tank
 	    */
-	void destroyTank(int tankID);
+	 public void destroyTank(NetworkTarget nt);
 	
 
 		//-------MISSILE--------------------------------------------------------------
@@ -57,7 +59,7 @@ public interface GameVisualisation {
 	   * @param posY y-coordinate position in fields
 	   * @param angle the direction of the missile {0,90,180,270}
 	   */
-    void addMissile(int missileID,int posX, int posY, int angle);
+	 public void addMissile(NetworkTarget nt,Point point, int angle);
     
     	   /** 
 	    *  move missile with ID = missileID in direction = angle
@@ -65,21 +67,21 @@ public interface GameVisualisation {
 	    * @param missileID ID of the missile
 	    * @param angle the direction of the missile {0,90,180,270}
 	    */
-    void moveMissile(int missileID);
+	  public void moveMissile(NetworkTarget nt);
     
 	   /**
 	    * remove missile with ID = missileID
 	    *  
 	    * @param tankID ID of the tank
 	    */
-    void removeMissile(int missileID);
+	  public void removeMissile(NetworkTarget nt);
     
 	   /**
 	    * Method explodeMissile starts the animation of missile explosin.  
 	    *  
 	    * @param tankID ID of the tank
 	    */
-    void explodeMissile(int missileID);
+	  public void explodeMissile(NetworkTarget nt);
 
     
 //-------POWERUP--------------------------------------------------------------
@@ -92,7 +94,7 @@ public interface GameVisualisation {
 	    * @param posX x-coordinate position in fields
 	    * @param posY y-coordinate position in fields
 	    */
-    void addPowerUp(Point point, String parPowerUp);
+    public void addPowerUp(Point point, String parPowerUp);
     
 	   /** 
 	    * remove powerUp with ID = powerUpID
