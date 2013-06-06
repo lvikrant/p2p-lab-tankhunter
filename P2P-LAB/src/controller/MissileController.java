@@ -2,9 +2,7 @@ package controller;
 
 import java.awt.Point;
 
-import interfaces.IMissileController;
-
-public class MissileController implements IMissileController {
+public class MissileController {
 
 	public MissileController(GameController gameC, int missileLimit) {
 		// TODO Auto-generated constructor stub
