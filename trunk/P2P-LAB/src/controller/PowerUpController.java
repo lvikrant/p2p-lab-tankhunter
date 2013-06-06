@@ -1,7 +1,5 @@
 package controller;
 
-import interfaces.IPowerUpController;
-
 import java.awt.Point;
 import java.util.Map;
 import java.util.TreeMap;
@@ -10,7 +8,7 @@ import comparator.PointComparator;
 
 import model.PowerUp;
 
-public class PowerUpController implements IPowerUpController {
+public class PowerUpController{
 	
 	Map<Point,PowerUp> map= new TreeMap<Point, PowerUp>(new PointComparator());
 	private GameController gc;

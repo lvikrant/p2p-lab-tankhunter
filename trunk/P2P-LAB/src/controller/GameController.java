@@ -152,7 +152,7 @@ public class GameController implements ActionListener, KeyListener{
 	
 	public void moveToRegion(int posX, int posY, int angle){
 		OBJECT_CONTROLLER.removeTank(ME);
-		OBJECT_CONTROLLER.removeAllPowerUp();
+		OBJECT_CONTROLLER.removeAllPowerUps();
 		gameWindow.moveToRegionRight(posY);
 		OBJECT_CONTROLLER.addTank(ME, new Point(0,posY), angle);
 		OBJECT_CONTROLLER.setElements(0);
