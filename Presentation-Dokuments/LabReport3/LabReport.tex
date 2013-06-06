@@ -1,0 +1,14 @@
+
+\section{Network management Layout}
+In this Section it is explains how connections are initiated, maintained and how data transfer is done. All Classes described extend from the Java-Thread-Class. This allows to create new threads running this classes to maintain specific functions. It is to add that every list or queue used in this section is subject to multi threaded access. To ensure thread-safety only synchronized lists and queues are used. This results in a lock on a list or queue if an access is needed.
+To initiate this a instance of ConnectionManager is created and the thread-function started.
+
+\subsection{ConnectionManager}
+This is the main class of the Network classes. First it creates ServerSocket which listens on a port. If no specific port is given it start on a random port supplied by the OS. Then the ServerSocket is passed to a new instance of IncommingConnectionHandler that is started in a new thread. The ConnectionManager is responsible to handle a list of ConnectionHandler. If a new connection is to be initiated its added to this list. The main loop of the ConnectionManager periodical reads new data from the underlying ConnectionHandlers and interprets basic commands like answering a Ping with a Pong. The other data is stored in a queue and is provided to higher classes on request. The ConnectionManager also relays the data to be send to the corresponding ConnectionHandler. 
+
+\subsection{IncommingConnectionHandler}
+This class uses the blocking accept function of a ServerSocket to allow other Sockets to connect. If a new connection is established a new ClientHandler is created and added to the ConnectionHandler list in the ConnectionManager.
+
+\subsection{ConnectionHandler}
+Every instance of a ConnectionHandler is responsibly to maintain one connection. It maintain two queues. One is used for received objects ready to get read by the ConnectionManger. The other is a buffed for objects that are send. 
+Whenever a object is send, the current open port, the IncommingConnectionHandler is listening on, is stored in the object. On the other hand, every object received has the IP of it's sender added to the object.
