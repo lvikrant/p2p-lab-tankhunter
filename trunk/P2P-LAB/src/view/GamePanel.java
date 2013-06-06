@@ -275,6 +275,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	    * @param tankID ID of the tank
 	    */
 	   public void destroyTank(NetworkTarget nt){
+		   tankMap.get(nt).setDead(true);
 		   tankMap.get(nt).getDestroyTimer().start();
 	   }
 	   
@@ -407,8 +408,8 @@ public class GamePanel extends JPanel implements ActionListener{
 	for (Map.Entry<NetworkTarget, TankLabel> entry : tankMap.entrySet()){
 		if (e.getSource() == entry.getValue().getDestroyTimer()) {
 			if(entry.getValue().isDead()){
-				entry.getValue().setDead(true);
-				entry.getValue().setIcon(skull);				
+				entry.getValue().setDead(false);
+				entry.getValue().setIcon(skull);
 			} else {
                 entry.getValue().getDestroyTimer().stop();
                 entry.getValue().getLabel().setVisible(false);
