@@ -278,12 +278,7 @@ public class GamePanel extends JPanel implements ActionListener{
 		   tankMap.get(nt).setDead(true);
 		   tankMap.get(nt).getDestroyTimer().start();
 	   }
-	   
 
-	   
-	   
-	
-	   
 	   public void addMissile(NetworkTarget nt,Point point, int angle){
 		   MissileLabel ml = new MissileLabel(point,angle, this);
 		   missileMap.put(nt, ml);
@@ -378,14 +373,6 @@ public class GamePanel extends JPanel implements ActionListener{
 			ml.setFly(16);
 			ml.getMoveTimer().start();
 		}
-	   
-
-	
-	   
-	   
-
-
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
