@@ -22,7 +22,7 @@ public class MissileLabel {
 	
 	private Timer moveTimer;
 	
-	public MissileLabel(Point point,int angle, GamePanel gp) {
+	public MissileLabel(Point point,int angle, GameRegion gp) {
 		ANGLE = angle;
 		posX = (int)point.getX();
 		posY = (int)point.getY();
