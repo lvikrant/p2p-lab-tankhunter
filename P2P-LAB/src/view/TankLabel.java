@@ -17,7 +17,7 @@ public class TankLabel {
 	private int onTheWay = 16;
 	private Timer moveTimer;
 	
-	public TankLabel(Point point,GamePanel gp) {
+	public TankLabel(Point point,GameRegion gp) {
 		posX = (int)point.getX()*32;
 		posY = (int)point.getY()*32;
 		label = new JLabel();

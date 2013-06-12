@@ -28,8 +28,10 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public GamePanel gamePanel;
 
-	public GamePanel gp;
+
 	private JMenuBar menuBar;
 
 	public JLabel bonusLabel;
@@ -53,14 +55,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	private JMenu menuMusic;
 	private JMenuItem menuItemPlayOrStopMusic;
 
-	public GamePanel gp00;
-	public GamePanel gp01;
-	public GamePanel gp02;
-	public GamePanel gp10;
-	public GamePanel gp12;
-	public GamePanel gp20;
-	public GamePanel gp21;
-	public GamePanel gp22;
+
 
 	private Timer movement;
 	private int onTheWay = 16;
@@ -73,45 +68,19 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		setIconImage(new ImageIcon("src/resources/TankHunters.png").getImage());
 		GAMEMODE = parGameMode;
 
-		gp = new GamePanel("src/resources/b11.png", this, GAMEMODE);
-		gp00 = new GamePanel("src/resources/b00.png", this, GAMEMODE);
-		gp01 = new GamePanel("src/resources/b01.png", this, GAMEMODE);
-		gp02 = new GamePanel("src/resources/b02.png", this, GAMEMODE);
-		gp10 = new GamePanel("src/resources/b10.png", this, GAMEMODE);
+	
 
-		gp12 = new GamePanel("src/resources/b12.png", this, GAMEMODE);
-		gp20 = new GamePanel("src/resources/b20.png", this, GAMEMODE);
-		gp21 = new GamePanel("src/resources/b21.png", this, GAMEMODE);
-		gp22 = new GamePanel("src/resources/b22.png", this, GAMEMODE);
-
-		gp00.setLocation(-448, -288);
-		gp01.setLocation(-448, 128);
-		gp02.setLocation(-448, 544);
-		gp10.setLocation(224, -288);
-		gp.setLocation(224, 128);
-		gp12.setLocation(224, 544);
-		gp20.setLocation(896, -288);
-		gp21.setLocation(896, 128);
-		gp22.setLocation(896, 544);
-
-		getContentPane().add(gp00);
-		getContentPane().add(gp01);
-		getContentPane().add(gp02);
-		getContentPane().add(gp10);
-		getContentPane().add(gp12);
-		getContentPane().add(gp20);
-		getContentPane().add(gp21);
-		getContentPane().add(gp22);
+		gamePanel = new GamePanel(this, GAMEMODE);
+		getContentPane().add(gamePanel);
 
 		setBounds(50, 50, 1125, 722);
-
 		setLayout(null);
 		GameController gc = new GameController(this, playerName);
+		
 		setTitle("Tank Hunters");
 		addKeyListener(gc);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().add(gp);
 		setJMenuBar(getMenuBar0());
 		setVisible(true);
 
@@ -248,10 +217,10 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	}
 
 	public void createNewPanel(int type) {
-		gp.setVisible(false);
-		remove(gp);
+		gamePanel.getMainRegion().setVisible(false);
+		remove(gamePanel.getMainRegion());
 		menuBar.setVisible(false);
-		gp = new GamePanel("src/resources/background1.png", this, GAMEMODE);
+		gp = new GameRegion("src/resources/background1.png", this, GAMEMODE);
 		add(gp);
 		menuBar.setVisible(true);
 	}
@@ -266,9 +235,9 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		gp = gp21;
 		gp12 = gp22;
 
-		gp20 = new GamePanel("src/resources/bg.png", this, GAMEMODE);
-		gp21 = new GamePanel("src/resources/bg.png", this, GAMEMODE);
-		gp22 = new GamePanel("src/resources/bg.png", this, GAMEMODE);
+		gp20 = new GameRegion("src/resources/bg.png", this, GAMEMODE);
+		gp21 = new GameRegion("src/resources/bg.png", this, GAMEMODE);
+		gp22 = new GameRegion("src/resources/bg.png", this, GAMEMODE);
 
 		getContentPane().add(gp20);
 		getContentPane().add(gp21);
@@ -317,89 +286,19 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		regionLabel.setText("Region (" + posX + "|" + posY + ")");
 	}
 
-	public void movePanels(int angle) {
+	public void movePanel(int angle) {
 		switch (angle) {
 		case 0:
-			gp00.setLocation((int) gp00.getLocation().getX() - 2, (int) gp00
-					.getLocation().getY());
-			gp01.setLocation((int) gp01.getLocation().getX() - 2, (int) gp01
-					.getLocation().getY());
-			gp02.setLocation((int) gp02.getLocation().getX() - 2, (int) gp02
-					.getLocation().getY());
-			gp10.setLocation((int) gp10.getLocation().getX() - 2, (int) gp10
-					.getLocation().getY());
-			gp.setLocation((int) gp.getLocation().getX() - 2, (int) gp
-					.getLocation().getY());
-			gp12.setLocation((int) gp12.getLocation().getX() - 2, (int) gp12
-					.getLocation().getY());
-			gp20.setLocation((int) gp20.getLocation().getX() - 2, (int) gp20
-					.getLocation().getY());
-			gp21.setLocation((int) gp21.getLocation().getX() - 2, (int) gp21
-					.getLocation().getY());
-			gp22.setLocation((int) gp22.getLocation().getX() - 2, (int) gp22
-					.getLocation().getY());
+			gamePanel.setLocation((int) gamePanel.getLocation().getX()-2, (int) gamePanel.getLocation().getY());
 			break;
 		case 90:
-			gp00.setLocation((int) gp00.getLocation().getX(), (int) gp00
-					.getLocation().getY() + 2);
-			gp01.setLocation((int) gp01.getLocation().getX(), (int) gp01
-					.getLocation().getY() + 2);
-			gp02.setLocation((int) gp02.getLocation().getX(), (int) gp02
-					.getLocation().getY() + 2);
-			gp10.setLocation((int) gp10.getLocation().getX(), (int) gp10
-					.getLocation().getY() + 2);
-			gp.setLocation((int) gp.getLocation().getX(), (int) gp
-					.getLocation().getY() + 2);
-			gp12.setLocation((int) gp12.getLocation().getX(), (int) gp12
-					.getLocation().getY() + 2);
-			gp20.setLocation((int) gp20.getLocation().getX(), (int) gp20
-					.getLocation().getY() + 2);
-			gp21.setLocation((int) gp21.getLocation().getX(), (int) gp21
-					.getLocation().getY() + 2);
-			gp22.setLocation((int) gp22.getLocation().getX(), (int) gp22
-					.getLocation().getY() + 2);
-
+			gamePanel.setLocation((int) gamePanel.getLocation().getX(), (int) gamePanel.getLocation().getY()+2);
 			break;
 		case 180:
-			gp00.setLocation((int) gp00.getLocation().getX() + 2, (int) gp00
-					.getLocation().getY());
-			gp01.setLocation((int) gp01.getLocation().getX() + 2, (int) gp01
-					.getLocation().getY());
-			gp02.setLocation((int) gp02.getLocation().getX() + 2, (int) gp02
-					.getLocation().getY());
-			gp10.setLocation((int) gp10.getLocation().getX() + 2, (int) gp10
-					.getLocation().getY());
-			gp.setLocation((int) gp.getLocation().getX() + 2, (int) gp
-					.getLocation().getY());
-			gp12.setLocation((int) gp12.getLocation().getX() + 2, (int) gp12
-					.getLocation().getY());
-			gp20.setLocation((int) gp20.getLocation().getX() + 2, (int) gp20
-					.getLocation().getY());
-			gp21.setLocation((int) gp21.getLocation().getX() + 2, (int) gp21
-					.getLocation().getY());
-			gp22.setLocation((int) gp22.getLocation().getX() + 2, (int) gp22
-					.getLocation().getY());
+			gamePanel.setLocation((int) gamePanel.getLocation().getX()+2, (int) gamePanel.getLocation().getY());
 			break;
 		case 270:
-
-			gp00.setLocation((int) gp00.getLocation().getX(), (int) gp00
-					.getLocation().getY() - 2);
-			gp01.setLocation((int) gp01.getLocation().getX(), (int) gp01
-					.getLocation().getY() - 2);
-			gp02.setLocation((int) gp02.getLocation().getX(), (int) gp02
-					.getLocation().getY() - 2);
-			gp10.setLocation((int) gp10.getLocation().getX(), (int) gp10
-					.getLocation().getY() - 2);
-			gp.setLocation((int) gp.getLocation().getX(), (int) gp
-					.getLocation().getY() - 2);
-			gp12.setLocation((int) gp12.getLocation().getX(), (int) gp12
-					.getLocation().getY() - 2);
-			gp20.setLocation((int) gp20.getLocation().getX(), (int) gp20
-					.getLocation().getY() - 2);
-			gp21.setLocation((int) gp21.getLocation().getX(), (int) gp21
-					.getLocation().getY() - 2);
-			gp22.setLocation((int) gp22.getLocation().getX(), (int) gp22
-					.getLocation().getY() - 2);
+			gamePanel.setLocation((int) gamePanel.getLocation().getX(), (int) gamePanel.getLocation().getY()-2);
 			break;
 
 		}
@@ -411,13 +310,21 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		if (e.getSource() == movement) {
 			onTheWay--;
 			if (onTheWay > 0) {
-				movePanels(angle);
+				movePanel(angle);
 			} else {
 				movement.stop();
 				onTheWay = 16;
 			}
 
 		}
+	}
+
+	public GameRegion getMainRegion() {
+		return gamePanel.getMainRegion();
+	}
+	
+	public void setGamePanelLocation(int posX, int posY){
+		gamePanel.setLocation(x, y);
 	}
 
 }
