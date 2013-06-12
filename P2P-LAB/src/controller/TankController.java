@@ -34,7 +34,10 @@ public class TankController {
 			Tank tank = new Tank(gc, nt, pos, 0);
 			if (map.size() <= TANK_LIMIT) {
 				map.put(nt, tank);
-				gc.gameWindow.gp.addTank(nt, pos, 0);
+				gc.getMainRegion().addTank(nt, pos, 0);
+				if(nt == gc.getPlayer()){
+					gc.setGamePanelMiddle(pos);
+				}
 				return true;
 			} else {
 				return false;
@@ -53,7 +56,7 @@ public class TankController {
 		if (gc.getFieldInfo(pos).equals("FREE")) {
 			Tank tank = new Tank(gc, nt, pos, angle);
 			map.put(nt, tank);
-			gc.gameWindow.gp.addTank(nt, pos, 0);
+			gc.getMainRegion().addTank(nt, pos, 0);
 			return true;
 		}
 		return false;
@@ -61,7 +64,7 @@ public class TankController {
 
 	public void remove(NetworkTarget nt) {
 		if (map.containsKey(nt)) {
-			gc.gameWindow.gp.removeTank(nt);
+			gc.getMainRegion().removeTank(nt);
 			map.remove(nt);
 		}
 
@@ -100,7 +103,7 @@ public class TankController {
 
 	public void destroy(NetworkTarget nt) {
 		Sound.play("unitDown");
-		gc.gameWindow.gp.destroyTank(nt);
+		gc.getMainRegion().destroyTank(nt);
 	}
 
 }

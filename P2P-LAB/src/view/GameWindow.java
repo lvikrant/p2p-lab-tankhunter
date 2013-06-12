@@ -4,6 +4,7 @@ import interfaces.InformationVisualisation;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -302,6 +303,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			break;
 
 		}
+		
 	}
 
 	@Override
@@ -323,8 +325,8 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		return gamePanel.getMainRegion();
 	}
 	
-	public void setGamePanelLocation(int posX, int posY){
-		gamePanel.setLocation(x, y);
+	public void setGamePanelMiddle(Point pos){
+		gamePanel.setLocation(-128-((int)pos.getX()*32),-96-((int)pos.getY()*32));
 	}
 
 }

@@ -8,7 +8,7 @@ import javax.swing.Timer;
 
 import controller.GameController;
 
-import view.GamePanel;
+import view.GameRegion;
 
 public class Tank implements ActionListener{
 	
@@ -35,6 +35,9 @@ public class Tank implements ActionListener{
 	
 	private final NetworkTarget NT;    // tank ID
 	
+    private GameRegion mainRegion;
+	
+	
 	
 	public Tank(GameController parGC,NetworkTarget nt, Point pos, int angle){
 		System.out.println("TANK ID : " + 0);
@@ -44,6 +47,7 @@ public class Tank implements ActionListener{
 		
 		NT = nt;
 		gc = parGC;
+		mainRegion = gc.getMainRegion();
 		tankAngle = 0;
 	    
 		attackDelayTimer = new Timer(10,this);
@@ -77,7 +81,7 @@ public class Tank implements ActionListener{
     	   readyToMove = false;
     	   moveDelayTimer.start();
    	       tankAngle = 270;
-   		   gc.gameWindow.gp.rotateTank(NT,270);
+   	       mainRegion.rotateTank(NT,270);
    		   String nextField = gc.getFieldInfo(posX,posY+1);
    		   
    	 	   if(nextField != "ROCK" && nextField != "TANK"){
@@ -85,7 +89,7 @@ public class Tank implements ActionListener{
    	    	    	  gc.removePowerUp(posX, posY+1);
    	    	      }
    	              posY++;
-   	              gc.gameWindow.gp.moveTank(NT,270);
+   	              mainRegion.moveTank(NT,270);
    	       }
        }
     }
@@ -95,14 +99,14 @@ public class Tank implements ActionListener{
     		readyToMove = false;
     		moveDelayTimer.start();
     		tankAngle = 90;
-    		gc.gameWindow.gp.rotateTank(NT,90);
+    		mainRegion.rotateTank(NT,90);
     		String nextField = gc.getFieldInfo(posX,posY-1);
     		
     		if(nextField != "ROCK" && nextField != "TANK"){
     			   if(nextField == "POWERUP"){
    	    	    	   gc.removePowerUp(posX, posY-1);
    	    	       }
-	               gc.gameWindow.gp.moveTank(NT,90);
+    			   mainRegion.moveTank(NT,90);
 	               posY--;
     		   }
     	}
@@ -113,7 +117,7 @@ public class Tank implements ActionListener{
     	    readyToMove = false;
     	    moveDelayTimer.start();
    	        tankAngle = 180;
-        	gc.gameWindow.gp.rotateTank(NT,180);
+   	        mainRegion.rotateTank(NT,180);
         	String nextField = gc.getFieldInfo(posX-1,posY);
    	 
         	if(nextField != "ROCK" && nextField != "TANK"){
@@ -121,7 +125,7 @@ public class Tank implements ActionListener{
         		   		gc.removePowerUp(posX-1, posY);
         		   	} 
         		   	posX--;
-        		   	gc.gameWindow.gp.moveTank(NT,180);
+        		   	mainRegion.moveTank(NT,180);
         	   }
     	}
     }
@@ -133,7 +137,7 @@ public class Tank implements ActionListener{
     			readyToMove = false;
     			moveDelayTimer.start();
     			tankAngle = 0;
-    			gc.gameWindow.gp.rotateTank(NT,0);
+    			mainRegion.rotateTank(NT,0);
     			String nextField = gc.getFieldInfo(posX+1,posY);
     		
     			if(nextField != "ROCK" && nextField != "TANK"){
@@ -141,7 +145,7 @@ public class Tank implements ActionListener{
     					gc.removePowerUp(posX+1, posY);
    	    	   		}
     				posX++;
-    				gc.gameWindow.gp.moveTank(NT,0);
+    				mainRegion.moveTank(NT,0);
     			}
     		} else {
     				gc.moveToRegion(posX,posY,0);
@@ -196,7 +200,7 @@ public class Tank implements ActionListener{
     	moveDelayTimer.stop();
     	readyToShoot = false;
     	readyToMove = false;
-    	gc.gameWindow.gp.destroyTank(NT);
+    	mainRegion.destroyTank(NT);
     	
     
     }

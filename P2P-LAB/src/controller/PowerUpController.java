@@ -26,7 +26,7 @@ public class PowerUpController{
 			
 			if(map.size() <= MAX_ELEMENTS){
 				map.put(powerUp.getPos(), powerUp);
-				gc.gameWindow.gp.addPowerUp(point,powerUp.getPowerUp());
+				gc.getMainRegion().addPowerUp(point,powerUp.getPowerUp());
 				return true;
 			}		
 		}
@@ -42,7 +42,7 @@ public class PowerUpController{
 			PowerUp powerUp = new PowerUp(pos);
 			if(map.size() <= MAX_ELEMENTS){
 				map.put(powerUp.getPos(), powerUp);
-			    gc.gameWindow.gp.addPowerUp(pos,powerUp.getPowerUp());
+				gc.getMainRegion().addPowerUp(pos,powerUp.getPowerUp());
 		    	return true;
 		    } else {
 				return false;
@@ -57,7 +57,7 @@ public class PowerUpController{
 	public void remove(Point point){
 		
 		if(map.containsKey(point)){
-			gc.gameWindow.gp.remove(point);
+			gc.getMainRegion().remove(point);
 			map.remove(point);
 		} else {
 			System.err.println("An der Stelle : " + point + " gibt es keinen PowerUp");
@@ -75,7 +75,7 @@ public class PowerUpController{
 	
 	public void removeAll(){
 		for (Map.Entry<Point, PowerUp> entry : map.entrySet()){
-			gc.gameWindow.gp.remove(entry.getKey());
+			gc.getMainRegion().remove(entry.getKey());
 		}
 		map.clear();
 	}

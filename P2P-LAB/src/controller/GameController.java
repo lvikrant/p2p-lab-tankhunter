@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import javax.swing.Timer;
 import model.NetworkTarget;
 
+import view.GameRegion;
 import view.GameWindow;
 
 public class GameController implements ActionListener, KeyListener{
@@ -45,7 +46,7 @@ public class GameController implements ActionListener, KeyListener{
 		
 		gameWindow = parGameWindow;
 		
-		OBJECT_CONTROLLER.addTank(ME,new Point(10,6),0);
+		OBJECT_CONTROLLER.addTankRandom(ME);
 		OBJECT_CONTROLLER.addTankRandom(ENEMY);
 		
 		OBJECT_CONTROLLER.addPowerUpRandom();
@@ -57,8 +58,7 @@ public class GameController implements ActionListener, KeyListener{
 
 		gameTimer = new Timer(100, this);
 		respawn = new Timer(100,this);
-		respawn.setInitialDelay(1000);	
-		gameWindow.gp.setLocation(224, 128);
+		respawn.setInitialDelay(1000);
 		
 	}
 	
@@ -178,5 +178,16 @@ public class GameController implements ActionListener, KeyListener{
 		return ENEMY;
 	}
 
+	public GameRegion getMainRegion(){
+		return gameWindow.getMainRegion();
+	}
+	
+	public void setGamePanelMiddle(Point pos){
+		gameWindow.setGamePanelMiddle(pos);
+	}
+	
+	public NetworkTarget getPlayer(){
+		return ME;
+	}
 	
 }
