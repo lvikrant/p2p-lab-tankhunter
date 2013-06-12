@@ -148,7 +148,8 @@ public class Tank implements ActionListener{
     				mainRegion.moveTank(NT,0);
     			}
     		} else {
-    				gc.moveToRegion(posX,posY,0);
+    				//TODO test if position is free!
+    				gc.moveToNextRegion(new Point(posX,posY),0);
     		}
     	}
     }

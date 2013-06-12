@@ -120,8 +120,6 @@ public class WelcomeWindow extends JFrame {
                   new GameWindow(1,nameTextField.getText());
             }
         });       
-       
-        
         
         
        nameTextField = new JTextField();

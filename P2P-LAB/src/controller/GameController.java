@@ -60,6 +60,12 @@ public class GameController implements ActionListener, KeyListener{
 		respawn = new Timer(100,this);
 		respawn.setInitialDelay(1000);
 		
+		
+		
+		/**< LOCAL VERSION ONLY*/
+		
+		
+		
 	}
 	
 	
@@ -150,11 +156,25 @@ public class GameController implements ActionListener, KeyListener{
 	}
 	
 	
-	public void moveToRegion(int posX, int posY, int angle){
+	public void moveToNextRegion(Point pos, int angle){
 		OBJECT_CONTROLLER.removeTank(ME);
 		OBJECT_CONTROLLER.removeAllPowerUps();
-		gameWindow.moveToRegionRight(posY);
-		OBJECT_CONTROLLER.addTank(ME, new Point(0,posY), angle);
+		gameWindow.moveToNextRegion(pos, angle);
+		switch(angle){
+		case 0 :
+			OBJECT_CONTROLLER.addTank(ME, new Point(0,(int)pos.getY()), angle);
+			break;
+		case 90 :
+			OBJECT_CONTROLLER.addTank(ME, new Point((int)pos.getX(),MAP_HEIGHT-1), angle);
+			break;
+		case 180 :
+			OBJECT_CONTROLLER.addTank(ME, new Point(MAP_WIDTH-1,(int)pos.getY()), angle);
+			break;
+		case 270 :
+			OBJECT_CONTROLLER.addTank(ME, new Point((int)pos.getX(),0), angle);
+			break;
+		}
+	
 		OBJECT_CONTROLLER.setElements(0);
 	}
 	
