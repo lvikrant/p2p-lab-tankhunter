@@ -217,38 +217,43 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		return menuItemExitGame;
 	}
 
-	public void createNewPanel(int type) {
-		gamePanel.getMainRegion().setVisible(false);
-		remove(gamePanel.getMainRegion());
-		menuBar.setVisible(false);
-		gp = new GameRegion("src/resources/background1.png", this, GAMEMODE);
-		add(gp);
-		menuBar.setVisible(true);
-	}
+	public void moveToNextRegion(Point pos, int parAngle) {
+		angle = parAngle;
+		
+		switch(angle){
+		case 0 : gamePanel.setLocation((int)gamePanel.getLocation().getX()+672,(int)gamePanel.getLocation().getX());
+		gamePanel.regionArray[0] = gamePanel.getRegion(1);
+		gamePanel.regionArray[3] = gamePanel.getMainRegion();
+		gamePanel.regionArray[5] = gamePanel.getRegion(6);
 
-	public void moveToRegionRight(int posY) {
+		gamePanel.regionArray[1] = gamePanel.getRegion(2);
+		gamePanel.mainRegion     = gamePanel.getRegion(4);
+		gamePanel.regionArray[6] = gamePanel.getRegion(7);
 
-		gp00 = gp10;
-		gp01 = gp;
-		gp02 = gp12;
+		gamePanel.regionArray[2] = gamePanel.createRegion();
+		gamePanel.regionArray[4] = gamePanel.createRegion();
+		gamePanel.regionArray[7] = gamePanel.createRegion();
+		
+		gamePanel.regionArray[2].setLocation(1248, -288 + (6 - (int)pos.getY() * 32));
+		gamePanel.regionArray[4].setLocation(1248, 128 + (6 -(int)pos.getY()) * 32);
+		gamePanel.regionArray[7].setLocation(1248, 544 + (6 -(int)pos.getY()) * 32);
+		
+		gamePanel.add(gamePanel.regionArray[2]);
+		gamePanel.add(gamePanel.regionArray[4]);
+		gamePanel.add(gamePanel.regionArray[7]);
+		
+			break;
+		case 90 : gamePanel.setLocation((int)gamePanel.getLocation().getX()-416,(int)gamePanel.getLocation().getX());
+			//TODO <- schieben!
+			break;
+		case 180 : gamePanel.setLocation((int)gamePanel.getLocation().getX()-672,(int)gamePanel.getLocation().getX());
+			//TODO <- schieben!
+			break;
+		case 270 : gamePanel.setLocation((int)gamePanel.getLocation().getX()+416,(int)gamePanel.getLocation().getX());
+			//TODO <- schieben!
+			break;
+		}
 
-		gp10 = gp20;
-		gp = gp21;
-		gp12 = gp22;
-
-		gp20 = new GameRegion("src/resources/bg.png", this, GAMEMODE);
-		gp21 = new GameRegion("src/resources/bg.png", this, GAMEMODE);
-		gp22 = new GameRegion("src/resources/bg.png", this, GAMEMODE);
-
-		getContentPane().add(gp20);
-		getContentPane().add(gp21);
-		getContentPane().add(gp22);
-
-		gp20.setLocation(1248, -288 + (6 - posY) * 32);
-		gp21.setLocation(1248, 128 + (6 - posY) * 32);
-		gp22.setLocation(1248, 544 + (6 - posY) * 32);
-
-		angle = 0;
 		movement.start();
 
 	}
