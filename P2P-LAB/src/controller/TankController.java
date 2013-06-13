@@ -56,7 +56,7 @@ public class TankController {
 		if (gc.getFieldInfo(pos).equals("FREE")) {
 			Tank tank = new Tank(gc, nt, pos, angle);
 			map.put(nt, tank);
-			gc.getMainRegion().addTank(nt, pos, 0);
+			gc.getMainRegion().addTank(nt, pos, angle);
 			if(nt == gc.getPlayer()){
 			//	gc.setGamePanelMiddle(pos);
 			}
