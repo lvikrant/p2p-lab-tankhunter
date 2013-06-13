@@ -159,6 +159,7 @@ public class GameController implements ActionListener, KeyListener{
 	public void moveToNextRegion(Point pos, int angle){
 		OBJECT_CONTROLLER.removeTank(ME);
 		OBJECT_CONTROLLER.removeAllPowerUps();
+		OBJECT_CONTROLLER.setElements(0);
 		gameWindow.moveToNextRegion(pos, angle);
 		switch(angle){
 		case 0 :
@@ -175,7 +176,7 @@ public class GameController implements ActionListener, KeyListener{
 			break;
 		}
 	
-		OBJECT_CONTROLLER.setElements(0);
+
 	}
 	
 

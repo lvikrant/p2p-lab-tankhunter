@@ -10,14 +10,15 @@ public class GamePanel extends JPanel {
 	public GameRegion mainRegion;
 	public GameRegion[] regionArray = new GameRegion[8];
 	
-	public GameRegion gp00;
-	public GameRegion gp01;
-	public GameRegion gp02;
-	public GameRegion gp10;
-	public GameRegion gp12;
-	public GameRegion gp20;
-	public GameRegion gp21;
-	public GameRegion gp22;
+	public GameRegion r0;
+	public GameRegion r1;
+	public GameRegion r2;
+	public GameRegion r3;
+	public GameRegion r4;
+	public GameRegion r5;
+	public GameRegion r6;
+	public GameRegion r7;
+	
 
 	private final int GAMEMODE;
 	private GameWindow gw;
@@ -31,41 +32,41 @@ public class GamePanel extends JPanel {
 		    setSize(size);
 		    setLayout(null);  
 		    
-			mainRegion = new GameRegion("src/resources/b11.png", gw, GAMEMODE);
+			mainRegion = new GameRegion("src/resources/bmain.png", gw, GAMEMODE);
 			mainRegion.setLocation(672,416);
 			add(mainRegion);
 			
-			regionArray[0] = new GameRegion("src/resources/b00.png", gw, GAMEMODE);
-			regionArray[0].setLocation(0,0);
-			add(regionArray[0]);
+			r0 = new GameRegion("src/resources/b0.png", gw, GAMEMODE);
+			r0.setLocation(0,0);
+			add(r0);
 			
-			regionArray[1] = new GameRegion("src/resources/b10.png", gw, GAMEMODE);
-			regionArray[1].setLocation(672,0);
-			add(regionArray[1]);
+			r1 = new GameRegion("src/resources/b1.png", gw, GAMEMODE);
+			r1.setLocation(672,0);
+			add(r1);
 			
-			regionArray[2] = new GameRegion("src/resources/b20.png", gw, GAMEMODE);
-			regionArray[2].setLocation(1344,0);
-			add(regionArray[2]);
+			r2 = new GameRegion("src/resources/b2.png", gw, GAMEMODE);
+			r2.setLocation(1344,0);
+			add(r2);
 			
-			regionArray[3] = new GameRegion("src/resources/b01.png", gw, GAMEMODE);
-			regionArray[3].setLocation(0,416);
-			add(regionArray[3]);
+			r3 = new GameRegion("src/resources/b3.png", gw, GAMEMODE);
+			r3.setLocation(0,416);
+			add(r3);
 			
-			regionArray[4] = new GameRegion("src/resources/b21.png", gw, GAMEMODE);
-			regionArray[4].setLocation(1344,416);
-			add(regionArray[4]);
+			r4 = new GameRegion("src/resources/b4.png", gw, GAMEMODE);
+			r4.setLocation(1344,416);
+			add(r4);
 			
-			regionArray[5] = new GameRegion("src/resources/b02.png", gw, GAMEMODE);
-			regionArray[5].setLocation(0,832);
-			add(regionArray[5]);
+			r5 = new GameRegion("src/resources/b5.png", gw, GAMEMODE);
+			r5.setLocation(0,832);
+			add(r5);
 			
-			regionArray[6] = new GameRegion("src/resources/b12.png", gw, GAMEMODE);
-			regionArray[6].setLocation(672,832);
-			add(regionArray[6]);
+			r6 = new GameRegion("src/resources/b6.png", gw, GAMEMODE);
+			r6.setLocation(672,832);
+			add(r6);
 			
-			regionArray[7] = new GameRegion("src/resources/b22.png", gw, GAMEMODE);
-			regionArray[7].setLocation(1344,832);
-			add(regionArray[7]);
+			r7 = new GameRegion("src/resources/b7.png", gw, GAMEMODE);
+			r7.setLocation(1344,832);
+			add(r7);
 		
 	}
 	

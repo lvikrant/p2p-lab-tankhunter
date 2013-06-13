@@ -221,26 +221,31 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		angle = parAngle;
 		
 		switch(angle){
-		case 0 : gamePanel.setLocation((int)gamePanel.getLocation().getX()+672,(int)gamePanel.getLocation().getX());
-		gamePanel.regionArray[0] = gamePanel.getRegion(1);
-		gamePanel.regionArray[3] = gamePanel.getMainRegion();
-		gamePanel.regionArray[5] = gamePanel.getRegion(6);
+		case 0 : 
+			gamePanel.setLocation((int)gamePanel.getLocation().getX()+672,(int)gamePanel.getLocation().getY());
+			
+			
+			gamePanel.r0 = gamePanel.r1;
+			gamePanel.r3 = gamePanel.getMainRegion();
+			gamePanel.r5 = gamePanel.r6;
 
-		gamePanel.regionArray[1] = gamePanel.getRegion(2);
-		gamePanel.mainRegion     = gamePanel.getRegion(4);
-		gamePanel.regionArray[6] = gamePanel.getRegion(7);
+			gamePanel.r1 = gamePanel.r2;
+			gamePanel.mainRegion     = gamePanel.r4;
+			gamePanel.r6 = gamePanel.r7;
 
-		gamePanel.regionArray[2] = gamePanel.createRegion();
-		gamePanel.regionArray[4] = gamePanel.createRegion();
-		gamePanel.regionArray[7] = gamePanel.createRegion();
+			gamePanel.r2 = gamePanel.createRegion();
+			gamePanel.r4 = gamePanel.createRegion();
+			gamePanel.r7 = gamePanel.createRegion();
 		
-		gamePanel.regionArray[2].setLocation(1248, -288 + (6 - (int)pos.getY() * 32));
-		gamePanel.regionArray[4].setLocation(1248, 128 + (6 -(int)pos.getY()) * 32);
-		gamePanel.regionArray[7].setLocation(1248, 544 + (6 -(int)pos.getY()) * 32);
+	//		gamePanel.regionArray[2].setLocation(1248, -288 + (6 - (int)pos.getY() * 32));
+	//		gamePanel.regionArray[4].setLocation(1248, 128 + (6 -(int)pos.getY()) * 32);
+	//		gamePanel.regionArray[7].setLocation(1248, 544 + (6 -(int)pos.getY()) * 32);
 		
-		gamePanel.add(gamePanel.regionArray[2]);
-		gamePanel.add(gamePanel.regionArray[4]);
-		gamePanel.add(gamePanel.regionArray[7]);
+	//		gamePanel.add(gamePanel.regionArray[2]);
+	//		gamePanel.add(gamePanel.regionArray[4]);
+	//		gamePanel.add(gamePanel.regionArray[7]);
+		
+	//		moveAllRegions(180);
 		
 			break;
 		case 90 : gamePanel.setLocation((int)gamePanel.getLocation().getX()-416,(int)gamePanel.getLocation().getX());
@@ -333,5 +338,27 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	public void setGamePanelMiddle(Point pos){
 		gamePanel.setLocation(-128-((int)pos.getX()*32),-96-((int)pos.getY()*32));
 	}
+	
+	private void moveAllRegions(int angle){
+		
+		
+		
+	
+			switch(angle){
+			case 0: 
+				break;
+			case 180 : 
+				gamePanel.r1.setLocation((int)gamePanel.r1.getLocation().getX()-672,(int)gamePanel.r1.getLocation().getY());
+				gamePanel.r2.setLocation((int)gamePanel.r2.getLocation().getX()-672,(int)gamePanel.r2.getLocation().getY());
+				gamePanel.mainRegion.setLocation((int)gamePanel.mainRegion.getLocation().getX()-672,(int)gamePanel.mainRegion.getLocation().getY());
+				gamePanel.r4.setLocation((int)gamePanel.r4.getLocation().getX()-672,(int)gamePanel.r4.getLocation().getY());
+				gamePanel.r6.setLocation((int)gamePanel.r6.getLocation().getX()-672,(int)gamePanel.r6.getLocation().getY());
+				gamePanel.r7.setLocation((int)gamePanel.r7.getLocation().getX()-672,(int)gamePanel.r7.getLocation().getY());
+
+				break;
+			}
+		}
+		
+	
 
 }
