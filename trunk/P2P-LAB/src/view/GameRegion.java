@@ -365,7 +365,7 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	
 	
 	public void movePanels(int angle){
-	   gameWindow.movePanel(angle);
+	   gameWindow.movePanels(angle);
 	}
 
 }
