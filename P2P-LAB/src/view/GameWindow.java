@@ -67,7 +67,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 	private Timer movement;
 	private int onTheWay = 16;
-	private int angle = 0;
+	private int angle;
 
 	private final String PLAYER_NAME;
 
@@ -79,7 +79,6 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 		setBounds(50, 50, 1125, 722);
 		setLayout(null);
-		
 		
 		setTitle("Tank Hunters");
 
@@ -262,32 +261,113 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	}
 
 
-	public void moveToNextRegion(Point pos, int angle){
+	public void moveToNextRegion(Point pos, int a){
+		angle = a;
+		switch(angle){
+		case 0:
 		
-		r0 = null;
-
-	  	r0 = r1;
-	  	r1 = r2;
-	  	
-	  	r3 = r4;
-	  	r4 = r5;
-	  	
-	  	r6 = r7;
-	  	r7 = r8;
-	  	
-	  	r2 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-	    r5 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-	  	r8 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-	  	
-	  	getContentPane().add(r2);
-		getContentPane().add(r5);
-		getContentPane().add(r8);
-		 
-		r2.setLocation(1248, -288+(6-(int)pos.getY())*32);
-		r5.setLocation(1248, 128+(6-(int)pos.getY())*32);
-		r8.setLocation(1248, 544+(6-(int)pos.getY())*32);
-		
-		angle = 0;
+			r0 = r1;
+		  	r1 = r2;
+		  	
+		  	r3 = r4;
+		  	r4 = r5;
+		  	
+		  	r6 = r7;
+		  	r7 = r8;
+		  	
+		  	r2 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		    r5 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		  	r8 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		  	
+		  	getContentPane().add(r2);
+			getContentPane().add(r5);
+			getContentPane().add(r8);
+			 
+			r2.setLocation(1248, -288+(6-(int)pos.getY())*32);
+			r5.setLocation(1248, 128+(6-(int)pos.getY())*32);
+			r8.setLocation(1248, 544+(6-(int)pos.getY())*32);
+			
+			angle = 0;
+			break;
+		case 90:
+			r0.setVisible(false);
+			r0 = r3;
+		  	r3 = r6;
+		  	
+		  	r1 = r4;
+		  	r4 = r7;
+		  	
+		  	r2 = r5;
+		  	r5 = r8;
+		  	
+	//	  	r6 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+	//	    r7 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+	 //       r8 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		  	
+	 //       r6.setVisible(false);
+	 //       r7.setVisible(false);
+	 //       r8.setVisible(false);
+		  
+	//	  	getContentPane().add(r6);
+	//		getContentPane().add(r7);
+	//		getContentPane().add(r8);
+			 
+	//		r6.setLocation(-320+(3-(int)pos.getX())*32,-288);
+	//		r7.setLocation(320+(3-(int)pos.getX())*32, -288);
+	//		r8.setLocation(680+(3-(int)pos.getX())*32, -288);
+			
+			angle = 90;
+			break;
+		case 180:
+			r2 = r1;
+		  	r1 = r0;
+		  	
+		  	r5 = r4;
+		  	r4 = r3;
+		  	
+		  	r8 = r7;
+		  	r7 = r6;
+		  	
+	//	  	r0 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+	//	    r3 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+	//	  	r6 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		  	
+	//	  	getContentPane().add(r0);
+	//		getContentPane().add(r3);
+	//		getContentPane().add(r6);
+			 
+	//		r2.setLocation(1248, -288+(6-(int)pos.getY())*32);
+	//		r5.setLocation(1248, 128+(6-(int)pos.getY())*32);
+	//		r8.setLocation(1248, 544+(6-(int)pos.getY())*32);
+			
+			angle = 180;
+			break;
+		case 270:
+			r6 = r3;
+		  	r3 = r0;
+		  	
+		  	r7 = r4;
+		  	r4 = r1;
+		  	
+		  	r8 = r5;
+		  	r5 = r2;
+		  	
+//		  	r0 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+//		    r1 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+//		  	r2 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		  	
+//		  	getContentPane().add(r2);
+//			getContentPane().add(r5);
+//			getContentPane().add(r8);
+			 
+//			r2.setLocation(1248, -288+(6-(int)pos.getY())*32);
+//			r5.setLocation(1248, 128+(6-(int)pos.getY())*32);
+//			r8.setLocation(1248, 544+(6-(int)pos.getY())*32);
+			
+			angle = 270;
+			break;
+		}
+	  
 		movement.start();
 
 		
@@ -411,7 +491,6 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	   	   r6.setLocation((int)r6.getLocation().getX()-128-(int)pos.getX()*32,(int)r6.getLocation().getY()-96-(int)pos.getY()*32);
 	   	   r7.setLocation((int)r7.getLocation().getX()-128-(int)pos.getX()*32,(int)r7.getLocation().getY()-96-(int)pos.getY()*32);
 	   	   r8.setLocation((int)r8.getLocation().getX()-128-(int)pos.getX()*32,(int)r8.getLocation().getY()-96-(int)pos.getY()*32);
-	   	   System.out.println("TEST");
 	}	
 	
 

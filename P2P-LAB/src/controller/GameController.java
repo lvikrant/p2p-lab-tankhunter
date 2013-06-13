@@ -42,7 +42,7 @@ public class GameController implements ActionListener, KeyListener{
 	
 		PLAYER_NAME = playerName;
 		ME = new NetworkTarget("255.168.0.42", 8080, PLAYER_NAME);
-		OBJECT_CONTROLLER = new ObjectController(this,POWERUP_LIMIT,TANK_LIMIT,MISSILE_LIMIT,1);
+		OBJECT_CONTROLLER = new ObjectController(this,POWERUP_LIMIT,TANK_LIMIT,MISSILE_LIMIT,0);
 		
 		gameWindow = parGameWindow;
 		
@@ -157,6 +157,7 @@ public class GameController implements ActionListener, KeyListener{
 	
 	
 	public void moveToNextRegion(Point pos, int angle){
+		//TODO test if position is free!
 		OBJECT_CONTROLLER.removeTank(ME);
 		OBJECT_CONTROLLER.removeAllPowerUps();
 		OBJECT_CONTROLLER.setElements(0);
@@ -176,7 +177,6 @@ public class GameController implements ActionListener, KeyListener{
 			break;
 		}
 	
-
 	}
 	
 
