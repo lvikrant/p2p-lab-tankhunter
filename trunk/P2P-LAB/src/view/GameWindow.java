@@ -67,7 +67,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 	private Timer movement;
 	private int onTheWay = 16;
-	private int angle;
+	private int angle = 0;
 
 	private final String PLAYER_NAME;
 
@@ -265,7 +265,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		angle = a;
 		switch(angle){
 		case 0:
-		
+		    
 			r0 = r1;
 		  	r1 = r2;
 		  	
@@ -274,7 +274,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		  	
 		  	r6 = r7;
 		  	r7 = r8;
-		  	
+
 		  	r2 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
 		    r5 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
 		  	r8 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
@@ -290,23 +290,21 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			angle = 0;
 			break;
 		case 90:
-			r0.setVisible(false);
-			r0 = r3;
-		  	r3 = r6;
+			
+		  	r6 = r3;
+		  	r3 = r0;
 		  	
-		  	r1 = r4;
-		  	r4 = r7;
+		  	r7 = r4;
+		  	r4 = r1;
 		  	
-		  	r2 = r5;
-		  	r5 = r8;
+		  	r8 = r5;  	
+		  	r5 = r2;
+
+		  	r0 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		    r1 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+	        r2 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
 		  	
-	//	  	r6 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-	//	    r7 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-	 //       r8 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-		  	
-	 //       r6.setVisible(false);
-	 //       r7.setVisible(false);
-	 //       r8.setVisible(false);
+
 		  
 	//	  	getContentPane().add(r6);
 	//		getContentPane().add(r7);
@@ -328,9 +326,9 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		  	r8 = r7;
 		  	r7 = r6;
 		  	
-	//	  	r0 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-	//	    r3 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-	//	  	r6 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		  	r0 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		    r3 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		  	r6 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
 		  	
 	//	  	getContentPane().add(r0);
 	//		getContentPane().add(r3);
@@ -343,18 +341,19 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			angle = 180;
 			break;
 		case 270:
-			r6 = r3;
-		  	r3 = r0;
+			
+		  	r0 = r3;
+		  	r3 = r6;
+		  
+			r1 = r4;
+		  	r4 = r7;
+		  
+		  	r2 = r5;
+		  	r5 = r8;
 		  	
-		  	r7 = r4;
-		  	r4 = r1;
-		  	
-		  	r8 = r5;
-		  	r5 = r2;
-		  	
-//		  	r0 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-//		    r1 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-//		  	r2 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		  	r6 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		    r7 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		  	r8 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
 		  	
 //		  	getContentPane().add(r2);
 //			getContentPane().add(r5);
@@ -368,6 +367,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			break;
 		}
 	  
+		System.out.println("MOVE");
 		movement.start();
 
 		
@@ -409,6 +409,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 
 	public void movePanels(int angle){
+		System.out.println("Position  +-2 : " + r0.getLocation());
 		switch (angle) {
 		case 0:
 	   	   r0.setLocation((int)r0.getLocation().getX()-2,(int)r0.getLocation().getY());
