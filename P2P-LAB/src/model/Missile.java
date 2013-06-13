@@ -26,13 +26,11 @@ public class Missile implements ActionListener {
 	private int range;
 	private final NetworkTarget NT;
 	
-	private GameRegion mainRegion;
 	
 
 
 	public Missile(NetworkTarget nt, int parAngle, int parRange, int tankPosX, int tankPosY,GameController parGC) {
 		gc = parGC;
-		mainRegion = gc.getMainRegion();
 		ANGLE = parAngle;
 		NT = nt;
 		range = parRange;
@@ -74,16 +72,16 @@ public class Missile implements ActionListener {
 				
 				/** Wenn nächstes Feld ROCK ist*/
 				if (nextField.equals("ROCK")){
-					mainRegion.explodeMissile(NT);	
+					gc.getMainRegion().explodeMissile(NT);	
 				/** Wenn nächstes Feld TANK ist*/
 				} else if(nextField.equals("TANK")){
 					
 			    gc.destroyTank(gc.getTank(new Point(posX+1,posY)));
-			    mainRegion.explodeMissile(NT);
+			    gc.getMainRegion().explodeMissile(NT);
 				
 				/** Wenn nächstes Feld weder ROCK noch TANK ist*/
 				} else {
-					mainRegion.moveMissile(NT);
+					gc.getMainRegion().moveMissile(NT);
 					posX++;
 					range--;
 					move.start();
@@ -98,15 +96,15 @@ public class Missile implements ActionListener {
 				nextField = gc.getFieldInfo(posX, posY-1);
 			
 				if (nextField.equals("ROCK")){
-					mainRegion.explodeMissile(NT);	
+					gc.getMainRegion().explodeMissile(NT);	
 			
 				} else if(nextField.equals("TANK")){
 					
 				    gc.destroyTank(gc.getTank(new Point(posX,posY-1)));
-				    mainRegion.explodeMissile(NT);
+				    gc.getMainRegion().explodeMissile(NT);
 			
 				} else {
-					mainRegion.moveMissile(NT);
+					gc.getMainRegion().moveMissile(NT);
 					posY--;
 					range--;
 					move.start();
@@ -121,16 +119,16 @@ public class Missile implements ActionListener {
 			
 				/** Wenn nächstes Feld ROCK ist*/
 				if (nextField.equals("ROCK")){
-					mainRegion.explodeMissile(NT);	
+					gc.getMainRegion().explodeMissile(NT);	
 			
 					/** Wenn nächstes Feld TANK ist*/
 				} else if(nextField.equals("TANK")){
 					
 				    gc.destroyTank(gc.getTank(new Point(posX-1,posY)));
-				    mainRegion.explodeMissile(NT);
+				    gc.getMainRegion().explodeMissile(NT);
 			
 				} else {
-					mainRegion.moveMissile(NT);
+					gc.getMainRegion().moveMissile(NT);
 					posX--;
 					range--;
 					move.start();
@@ -145,16 +143,16 @@ public class Missile implements ActionListener {
 			
 
 				if (nextField.equals("ROCK")){
-					mainRegion.explodeMissile(NT);	
+					gc.getMainRegion().explodeMissile(NT);	
 			
 
 				} else if(nextField.equals("TANK")){
 		
 				    gc.destroyTank(gc.getTank(new Point(posX,posY+1)));
-				    mainRegion.explodeMissile(NT);
+				    gc.getMainRegion().explodeMissile(NT);
 
 				} else {
-					mainRegion.moveMissile(NT);
+					gc.getMainRegion().moveMissile(NT);
 					posY++;
 					range--;
 					move.start();
@@ -207,7 +205,7 @@ public class Missile implements ActionListener {
 			if(range > 0){
 				move();
 			} else {
-				mainRegion.removeMissile(NT);
+				gc.getMainRegion().removeMissile(NT);
 			}
 			
 		}
