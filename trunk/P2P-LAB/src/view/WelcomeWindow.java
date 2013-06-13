@@ -129,7 +129,6 @@ public class WelcomeWindow extends JFrame {
        nameTextField.setFont(new Font("Serif", Font.BOLD, 24));
        
        
-       
        nameLabel = new JLabel();
        nameLabel.setText("Name:");
        nameLabel.setBounds(320, 120, 100, 40);
