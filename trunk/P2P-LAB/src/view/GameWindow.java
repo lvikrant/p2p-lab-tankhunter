@@ -261,8 +261,8 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	}
 
 
-	public void moveToNextRegion(Point pos, int a){
-		angle = a;
+	public void moveToNextRegion(Point pos, int parAngle){
+		angle = parAngle;
 		switch(angle){
 		case 0:
 		    
@@ -330,13 +330,13 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		    r3 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
 		  	r6 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
 		  	
-	//	  	getContentPane().add(r0);
-	//		getContentPane().add(r3);
-	//		getContentPane().add(r6);
+		  	getContentPane().add(r0);
+			getContentPane().add(r3);
+			getContentPane().add(r6);
 			 
-	//		r2.setLocation(1248, -288+(6-(int)pos.getY())*32);
-	//		r5.setLocation(1248, 128+(6-(int)pos.getY())*32);
-	//		r8.setLocation(1248, 544+(6-(int)pos.getY())*32);
+			r0.setLocation(-800, -288+(6-(int)pos.getY())*32);
+			r3.setLocation(-800, 128+(6-(int)pos.getY())*32);
+			r6.setLocation(-800, 544+(6-(int)pos.getY())*32);
 			
 			angle = 180;
 			break;
