@@ -1,15 +1,22 @@
 package model;
 
-public class NetworkTarget {
+import java.io.Serializable;
 
-	private final String IP;
-	private final int PORT;
-	private final String NAME;
+public class NetworkTarget implements Serializable {
+
+	public String IP;
+	public int PORT;
+	public String NAME;
 	
 	public NetworkTarget(String ip,int port, String name){
 		IP = ip;
 		PORT = port;
 		NAME = name;
+	}
+	public NetworkTarget(String ip,int port){
+		IP = ip;
+		PORT = port;
+		NAME = "no name";
 	}
 	
 	public String getIP(){
