@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.Map;
 
 import model.MapElements;
+import model.Missile;
 import model.NetworkTarget;
 import model.PowerUp;
 import model.Tank;
@@ -148,5 +149,15 @@ public class ObjectController implements IObjectController{
 		case 270: TANK_CONTROLLER.get(nt).moveDown(); break;
 		}
 		return true;
+	}
+
+
+
+	public void importMissileMap(Map<NetworkTarget, Missile> map) {
+		MISSILE_CONTROLLER.importMap(map);		
+	}
+
+	public Map<NetworkTarget, Missile> exportMissileMap() {
+		return MISSILE_CONTROLLER.exportMap();
 	}	
 }
