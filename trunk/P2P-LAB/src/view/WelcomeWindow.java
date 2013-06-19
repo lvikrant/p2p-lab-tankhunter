@@ -120,8 +120,8 @@ public class WelcomeWindow extends JFrame {
                   new GameWindow(1,nameTextField.getText());
             }
         });       
-        
-        
+       
+         
        nameTextField = new JTextField();
        nameTextField.setText("Evgheni");
        nameTextField.setBounds(400, 120, 150, 40);
