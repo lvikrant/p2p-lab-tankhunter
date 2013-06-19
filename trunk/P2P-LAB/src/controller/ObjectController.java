@@ -159,5 +159,10 @@ public class ObjectController implements IObjectController{
 
 	public Map<NetworkTarget, Missile> exportMissileMap() {
 		return MISSILE_CONTROLLER.exportMap();
+	}
+
+
+	public void enterRegion(NetworkTarget nt, Point pos, int angle) {
+		TANK_CONTROLLER.enterRegion(nt, pos, angle);	
 	}	
 }
