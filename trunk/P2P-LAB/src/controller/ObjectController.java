@@ -134,5 +134,19 @@ public class ObjectController implements IObjectController{
 			return MAP_ELEMENTS.getFieldInfo((int)point.getX(),(int)point.getY());
 		}
 		
+	}
+
+
+	public boolean moveTank(NetworkTarget nt, int angle) {
+		if(TANK_CONTROLLER.contains(nt) == false){
+			return false;
+		}
+		switch(angle){
+		case 0: TANK_CONTROLLER.get(nt).moveRight(); break; 
+		case 90: TANK_CONTROLLER.get(nt).moveUp(); break;
+		case 180: TANK_CONTROLLER.get(nt).moveLeft(); break;
+		case 270: TANK_CONTROLLER.get(nt).moveDown(); break;
+		}
+		return true;
 	}	
 }
