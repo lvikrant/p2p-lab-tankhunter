@@ -73,14 +73,10 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	
 	
 	
-	  public GameRegion(String img, GameWindow gw, int parGameMode) {
-		this(new ImageIcon(img).getImage(), gw, parGameMode);
+	  public GameRegion(String img, GameWindow gw, int region) {
+		this(new ImageIcon(img).getImage(), gw, region);
 		gameWindow = gw;
 	  
-		if(parGameMode == 0){
-			  Border blackline = BorderFactory.createLineBorder(Color.red);
-			    setBorder(blackline);
-		}
 		setVisible(true);
 	
 		
@@ -93,7 +89,7 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	  }
 	
 
-	  public GameRegion(Image img, GameWindow gw,int parGameMode) {
+	  public GameRegion(Image img, GameWindow gw,int region) {
 		gameWindow = gw;
 	    this.img = img;
 	    Dimension size = new Dimension(672,416);

@@ -88,39 +88,39 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 		movement = new Timer(10, this);
 		
-		r0 = new GameRegion("src/resources/b0.png", this, GAMEMODE);
+		r0 = createNewRegion();
 		r0.setLocation(0,0);
 		add(r0);
 		
-		r1 = new GameRegion("src/resources/b1.png", this, GAMEMODE);
+		r1 = createNewRegion();
 		r1.setLocation(672,0);
 		add(r1);
 		
-		r2 = new GameRegion("src/resources/b2.png", this, GAMEMODE);
+		r2 = createNewRegion();
 		r2.setLocation(1344,0);
 		add(r2);
 		
-		r3 = new GameRegion("src/resources/b3.png", this, GAMEMODE);
+		r3 = createNewRegion();
 		r3.setLocation(0,416);
 		add(r3);
 		
-		r4 = new GameRegion("src/resources/bmain.png", this, GAMEMODE);
+		r4 = createNewRegion();
 		r4.setLocation(672,416);
 		add(r4);
 		
-		r5 = new GameRegion("src/resources/b4.png", this, GAMEMODE);
+		r5 = createNewRegion();
 		r5.setLocation(1344,416);
 		add(r5);
 		
-		r6 = new GameRegion("src/resources/b5.png", this, GAMEMODE);
+		r6 = createNewRegion();
 		r6.setLocation(0,832);
 		add(r6);
 		
-		r7 = new GameRegion("src/resources/b6.png", this, GAMEMODE);
+		r7 = createNewRegion();
 		r7.setLocation(672,832);
 		add(r7);
 		
-		r8 = new GameRegion("src/resources/b7.png", this, GAMEMODE);
+		r8 = createNewRegion();
 		r8.setLocation(1344,832);
 		add(r8);
 		
@@ -274,9 +274,9 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		  	r6 = r7;
 		  	r7 = r8;
 
-		  	r2 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-		    r5 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-		  	r8 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		  	r2 = createNewRegion();
+		    r5 = createNewRegion();
+		  	r8 = createNewRegion();
 		  	
 		  	getContentPane().add(r2);
 			getContentPane().add(r5);
@@ -299,9 +299,9 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		  	r8 = r5;  	
 		  	r5 = r2;
 
-		  	r0 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-		    r1 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-	        r2 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		  	r0 = createNewRegion();
+		    r1 = createNewRegion();
+	        r2 = createNewRegion();
 		  	
 
 		  
@@ -325,9 +325,9 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		  	r8 = r7;
 		  	r7 = r6;
 		  	
-		  	r0 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-		    r3 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-		  	r6 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		  	r0 = createNewRegion();
+		    r3 = createNewRegion();
+		  	r6 = createNewRegion();
 		  	
 		  	getContentPane().add(r0);
 			getContentPane().add(r3);
@@ -350,9 +350,9 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		  	r2 = r5;
 		  	r5 = r8;
 		  	
-		  	r6 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-		    r7 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
-		  	r8 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
+		  	r6 = createNewRegion();
+		    r7 = createNewRegion();
+		  	r8 = createNewRegion();
 		  	
 		  	getContentPane().add(r6);
 			getContentPane().add(r7);
@@ -490,6 +490,12 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	   	   r7.setLocation((int)r7.getLocation().getX()-128-(int)pos.getX()*32,(int)r7.getLocation().getY()-96-(int)pos.getY()*32);
 	   	   r8.setLocation((int)r8.getLocation().getX()-128-(int)pos.getX()*32,(int)r8.getLocation().getY()-96-(int)pos.getY()*32);
 	}	
+	
+	public GameRegion createNewRegion(){
+		int random = (int) (Math.random() * 3);
+		return new GameRegion("src/resources/regions/region" + random +".png", this, random);
+		
+	}
 	
 
 }
