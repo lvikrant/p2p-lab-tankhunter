@@ -56,18 +56,15 @@ public class GameController implements ActionListener, KeyListener{
 		OBJECT_CONTROLLER.addPowerUpRandom();
 		OBJECT_CONTROLLER.addPowerUpRandom();
 		
-		
-
 		gameTimer = new Timer(100, this);
 		respawn = new Timer(100,this);
 		respawn.setInitialDelay(1000);
 		
 		if(GAMEMODE == 1){
-			
+			regionController = true;
 		} else if (GAMEMODE == 2){
-			
-		}
-		
+			regionController = false;
+		}	
 		System.out.println(GAMEMODE);
 		
 		
