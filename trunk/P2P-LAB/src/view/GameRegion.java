@@ -217,6 +217,7 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	    	 } else {
 	    		tl.setWay(16);
 	    		tl.getMoveTimer().stop();
+	    		gameWindow.testPosition();
 	    	 }
 			
 	    }
