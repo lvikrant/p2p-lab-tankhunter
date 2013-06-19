@@ -54,16 +54,18 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 	private JMenu menuMusic;
 	private JMenuItem menuItemPlayOrStopMusic;
+	
+	public  GameRegion [] regionArray = new GameRegion[9];
 
-	public GameRegion r0;
-	public GameRegion r1;
-	public GameRegion r2;
-	public GameRegion r3;
-	public GameRegion r4;
-	public GameRegion r5;
-	public GameRegion r6;
-	public GameRegion r7;
-	public GameRegion r8;
+//	public GameRegion r0;
+//	public GameRegion r1;
+//	public GameRegion r2;
+//	public GameRegion r3;
+//	public GameRegion r4;
+//	public GameRegion r5;
+//	public GameRegion r6;
+//	public GameRegion r7;
+//	public GameRegion r8;
 
 	private Timer movement;
 	private int onTheWay = 16;
@@ -88,42 +90,20 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 		movement = new Timer(10, this);
 		
-		r0 = createNewRegion();
-		r0.setLocation(0,0);
-		add(r0);
+		for(int i = 0; i < 9; i++){
+			regionArray[i] = createNewRegion();
+			add(regionArray[i]);
+		}
 		
-		r1 = createNewRegion();
-		r1.setLocation(672,0);
-		add(r1);
-		
-		r2 = createNewRegion();
-		r2.setLocation(1344,0);
-		add(r2);
-		
-		r3 = createNewRegion();
-		r3.setLocation(0,416);
-		add(r3);
-		
-		r4 = createNewRegion();
-		r4.setLocation(672,416);
-		add(r4);
-		
-		r5 = createNewRegion();
-		r5.setLocation(1344,416);
-		add(r5);
-		
-		r6 = createNewRegion();
-		r6.setLocation(0,832);
-		add(r6);
-		
-		r7 = createNewRegion();
-		r7.setLocation(672,832);
-		add(r7);
-		
-		r8 = createNewRegion();
-		r8.setLocation(1344,832);
-		add(r8);
-		
+		regionArray[0].setLocation(0,0);
+		regionArray[1].setLocation(672,0);
+		regionArray[2].setLocation(1344,0);
+		regionArray[3].setLocation(0,416);
+		regionArray[4].setLocation(672,416);	
+		regionArray[5].setLocation(1344,416);
+		regionArray[6].setLocation(0,832);
+		regionArray[7].setLocation(672,832);
+		regionArray[8].setLocation(1344,832);
 		
 		GameController gc = new GameController(this, playerName,GAMEMODE);
 		addKeyListener(gc);
@@ -265,102 +245,102 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		switch(angle){
 		case 0:
 		    
-			r0 = r1;
-		  	r1 = r2;
+			regionArray[0] = regionArray[1];
+		  	regionArray[1] = regionArray[2];
 		  	
-		  	r3 = r4;
-		  	r4 = r5;
+		  	regionArray[3] = regionArray[4];
+		  	regionArray[4] = regionArray[5];
 		  	
-		  	r6 = r7;
-		  	r7 = r8;
+		  	regionArray[6] = regionArray[7];
+		  	regionArray[7] = regionArray[8];
 
-		  	r2 = createNewRegion();
-		    r5 = createNewRegion();
-		  	r8 = createNewRegion();
+		  	regionArray[2] = createNewRegion();
+		  	regionArray[5] = createNewRegion();
+		  	regionArray[8] = createNewRegion();
 		  	
-		  	getContentPane().add(r2);
-			getContentPane().add(r5);
-			getContentPane().add(r8);
+		  	getContentPane().add(regionArray[2]);
+			getContentPane().add(regionArray[5]);
+			getContentPane().add(regionArray[8]);
 			 
-			r2.setLocation(1248, -288+(6-(int)pos.getY())*32);
-			r5.setLocation(1248, 128+(6-(int)pos.getY())*32);
-			r8.setLocation(1248, 544+(6-(int)pos.getY())*32);
+			regionArray[2].setLocation(1248, -288+(6-(int)pos.getY())*32);
+			regionArray[5].setLocation(1248, 128+(6-(int)pos.getY())*32);
+			regionArray[8].setLocation(1248, 544+(6-(int)pos.getY())*32);
 			
 			angle = 0;
 			break;
 		case 90:
 			
-		  	r6 = r3;
-		  	r3 = r0;
+			regionArray[6] = regionArray[3];
+			regionArray[3] = regionArray[0];
 		  	
-		  	r7 = r4;
-		  	r4 = r1;
+			regionArray[7] = regionArray[4];
+			regionArray[4] = regionArray[1];
 		  	
-		  	r8 = r5;  	
-		  	r5 = r2;
+			regionArray[8] = regionArray[5];  	
+			regionArray[5] = regionArray[2];
 
-		  	r0 = createNewRegion();
-		    r1 = createNewRegion();
-	        r2 = createNewRegion();
+			regionArray[0] = createNewRegion();
+			regionArray[1] = createNewRegion();
+			regionArray[2] = createNewRegion();
 		  	
 
 		  
-		  	getContentPane().add(r0);
-			getContentPane().add(r1);
-			getContentPane().add(r2);
+		  	getContentPane().add(regionArray[0]);
+			getContentPane().add(regionArray[1]);
+			getContentPane().add(regionArray[2]);
 			 
-			r0.setLocation(-224+(3-(int)pos.getX())*32,-512);
-			r1.setLocation(448+(3-(int)pos.getX())*32, -512);
-			r2.setLocation(1120+(3-(int)pos.getX())*32, -512);
+			regionArray[0].setLocation(-224+(3-(int)pos.getX())*32,-512);
+			regionArray[1].setLocation(448+(3-(int)pos.getX())*32, -512);
+			regionArray[2].setLocation(1120+(3-(int)pos.getX())*32, -512);
 			
 			angle = 90;
 			break;
 		case 180:
-			r2 = r1;
-		  	r1 = r0;
+			regionArray[2] = regionArray[1];
+			regionArray[1] = regionArray[0];
 		  	
-		  	r5 = r4;
-		  	r4 = r3;
+			regionArray[5] = regionArray[4];
+			regionArray[4] = regionArray[3];
 		  	
-		  	r8 = r7;
-		  	r7 = r6;
+			regionArray[8] = regionArray[7];
+			regionArray[7] = regionArray[6];
 		  	
-		  	r0 = createNewRegion();
-		    r3 = createNewRegion();
-		  	r6 = createNewRegion();
+			regionArray[0] = createNewRegion();
+			regionArray[3] = createNewRegion();
+			regionArray[6] = createNewRegion();
 		  	
-		  	getContentPane().add(r0);
-			getContentPane().add(r3);
-			getContentPane().add(r6);
+		  	getContentPane().add(regionArray[0]);
+			getContentPane().add(regionArray[3]);
+			getContentPane().add(regionArray[6]);
 			 
-			r0.setLocation(-800, -288+(6-(int)pos.getY())*32);
-			r3.setLocation(-800, 128+(6-(int)pos.getY())*32);
-			r6.setLocation(-800, 544+(6-(int)pos.getY())*32);
+			regionArray[0].setLocation(-800, -288+(6-(int)pos.getY())*32);
+			regionArray[3].setLocation(-800, 128+(6-(int)pos.getY())*32);
+			regionArray[6].setLocation(-800, 544+(6-(int)pos.getY())*32);
 			
 			angle = 180;
 			break;
 		case 270:
 			
-		  	r0 = r3;
-		  	r3 = r6;
+			regionArray[0] = regionArray[3];
+			regionArray[3] = regionArray[6];
 		  
-			r1 = r4;
-		  	r4 = r7;
+			regionArray[1] = regionArray[4];
+			regionArray[4] = regionArray[7];
 		  
-		  	r2 = r5;
-		  	r5 = r8;
+			regionArray[2] = regionArray[5];
+			regionArray[5] = regionArray[8];
 		  	
-		  	r6 = createNewRegion();
-		    r7 = createNewRegion();
-		  	r8 = createNewRegion();
+			regionArray[6] = createNewRegion();
+			regionArray[7] = createNewRegion();
+			regionArray[8] = createNewRegion();
 		  	
-		  	getContentPane().add(r6);
-			getContentPane().add(r7);
-			getContentPane().add(r8);
+		  	getContentPane().add(regionArray[6]);
+			getContentPane().add(regionArray[7]);
+			getContentPane().add(regionArray[8]);
 			 
-			r6.setLocation(-224+(3-(int)pos.getX())*32, 768);
-			r7.setLocation(448+(3-(int)pos.getX())*32, 768);
-			r8.setLocation(1120+(3-(int)pos.getX())*32, 768);
+			regionArray[6].setLocation(-224+(3-(int)pos.getX())*32, 768);
+			regionArray[7].setLocation(448+(3-(int)pos.getX())*32, 768);
+			regionArray[8].setLocation(1120+(3-(int)pos.getX())*32, 768);
 			
 			angle = 270;
 			break;
@@ -407,57 +387,24 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 
 	public void movePanels(int angle){
-		switch (angle) {
-		case 0:
-	   	   r0.setLocation((int)r0.getLocation().getX()-2,(int)r0.getLocation().getY());
-	   	   r1.setLocation((int)r1.getLocation().getX()-2,(int)r1.getLocation().getY());
-	   	   r2.setLocation((int)r2.getLocation().getX()-2,(int)r2.getLocation().getY());
-	   	   r3.setLocation((int)r3.getLocation().getX()-2,(int)r3.getLocation().getY());
-	   	   r4.setLocation((int)r4.getLocation().getX()-2,(int)r4.getLocation().getY());
-	   	   r5.setLocation((int)r5.getLocation().getX()-2,(int)r5.getLocation().getY());
-	   	   r6.setLocation((int)r6.getLocation().getX()-2,(int)r6.getLocation().getY());
-	   	   r7.setLocation((int)r7.getLocation().getX()-2,(int)r7.getLocation().getY());
-	   	   r8.setLocation((int)r8.getLocation().getX()-2,(int)r8.getLocation().getY());
-	    	break;
-		case 90:
-		   	   r0.setLocation((int)r0.getLocation().getX(),(int)r0.getLocation().getY()+2);
-		   	   r1.setLocation((int)r1.getLocation().getX(),(int)r1.getLocation().getY()+2);
-		   	   r2.setLocation((int)r2.getLocation().getX(),(int)r2.getLocation().getY()+2);
-		   	   r3.setLocation((int)r3.getLocation().getX(),(int)r3.getLocation().getY()+2);
-		   	   r4.setLocation((int)r4.getLocation().getX(),(int)r4.getLocation().getY()+2);
-		   	   r5.setLocation((int)r5.getLocation().getX(),(int)r5.getLocation().getY()+2);
-		   	   r6.setLocation((int)r6.getLocation().getX(),(int)r6.getLocation().getY()+2);
-		   	   r7.setLocation((int)r7.getLocation().getX(),(int)r7.getLocation().getY()+2);
-		   	   r8.setLocation((int)r8.getLocation().getX(),(int)r8.getLocation().getY()+2);
-			  
-			break;
-		case 180:
-		   	   r0.setLocation((int)r0.getLocation().getX()+2,(int)r0.getLocation().getY());
-		   	   r1.setLocation((int)r1.getLocation().getX()+2,(int)r1.getLocation().getY());
-		   	   r2.setLocation((int)r2.getLocation().getX()+2,(int)r2.getLocation().getY());
-		   	   r3.setLocation((int)r3.getLocation().getX()+2,(int)r3.getLocation().getY());
-		   	   r4.setLocation((int)r4.getLocation().getX()+2,(int)r4.getLocation().getY());
-		   	   r5.setLocation((int)r5.getLocation().getX()+2,(int)r5.getLocation().getY());
-		   	   r6.setLocation((int)r6.getLocation().getX()+2,(int)r6.getLocation().getY());
-		   	   r7.setLocation((int)r7.getLocation().getX()+2,(int)r7.getLocation().getY());
-		   	   r8.setLocation((int)r8.getLocation().getX()+2,(int)r8.getLocation().getY());
-
-			break;
-		case 270:
-		   	   r0.setLocation((int)r0.getLocation().getX(),(int)r0.getLocation().getY()-2);
-		   	   r1.setLocation((int)r1.getLocation().getX(),(int)r1.getLocation().getY()-2);
-		   	   r2.setLocation((int)r2.getLocation().getX(),(int)r2.getLocation().getY()-2);
-		   	   r3.setLocation((int)r3.getLocation().getX(),(int)r3.getLocation().getY()-2);
-		   	   r4.setLocation((int)r4.getLocation().getX(),(int)r4.getLocation().getY()-2);
-		   	   r5.setLocation((int)r5.getLocation().getX(),(int)r5.getLocation().getY()-2);
-		   	   r6.setLocation((int)r6.getLocation().getX(),(int)r6.getLocation().getY()-2);
-		   	   r7.setLocation((int)r7.getLocation().getX(),(int)r7.getLocation().getY()-2);
-		   	   r8.setLocation((int)r8.getLocation().getX(),(int)r8.getLocation().getY()-2);
-			
-
-			break;
-			
+		for(GameRegion reg : regionArray){
+			switch (angle) {
+			case 0:	
+		   	   reg.setLocation((int)reg.getLocation().getX()-2,(int)reg.getLocation().getY());
+		    	break;
+			case 90:
+			   	   reg.setLocation((int)reg.getLocation().getX(),(int)reg.getLocation().getY()+2);	  
+				break;
+			case 180:
+			   	   reg.setLocation((int)reg.getLocation().getX()+2,(int)reg.getLocation().getY());
+				break;
+			case 270:
+			   	   reg.setLocation((int)reg.getLocation().getX(),(int)reg.getLocation().getY()-2);
+				break;
+				
+			}
 		}
+	
 	}
 
 	@Override
@@ -476,19 +423,13 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	}
 
 	public GameRegion getMainRegion() {
-		return r4;
+		return regionArray[4];
 	}
 	
 	public void setGamePanelMiddle(Point pos){
-	   	   r0.setLocation((int)r0.getLocation().getX()-128-(int)pos.getX()*32,(int)r0.getLocation().getY()-96-(int)pos.getY()*32);
-	   	   r1.setLocation((int)r1.getLocation().getX()-128-(int)pos.getX()*32,(int)r1.getLocation().getY()-96-(int)pos.getY()*32);
-	   	   r2.setLocation((int)r2.getLocation().getX()-128-(int)pos.getX()*32,(int)r2.getLocation().getY()-96-(int)pos.getY()*32);
-	   	   r3.setLocation((int)r3.getLocation().getX()-128-(int)pos.getX()*32,(int)r3.getLocation().getY()-96-(int)pos.getY()*32);
-	   	   r4.setLocation((int)r4.getLocation().getX()-128-(int)pos.getX()*32,(int)r4.getLocation().getY()-96-(int)pos.getY()*32);
-	   	   r5.setLocation((int)r5.getLocation().getX()-128-(int)pos.getX()*32,(int)r5.getLocation().getY()-96-(int)pos.getY()*32);
-	   	   r6.setLocation((int)r6.getLocation().getX()-128-(int)pos.getX()*32,(int)r6.getLocation().getY()-96-(int)pos.getY()*32);
-	   	   r7.setLocation((int)r7.getLocation().getX()-128-(int)pos.getX()*32,(int)r7.getLocation().getY()-96-(int)pos.getY()*32);
-	   	   r8.setLocation((int)r8.getLocation().getX()-128-(int)pos.getX()*32,(int)r8.getLocation().getY()-96-(int)pos.getY()*32);
+		for(GameRegion reg : regionArray){
+			reg.setLocation((int)reg.getLocation().getX()-128-(int)pos.getX()*32,(int)reg.getLocation().getY()-96-(int)pos.getY()*32);
+		}
 	}	
 	
 	public GameRegion createNewRegion(){
