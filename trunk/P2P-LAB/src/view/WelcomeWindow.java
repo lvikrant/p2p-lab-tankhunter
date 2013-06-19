@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
 import model.Sound;
 
 /**
@@ -119,6 +120,7 @@ public class WelcomeWindow extends JFrame {
                   new GameWindow(0,nameTextField.getText());
             }
         });       
+       
          
        nameTextField = new JTextField();
        nameTextField.setText("Evgheni");
