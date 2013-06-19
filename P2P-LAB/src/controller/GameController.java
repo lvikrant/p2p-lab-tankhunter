@@ -62,6 +62,7 @@ public class GameController implements ActionListener, KeyListener{
 		
 		if(GAMEMODE == 1){
 			regionController = true;
+			gameTimer.start();
 		} else if (GAMEMODE == 2){
 			regionController = false;
 		}	
