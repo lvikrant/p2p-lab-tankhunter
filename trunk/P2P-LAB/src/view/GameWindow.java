@@ -305,13 +305,13 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		  	
 
 		  
-	//	  	getContentPane().add(r6);
-	//		getContentPane().add(r7);
-	//		getContentPane().add(r8);
+		  	getContentPane().add(r0);
+			getContentPane().add(r1);
+			getContentPane().add(r2);
 			 
-	//		r6.setLocation(-320+(3-(int)pos.getX())*32,-288);
-	//		r7.setLocation(320+(3-(int)pos.getX())*32, -288);
-	//		r8.setLocation(680+(3-(int)pos.getX())*32, -288);
+			r0.setLocation(-224+(3-(int)pos.getX())*32,-512);
+			r1.setLocation(448+(3-(int)pos.getX())*32, -512);
+			r2.setLocation(1120+(3-(int)pos.getX())*32, -512);
 			
 			angle = 90;
 			break;
@@ -354,13 +354,13 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		    r7 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
 		  	r8 = new GameRegion("src/resources/bg.png",this,GAMEMODE);
 		  	
-//		  	getContentPane().add(r2);
-//			getContentPane().add(r5);
-//			getContentPane().add(r8);
+		  	getContentPane().add(r6);
+			getContentPane().add(r7);
+			getContentPane().add(r8);
 			 
-//			r2.setLocation(1248, -288+(6-(int)pos.getY())*32);
-//			r5.setLocation(1248, 128+(6-(int)pos.getY())*32);
-//			r8.setLocation(1248, 544+(6-(int)pos.getY())*32);
+			r6.setLocation(-224+(3-(int)pos.getX())*32, 768);
+			r7.setLocation(448+(3-(int)pos.getX())*32, 768);
+			r8.setLocation(1120+(3-(int)pos.getX())*32, 768);
 			
 			angle = 270;
 			break;
