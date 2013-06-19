@@ -124,16 +124,16 @@ public class GameController implements ActionListener, KeyListener{
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 	    case KeyEvent.VK_LEFT:  	
-	    	OBJECT_CONTROLLER.getTank(ME).moveLeft();
+	    	OBJECT_CONTROLLER.moveTank(ME, 180);
 	        break;
 	    case KeyEvent.VK_UP:  
-	    	OBJECT_CONTROLLER.getTank(ME).moveUp();
+	    	OBJECT_CONTROLLER.moveTank(ME, 90);
 	        break;
 	    case KeyEvent.VK_DOWN:  
-	    	OBJECT_CONTROLLER.getTank(ME).moveDown();
+	    	OBJECT_CONTROLLER.moveTank(ME, 270);
 	        break;
 	    case KeyEvent.VK_RIGHT: 
-	    	OBJECT_CONTROLLER.getTank(ME).moveRight();
+	    	OBJECT_CONTROLLER.moveTank(ME, 0);
 	        break;
 	    case KeyEvent.VK_SPACE:
 	    	OBJECT_CONTROLLER.getTank(ME).fire();
