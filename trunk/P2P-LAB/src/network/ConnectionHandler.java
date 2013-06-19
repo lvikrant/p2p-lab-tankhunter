@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 
 import model.NetworkObject;
+import model.NetworkTarget;
 
 import model.NetworkObject.dataType;
 
@@ -85,23 +86,13 @@ public class ConnectionHandler extends Thread {
 				while(baseSocket.getInputStream().available() > 0)
 				{
 					
-
-					
-					
 					data = (NetworkObject)(in.readObject());
-					data.from = baseSocket.getInetAddress().getHostAddress();
-					
-					
+					data.target.IP = baseSocket.getInetAddress().getHostAddress();
 					targetOpenPort = data.openPort;
-					
-					
+							
 					
 					synchronized (recived) {
 						recived.add(data);
-						if(data.type == dataType.Pong)
-						{
-						 int i = 0;
-						}
 					}
 					
 					
@@ -114,10 +105,6 @@ public class ConnectionHandler extends Thread {
 						}
 						
 					}
-					
-					
-					
-
 
 				}
 				synchronized (toSend) {
@@ -125,9 +112,8 @@ public class ConnectionHandler extends Thread {
 					{
 						data = toSend.poll();
 
-						
 						//data.from = baseSocket.getInetAddress().getHostAddress();
-						data.openPort = conManger.myServerSocket.getLocalPort();
+						data.target = new NetworkTarget("", conManger.myServerSocket.getLocalPort());
 						out.writeObject(data);
 						out.flush();
 
