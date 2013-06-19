@@ -361,4 +361,21 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	   gameWindow.movePanels(angle);
 	}
 
+
+	public void enterRegion(NetworkTarget nt, Point pos, int angle) {
+		TankLabel tl = null;
+		switch(angle){
+			case 0: 
+				tl = new TankLabel(new Point((int)pos.getX()-1,(int)pos.getY()),this);
+				break;
+		   }
+		   tankMap.put(nt, tl);
+		   rotateTank(nt, angle);
+		   add(tl.getLabel());
+		   setVisible(false);
+		   setVisible(true);
+		   moveTank(nt, angle);
+
+	}
+
 }

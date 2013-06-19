@@ -109,4 +109,16 @@ public class TankController {
 		gc.getMainRegion().destroyTank(nt);
 	}
 
+	public void enterRegion(NetworkTarget nt, Point pos, int angle) {
+		if (gc.getFieldInfo(pos).equals("FREE")) {
+			Tank tank = new Tank(gc, nt, pos, angle);
+			map.put(nt, tank);
+			gc.getMainRegion().enterRegion(nt, pos, angle);
+			if(nt == gc.getPlayer()){
+			//	gc.setGamePanelMiddle(pos);
+			}
+		}
+		
+	}
+
 }
