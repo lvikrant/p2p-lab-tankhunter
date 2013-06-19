@@ -35,7 +35,6 @@ public class Tank implements ActionListener {
 	private final NetworkTarget NT; // tank ID
 
 	public Tank(GameController parGC, NetworkTarget nt, Point pos, int angle) {
-		System.out.println("TANK ID : " + 0);
 		posX = (int) pos.getX();
 		posY = (int) pos.getY();
 
@@ -60,10 +59,6 @@ public class Tank implements ActionListener {
 
 	public int getPosY() {
 		return posY;
-	}
-
-	public void showPosition() {
-		System.out.println(posX + "  %% " + posY);
 	}
 
 	public void moveDown() {
