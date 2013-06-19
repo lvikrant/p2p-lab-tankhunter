@@ -243,7 +243,7 @@ public class ConnectionManager extends Thread{
 			{
 				switch (n.type) {
 				case ConenctTo:
-					Connect(n.target, n.targetPort);
+					Connect(n.target);
 
 					break;
 				case Data:
@@ -255,7 +255,7 @@ public class ConnectionManager extends Thread{
 				case Ping:
 					NetworkObject toSend = new NetworkObject();
 					toSend.type = dataType.Ping;
-					Send(new NetworkTarget(n.target, n.targetPort), toSend );
+					Send(n.target, toSend );
 
 					break;
 				case Pong:

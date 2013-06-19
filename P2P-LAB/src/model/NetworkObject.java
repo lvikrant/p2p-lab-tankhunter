@@ -1,7 +1,9 @@
 package model;
 
+import java.awt.Point;
 import java.io.Serializable;
 import java.net.InetSocketAddress;
+import java.util.Map;
 
 
 
@@ -22,18 +24,21 @@ public class NetworkObject implements Serializable {
 	 */
 	public int openPort;
 	
+	/**
+	 * sender of the message
+	 */
+	public NetworkTarget target;
 	
-	public String bla;
-	public String target;
-	public int targetPort;
-        public Tank tank;
-        public Missile missile;
+	
+	/**
+	 * target of the data (tank or missile)
+	 */
+	public NetworkTarget dataTarget;
+    public Tank tank;
+    public Missile missile;
+    
+    public Map<NetworkTarget, Tank>  tankData;
+    public Map<Point, PowerUp>  powerUpData;
 
-
-	@Override
-	public String toString() {
-		return "NetworkObject [type=" + type + ", from=" + from + ", openPort="
-				+ openPort + ", bla=" + bla + "]";
-	}
 
 }
