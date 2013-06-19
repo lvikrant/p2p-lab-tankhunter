@@ -122,23 +122,46 @@ public class GameController implements ActionListener, KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		switch (e.getKeyCode()) {
-	    case KeyEvent.VK_LEFT:  	
-	    	OBJECT_CONTROLLER.moveTank(ME, 180);
-	        break;
-	    case KeyEvent.VK_UP:  
-	    	OBJECT_CONTROLLER.moveTank(ME, 90);
-	        break;
-	    case KeyEvent.VK_DOWN:  
-	    	OBJECT_CONTROLLER.moveTank(ME, 270);
-	        break;
-	    case KeyEvent.VK_RIGHT: 
-	    	OBJECT_CONTROLLER.moveTank(ME, 0);
-	        break;
-	    case KeyEvent.VK_SPACE:
-	    	OBJECT_CONTROLLER.getTank(ME).fire();
-	    	break;
-	    }
+		if(regionController == true){
+			switch (e.getKeyCode()) {
+		    case KeyEvent.VK_LEFT:  	
+		    	OBJECT_CONTROLLER.moveTank(ME, 180);
+		        break;
+		    case KeyEvent.VK_UP:  
+		    	OBJECT_CONTROLLER.moveTank(ME, 90);
+		        break;
+		    case KeyEvent.VK_DOWN:  
+		    	OBJECT_CONTROLLER.moveTank(ME, 270);
+		        break;
+		    case KeyEvent.VK_RIGHT: 
+		    	OBJECT_CONTROLLER.moveTank(ME, 0);
+		        break;
+		    case KeyEvent.VK_SPACE:
+		    	OBJECT_CONTROLLER.getTank(ME).fire();
+		    	break;
+		    }
+		} else {
+			//TODO
+			System.err.println("Get the permission to move or to fire from the region controller");
+			switch (e.getKeyCode()) {
+		    case KeyEvent.VK_LEFT:  	
+		    	OBJECT_CONTROLLER.moveTank(ME, 180);
+		        break;
+		    case KeyEvent.VK_UP:  
+		    	OBJECT_CONTROLLER.moveTank(ME, 90);
+		        break;
+		    case KeyEvent.VK_DOWN:  
+		    	OBJECT_CONTROLLER.moveTank(ME, 270);
+		        break;
+		    case KeyEvent.VK_RIGHT: 
+		    	OBJECT_CONTROLLER.moveTank(ME, 0);
+		        break;
+		    case KeyEvent.VK_SPACE:
+		    	OBJECT_CONTROLLER.getTank(ME).fire();
+		    	break;
+		    }
+		}
+
 		
 		if(e.getKeyCode() == KeyEvent.VK_F2){
 		OBJECT_CONTROLLER.addPowerUpRandom();
