@@ -6,7 +6,6 @@ import java.util.TreeMap;
 
 import model.Missile;
 import model.NetworkTarget;
-
 import comparator.NTComparator;
 
 public class MissileController {
@@ -26,6 +25,15 @@ public class MissileController {
 	public boolean contains(Point point) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public void importMap(Map<NetworkTarget, Missile> parMap) {
+		map = parMap;
+		
+	}
+
+	public Map<NetworkTarget, Missile> exportMap() {
+		return map;
 	}
 
 }

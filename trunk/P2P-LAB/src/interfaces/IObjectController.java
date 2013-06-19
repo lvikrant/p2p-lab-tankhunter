@@ -3,6 +3,7 @@ package interfaces;
 import java.awt.Point;
 import java.util.Map;
 
+import model.Missile;
 import model.NetworkTarget;
 import model.PowerUp;
 import model.Tank;
@@ -58,6 +59,11 @@ public interface IObjectController {
     /**
      * MISSILE_CONTROLLER *******************
      */
+    
+    
+    public void importMissileMap(Map<NetworkTarget, Missile> map);
+
+    public Map<NetworkTarget, Missile> exportMissileMap();
     
     /**
      * MAP_ELEMENTS *************************
