@@ -189,8 +189,7 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 
 	   
 	   public void removeTank(NetworkTarget nt){
-		   TankLabel tl = tankMap.get(nt);
-		   System.out.println(tl.getAngle());		   
+		   TankLabel tl = tankMap.get(nt);	   
 		   tl.getLabel().setVisible(false);
 		   remove(tl.getLabel());
 		   tankMap.remove(nt);

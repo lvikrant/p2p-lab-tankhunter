@@ -107,7 +107,6 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		r4 = new GameRegion("src/resources/bmain.png", this, GAMEMODE);
 		r4.setLocation(672,416);
 		add(r4);
-		System.out.println(r4.toString());
 		
 		r5 = new GameRegion("src/resources/b4.png", this, GAMEMODE);
 		r5.setLocation(1344,416);
@@ -367,7 +366,6 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			break;
 		}
 	  
-		System.out.println("MOVE");
 		movement.start();
 
 		
@@ -409,7 +407,6 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 
 	public void movePanels(int angle){
-		System.out.println("Position  +-2 : " + r0.getLocation());
 		switch (angle) {
 		case 0:
 	   	   r0.setLocation((int)r0.getLocation().getX()-2,(int)r0.getLocation().getY());

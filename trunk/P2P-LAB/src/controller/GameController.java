@@ -66,8 +66,6 @@ public class GameController implements ActionListener, KeyListener{
 		} else if (GAMEMODE == 2){
 			regionController = false;
 		}	
-		System.out.println(GAMEMODE);
-		
 		
 	}
 	
