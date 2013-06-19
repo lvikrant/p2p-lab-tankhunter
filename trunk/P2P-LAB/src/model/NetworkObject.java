@@ -34,6 +34,7 @@ public class NetworkObject implements Serializable {
 	 * target of the data (tank or missile)
 	 */
 	public NetworkTarget dataTarget;
+	public int angle;
     public Tank tank;
     public Missile missile;
     

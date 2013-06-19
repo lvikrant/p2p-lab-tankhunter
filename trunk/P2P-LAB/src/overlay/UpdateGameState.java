@@ -89,7 +89,7 @@ public class UpdateGameState extends Thread {
 						//TODO: pass information up
 						
 					} else {
-						//controller.MoveTank(no.dataTarget, no.tank);
+						controller.moveTank(no.dataTarget, no.angle);
 									
 					}
 
