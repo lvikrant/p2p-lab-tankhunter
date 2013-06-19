@@ -7,6 +7,7 @@ public class NetworkTarget implements Serializable {
 	public String IP;
 	public int PORT;
 	public String NAME;
+        public boolean isRC;
 	
 	public NetworkTarget(String ip,int port, String name){
 		IP = ip;

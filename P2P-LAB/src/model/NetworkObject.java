@@ -8,7 +8,7 @@ import java.net.InetSocketAddress;
 public class NetworkObject implements Serializable {
 	
 	public enum dataType {
-	    Ping, Pong, ConenctTo, Data;
+	    Ping, Pong, ConenctTo, Init, Move, Shoot, Data;
 	}
 	
 	public dataType type = dataType.Data;
@@ -26,6 +26,8 @@ public class NetworkObject implements Serializable {
 	public String bla;
 	public String target;
 	public int targetPort;
+        public Tank tank;
+        public Missile missile;
 
 
 	@Override
