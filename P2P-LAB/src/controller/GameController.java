@@ -37,9 +37,11 @@ public class GameController implements ActionListener, KeyListener{
     
     private final ObjectController OBJECT_CONTROLLER;
     
-
-	public GameController(GameWindow parGameWindow,String playerName) {
-	
+    private boolean regionController;
+    private final int GAMEMODE; 
+	public GameController(GameWindow parGameWindow,String playerName, int mode) {
+	    
+		GAMEMODE = mode;
 		PLAYER_NAME = playerName;
 		ME = new NetworkTarget("255.168.0.42", 8080, PLAYER_NAME);
 		OBJECT_CONTROLLER = new ObjectController(this,POWERUP_LIMIT,TANK_LIMIT,MISSILE_LIMIT,0);
@@ -60,10 +62,13 @@ public class GameController implements ActionListener, KeyListener{
 		respawn = new Timer(100,this);
 		respawn.setInitialDelay(1000);
 		
+		if(GAMEMODE == 1){
+			
+		} else if (GAMEMODE == 2){
+			
+		}
 		
-		
-		/**< LOCAL VERSION ONLY*/
-		
+		System.out.println(GAMEMODE);
 		
 		
 	}
