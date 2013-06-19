@@ -49,7 +49,7 @@ public class WelcomeWindow extends JFrame {
         
         
         doublePlayer = new JLabel();
-        doublePlayer.setText("Play Client");
+        doublePlayer.setText("Play with red bounds");
         doublePlayer.setBounds(70, 200, 310, 40);
         doublePlayer.setForeground(Color.blue);
         doublePlayer.setFont(new Font("Serif", Font.BOLD, 24));
@@ -68,12 +68,12 @@ public class WelcomeWindow extends JFrame {
             public void mousePressed(java.awt.event.MouseEvent evt) {
             	   Sound.stop();
             	   frame.dispose();
-                   new GameWindow(2,nameTextField.getText());
+                   new GameWindow(0,nameTextField.getText());
             }
         });
         
         singlePlayer = new JLabel();
-        singlePlayer.setText("Play Server");
+        singlePlayer.setText("Play 1 vs A.I.");
         singlePlayer.setBounds(70, 160, 210, 40);
         singlePlayer.setForeground(Color.blue);
         singlePlayer.setFont(new Font("Serif", Font.BOLD, 24));
@@ -117,11 +117,11 @@ public class WelcomeWindow extends JFrame {
             public void mousePressed(java.awt.event.MouseEvent evt) {
             	  Sound.stop();
             	  frame.dispose();
-                  new GameWindow(0,nameTextField.getText());
+                  new GameWindow(1,nameTextField.getText());
             }
         });       
-       
-         
+        
+        
        nameTextField = new JTextField();
        nameTextField.setText("Evgheni");
        nameTextField.setBounds(400, 120, 150, 40);
