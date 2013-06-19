@@ -121,7 +121,6 @@ public class WelcomeWindow extends JFrame {
             }
         });       
        
-         
        nameTextField = new JTextField();
        nameTextField.setText("Evgheni");
        nameTextField.setBounds(400, 120, 150, 40);
