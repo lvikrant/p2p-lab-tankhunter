@@ -57,16 +57,6 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	
 	public  GameRegion [] regionArray = new GameRegion[9];
 
-//	public GameRegion r0;
-//	public GameRegion r1;
-//	public GameRegion r2;
-//	public GameRegion r3;
-//	public GameRegion r4;
-//	public GameRegion r5;
-//	public GameRegion r6;
-//	public GameRegion r7;
-//	public GameRegion r8;
-
 	private Timer movement;
 	private int onTheWay = 16;
 	private int angle = 0;
@@ -412,7 +402,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 		if (e.getSource() == movement) {
 			onTheWay--;
-			if (onTheWay > 0) {
+			if (onTheWay >= 0) {
 				movePanels(angle);
 			} else {
 				movement.stop();
@@ -430,6 +420,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		for(GameRegion reg : regionArray){
 			reg.setLocation((int)reg.getLocation().getX()-128-(int)pos.getX()*32,(int)reg.getLocation().getY()-96-(int)pos.getY()*32);
 		}
+		testPosition();
 	}	
 	
 	public GameRegion createNewRegion(){
@@ -438,5 +429,14 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		
 	}
 	
+	
+	public void testPosition(){
+		for(int i = 0; i < 9; i++){
+			if(!((regionArray[i].getLocation().getX()%32)==0 && (regionArray[i].getLocation().getY()%32)==0)){
+			System.out.println(regionArray[i].getLocation().getX() + " , " + regionArray[i].getLocation().getY());
+			}
+			
+		}
+	}
 
 }
