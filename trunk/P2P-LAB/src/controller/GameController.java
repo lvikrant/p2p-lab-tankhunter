@@ -235,4 +235,8 @@ public class GameController implements ActionListener, KeyListener{
 		return ME;
 	}
 	
+	public boolean isRegionController(){
+		return regionController;
+	}
+	
 }
