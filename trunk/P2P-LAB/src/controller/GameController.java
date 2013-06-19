@@ -29,16 +29,13 @@ public class GameController implements ActionListener, KeyListener{
 	public GameWindow gameWindow;   // Game Window
 	
 	private Timer respawn;
-	
 	private final int MAP_WIDTH = 21;      // map width in number of fields
     private final int MAP_HEIGHT = 13;     // map height in number of fields
-    
-
     
     private final ObjectController OBJECT_CONTROLLER;
     
     private boolean regionController;
-    private final int GAMEMODE; 
+    private final int GAMEMODE;
 	public GameController(GameWindow parGameWindow,String playerName, int mode) {
 	    
 		GAMEMODE = mode;
@@ -68,15 +65,6 @@ public class GameController implements ActionListener, KeyListener{
 		}	
 		
 	}
-	
-	
-	
-
-	
-
-
-	
-	//-------TANK--------------------------------------------------------------------------------------
 
 	
 	public void destroyTank(NetworkTarget nt){
@@ -116,8 +104,6 @@ public class GameController implements ActionListener, KeyListener{
   
 	}
 	
-
-	//-------- KEYS------------------------------------------------------------------------
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -165,7 +151,6 @@ public class GameController implements ActionListener, KeyListener{
 		if(e.getKeyCode() == KeyEvent.VK_F2){
 		OBJECT_CONTROLLER.addPowerUpRandom();
 		}
-		
 		
 	}
 
