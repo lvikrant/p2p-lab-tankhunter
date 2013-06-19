@@ -126,7 +126,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		add(r8);
 		
 		
-		GameController gc = new GameController(this, playerName);
+		GameController gc = new GameController(this, playerName,GAMEMODE);
 		addKeyListener(gc);
 		setResizable(false);
 		
