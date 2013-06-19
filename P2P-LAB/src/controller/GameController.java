@@ -105,6 +105,7 @@ public class GameController implements ActionListener, KeyListener{
 	}
 	
 
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(regionController == true){
@@ -151,6 +152,7 @@ public class GameController implements ActionListener, KeyListener{
 		if(e.getKeyCode() == KeyEvent.VK_F2){
 		OBJECT_CONTROLLER.addPowerUpRandom();
 		}
+		
 		
 	}
 
