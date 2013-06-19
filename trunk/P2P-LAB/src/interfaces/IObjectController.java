@@ -52,6 +52,8 @@ public interface IObjectController {
     public boolean contains(NetworkTarget nt);
 
     public boolean contains(Point point);
+    
+    public boolean moveTank(NetworkTarget nt, int angle);
 
     /**
      * MISSILE_CONTROLLER *******************
