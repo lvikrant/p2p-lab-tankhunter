@@ -193,32 +193,59 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	   
 	    private void animateTankMovement(NetworkTarget nt){
 	    	TankLabel tl = tankMap.get(nt);
-	    	if(tl.getWay() > 0){
 	    	
-	    	switch (tl.getAngle()) {
-			case 0:
-		   	    tl.movePosX(2);
-		   	    movePanels(0);	   	    
-		    	break;
-			case 90:
-				tl.movePosY(-2);
-				movePanels(90);	 
-				break;
-			case 180:
-				tl.movePosX(-2);
-				movePanels(180);	 
-				break;
-			case 270:
-				tl.movePosY(2);
-				movePanels(270);	 
-				break;
-			}
-	    	tl.decWay();
-	    	 } else {
-	    		tl.setWay(16);
-	    		tl.getMoveTimer().stop();
-	    		gameWindow.testPosition();
-	    	 }
+	    	if(nt == gameWindow.getMyNetworkTarget()){
+	    		if(tl.getWay() > 0){
+	    	    	
+	    	    	switch (tl.getAngle()) {
+	    			case 0:
+	    		   	    tl.movePosX(2);
+	    		   	    movePanels(0);	   	    
+	    		    	break;
+	    			case 90:
+	    				tl.movePosY(-2);
+	    				movePanels(90);	 
+	    				break;
+	    			case 180:
+	    				tl.movePosX(-2);
+	    				movePanels(180);	 
+	    				break;
+	    			case 270:
+	    				tl.movePosY(2);
+	    				movePanels(270);	 
+	    				break;
+	    			}
+	    	    	tl.decWay();
+	    	    	 } else {
+	    	    		tl.setWay(16);
+	    	    		tl.getMoveTimer().stop();
+	    	    		gameWindow.testPosition();
+	    	    	 }
+	    	} else {
+	    		if(tl.getWay() > 0){
+	    	    	
+	    	    	switch (tl.getAngle()) {
+	    			case 0:
+	    		   	    tl.movePosX(2); 	    
+	    		    	break;
+	    			case 90:
+	    				tl.movePosY(-2);
+	    				break;
+	    			case 180:
+	    				tl.movePosX(-2); 
+	    				break;
+	    			case 270:
+	    				tl.movePosY(2); 
+	    				break;
+	    			}
+	    	    	tl.decWay();
+	    	    	 } else {
+	    	    		tl.setWay(16);
+	    	    		tl.getMoveTimer().stop();
+	    	    		gameWindow.testPosition();
+	    	    	 }
+	    	}
+	    	
 			
 	    }
 	   
