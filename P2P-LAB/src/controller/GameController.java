@@ -6,9 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Map;
 
 import javax.swing.Timer;
 import model.NetworkTarget;
+import model.Tank;
 
 import view.GameRegion;
 import view.GameWindow;
@@ -36,6 +38,8 @@ public class GameController implements ActionListener, KeyListener{
     
     private boolean regionController;
     private final int GAMEMODE;
+    
+    private NetworkTarget deadPlayer;
 	public GameController(GameWindow parGameWindow,String playerName, int mode) {
 	    
 		GAMEMODE = mode;
@@ -68,8 +72,10 @@ public class GameController implements ActionListener, KeyListener{
 
 	
 	public void destroyTank(NetworkTarget nt){
-		 respawn.start();
+		
 		 OBJECT_CONTROLLER.destroy(nt);
+		 deadPlayer = nt;
+	     respawn.start();
 	}
 	
 	
@@ -98,7 +104,7 @@ public class GameController implements ActionListener, KeyListener{
 			}
 		}else if (e.getSource() == respawn){
 			respawn.stop();
-			OBJECT_CONTROLLER.addTankRandom(ENEMY);
+			OBJECT_CONTROLLER.addTankRandom(deadPlayer);
 		}
 		
   
@@ -141,12 +147,6 @@ public class GameController implements ActionListener, KeyListener{
 		    	OBJECT_CONTROLLER.getTank(ENEMY).fire();
 		    	break;
 		    
-			
-			
-			
-			
-			
-			
 			}
 		} else {
 			//TODO
@@ -174,6 +174,10 @@ public class GameController implements ActionListener, KeyListener{
 		if(e.getKeyCode() == KeyEvent.VK_F2){
 		OBJECT_CONTROLLER.addPowerUpRandom();
 		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_F3){
+			printTankInfo();
+			}
 		
 		
 	}
@@ -229,7 +233,7 @@ public class GameController implements ActionListener, KeyListener{
 	}
 
 	public NetworkTarget getTank(Point point) {
-		return ENEMY;
+		return OBJECT_CONTROLLER.getTank(point);
 	}
 
 	public GameRegion getMainRegion(){
@@ -246,6 +250,14 @@ public class GameController implements ActionListener, KeyListener{
 	
 	public boolean isRegionController(){
 		return regionController;
+	}
+	
+	public void printTankInfo(){
+
+		for (Map.Entry<NetworkTarget, Tank> entry : OBJECT_CONTROLLER.exportTankMap().entrySet())
+		{
+		    System.out.println(entry.getKey().getName() + "  Pos : " + entry.getValue().getPosX() + "|" + entry.getValue().getPosY());
+		}
 	}
 	
 }

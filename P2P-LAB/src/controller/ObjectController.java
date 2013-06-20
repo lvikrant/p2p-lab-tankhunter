@@ -93,6 +93,10 @@ public class ObjectController implements IObjectController{
 		return TANK_CONTROLLER.get(nt);
 	}
 	
+	public NetworkTarget getTank(Point point) {
+		return TANK_CONTROLLER.get(point);
+	}	
+	
 	public void importTankMap(Map<NetworkTarget, Tank> map) {
 		TANK_CONTROLLER.importMap(map);
 	}
@@ -164,5 +168,6 @@ public class ObjectController implements IObjectController{
 
 	public void enterRegion(NetworkTarget nt, Point pos, int angle) {
 		TANK_CONTROLLER.enterRegion(nt, pos, angle);	
-	}	
+	}
+
 }

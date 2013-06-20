@@ -51,6 +51,16 @@ public class TankController {
 	public Tank get(NetworkTarget nt) {
 		return map.get(nt);
 	}
+	
+	public NetworkTarget get(Point point) {
+		for (Map.Entry<NetworkTarget, Tank> entry : map.entrySet()){
+			if(entry.getValue().getPos().equals(point)){
+			    return entry.getKey();
+			}
+		}
+		System.err.println("NO TANK AT POINT : " + point);
+		return null;
+	}
 
 	boolean add(NetworkTarget nt, Point pos, int angle) {
 		if (gc.getFieldInfo(pos).equals("FREE")) {
