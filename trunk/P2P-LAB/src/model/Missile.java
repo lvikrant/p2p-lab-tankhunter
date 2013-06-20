@@ -75,7 +75,7 @@ public class Missile implements ActionListener {
 					gc.getMainRegion().explodeMissile(NT);	
 				/** Wenn nächstes Feld TANK ist*/
 				} else if(nextField.equals("TANK")){
-					
+				System.out.println("Destroy " + gc.getTank(new Point(posX+1,posY)).getName() + " At Position: " + (posX+1) + "|" + posY);
 			    gc.destroyTank(gc.getTank(new Point(posX+1,posY)));
 			    gc.getMainRegion().explodeMissile(NT);
 				

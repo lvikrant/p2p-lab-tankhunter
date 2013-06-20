@@ -420,9 +420,17 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	}
 	
 	public void setGamePanelMiddle(Point pos){
-		for(GameRegion reg : regionArray){
-			reg.setLocation((int)reg.getLocation().getX()-128-(int)pos.getX()*32,(int)reg.getLocation().getY()-96-(int)pos.getY()*32);
-		}
+
+		regionArray[0].setLocation(-128-(int)pos.getX()*32,-96-(int)pos.getY()*32);
+		regionArray[1].setLocation(544-(int)pos.getX()*32,-96-(int)pos.getY()*32);
+		regionArray[2].setLocation(1216-(int)pos.getX()*32,-96-(int)pos.getY()*32);
+		regionArray[3].setLocation(-128-(int)pos.getX()*32,320-(int)pos.getY()*32);
+		regionArray[4].setLocation(544-(int)pos.getX()*32,320-(int)pos.getY()*32);
+		regionArray[5].setLocation(1216-(int)pos.getX()*32,320-(int)pos.getY()*32);
+		regionArray[6].setLocation(-128-(int)pos.getX()*32,736-(int)pos.getY()*32);
+		regionArray[7].setLocation(544-(int)pos.getX()*32,736-(int)pos.getY()*32);
+		regionArray[8].setLocation(1216-(int)pos.getX()*32,736-(int)pos.getY()*32);
+
 		testPosition();
 	}	
 	
@@ -439,6 +447,11 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			if(!((regionArray[i].getLocation().getX()%32)==0 && (regionArray[i].getLocation().getY()%32)==0)){
 			System.out.println(regionArray[i].getLocation().getX() + " , " + regionArray[i].getLocation().getY());
 			}
+			
+		}
+		
+		for(int i = 0; i < 9; i++){		
+			System.out.println(regionArray[i].getLocation().getX() + " , " + regionArray[i].getLocation().getY());	
 			
 		}
 	}
