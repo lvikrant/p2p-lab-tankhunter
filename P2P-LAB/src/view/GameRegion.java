@@ -77,6 +77,9 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 		this(new ImageIcon(img).getImage(), gw, region);
 		gameWindow = gw;
 	  
+		Border blackline = BorderFactory.createLineBorder(Color.red);
+		setBorder(blackline);
+
 		setVisible(true);
 	
 		
