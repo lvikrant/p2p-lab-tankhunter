@@ -19,6 +19,7 @@ import javax.swing.JMenuItem;
 import javax.swing.Timer;
 
 import model.Music;
+import model.NetworkTarget;
 
 import controller.GameController;
 
@@ -62,6 +63,8 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	private int angle = 0;
 
 	private final String PLAYER_NAME;
+	
+	GameController gc;
 
 	public GameWindow(int parGameMode, String playerName) {
 		PLAYER_NAME = playerName;
@@ -95,7 +98,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		regionArray[7].setLocation(672,832);
 		regionArray[8].setLocation(1344,832);
 		
-		GameController gc = new GameController(this, playerName,GAMEMODE);
+		gc = new GameController(this, playerName,GAMEMODE);
 		addKeyListener(gc);
 		setResizable(false);
 		
@@ -438,6 +441,10 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			}
 			
 		}
+	}
+	
+	public NetworkTarget getMyNetworkTarget(){
+		return gc.getPlayer();
 	}
 
 }

@@ -125,7 +125,29 @@ public class GameController implements ActionListener, KeyListener{
 		    case KeyEvent.VK_SPACE:
 		    	OBJECT_CONTROLLER.getTank(ME).fire();
 		    	break;
-		    }
+		    case KeyEvent.VK_A:  	
+		    	OBJECT_CONTROLLER.moveTank(ENEMY, 180);
+		        break;
+		    case KeyEvent.VK_W:  
+		    	OBJECT_CONTROLLER.moveTank(ENEMY, 90);
+		        break;
+		    case KeyEvent.VK_S:  
+		    	OBJECT_CONTROLLER.moveTank(ENEMY, 270);
+		        break;
+		    case KeyEvent.VK_D: 
+		    	OBJECT_CONTROLLER.moveTank(ENEMY, 0);
+		        break;
+		    case KeyEvent.VK_CONTROL:
+		    	OBJECT_CONTROLLER.getTank(ENEMY).fire();
+		    	break;
+		    
+			
+			
+			
+			
+			
+			
+			}
 		} else {
 			//TODO
 			System.err.println("Get the permission to move or to fire from the region controller");
