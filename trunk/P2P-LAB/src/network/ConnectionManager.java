@@ -87,6 +87,11 @@ public class ConnectionManager extends Thread{
 
 		return null;
 	}
+	
+	public NetworkTarget getMe()
+	{
+		return new NetworkTarget(myServerSocket.getInetAddress().toString(), myServerSocket.getLocalPort());
+	}
 
 	public void Connect(String host, int port)
 	{
@@ -265,6 +270,12 @@ public class ConnectionManager extends Thread{
 				default:
 					break;
 				}
+			}
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
 		}

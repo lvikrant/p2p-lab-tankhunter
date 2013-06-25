@@ -10,7 +10,7 @@ import java.util.Map;
 public class NetworkObject implements Serializable {
 	
 	public enum dataType {
-	    Ping, Pong, ConenctTo, Init, Move, Shoot, Data;
+	    Ping, Pong, ConenctTo, Init, Move, Shoot, Data, Tank;
 	}
 	
 	public dataType type = dataType.Data;
@@ -40,6 +40,7 @@ public class NetworkObject implements Serializable {
     
     public Map<NetworkTarget, Tank>  tankData;
     public Map<Point, PowerUp>  powerUpData;
-
+    public Map<NetworkTarget, Missile>  missileData;
+    public int region;
 
 }

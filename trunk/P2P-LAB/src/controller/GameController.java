@@ -9,6 +9,8 @@ import java.awt.event.KeyListener;
 import java.util.Map;
 
 import javax.swing.Timer;
+
+import overlay.UpdateGameState;
 import model.NetworkTarget;
 import model.Tank;
 
@@ -39,23 +41,19 @@ public class GameController implements ActionListener, KeyListener{
     private boolean regionController;
     private final int GAMEMODE;
     
+    private UpdateGameState overlay;
+    
     private NetworkTarget deadPlayer;
 	public GameController(GameWindow parGameWindow,String playerName, int mode) {
 	    
 		GAMEMODE = mode;
 		PLAYER_NAME = playerName;
-		ME = new NetworkTarget("255.168.0.42", 8080, PLAYER_NAME);
+		
 		OBJECT_CONTROLLER = new ObjectController(this,POWERUP_LIMIT,TANK_LIMIT,MISSILE_LIMIT,0);
 		
 		gameWindow = parGameWindow;
 		
-		OBJECT_CONTROLLER.addTankRandom(ME);
-		OBJECT_CONTROLLER.addTankRandom(ENEMY);
 		
-		OBJECT_CONTROLLER.addPowerUpRandom();
-		OBJECT_CONTROLLER.addPowerUpRandom();
-		OBJECT_CONTROLLER.addPowerUpRandom();
-		OBJECT_CONTROLLER.addPowerUpRandom();
 		
 		gameTimer = new Timer(100, this);
 		respawn = new Timer(100,this);
@@ -67,6 +65,36 @@ public class GameController implements ActionListener, KeyListener{
 		} else if (GAMEMODE == 2){
 			regionController = false;
 		}	
+		
+		
+		if(regionController){
+			overlay = new UpdateGameState(OBJECT_CONTROLLER, 8080);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ME = overlay.man.getMe();
+			OBJECT_CONTROLLER.addTankRandom(ENEMY);
+			OBJECT_CONTROLLER.addTankRandom(ME);
+			OBJECT_CONTROLLER.addPowerUpRandom();
+			OBJECT_CONTROLLER.addPowerUpRandom();
+			OBJECT_CONTROLLER.addPowerUpRandom();
+			OBJECT_CONTROLLER.addPowerUpRandom();
+		} else {
+			overlay = new UpdateGameState(OBJECT_CONTROLLER, new NetworkTarget("127.0.0.1", 8080));
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ME = overlay.man.getMe();
+		}
+		
+		
+		
 		
 	}
 

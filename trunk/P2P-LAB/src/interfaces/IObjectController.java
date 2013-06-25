@@ -71,4 +71,6 @@ public interface IObjectController {
     public void setElements(int mapID);
 
     public String getFieldInfo(Point point);
+
+	public int getRegionId();
 }
