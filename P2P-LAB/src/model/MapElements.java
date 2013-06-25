@@ -7,6 +7,7 @@ public class MapElements {
 	private final int MAP_WIDTH;
 	private final int MAP_HEIGHT;
 	private String[][] map;
+	private int mapId;
 
 public MapElements(GameController gc, int mapID) {
 	MAP_WIDTH = gc.getMapWidth();
@@ -21,6 +22,7 @@ public String getFieldInfo(int posX, int posY){
     }
 
 public void setElements(int mapID) {
+	mapID = mapID;
 	switch(mapID){
 	case 0 : clearMap(); break;
 	case 1 : loadMap1(); break;
@@ -84,6 +86,10 @@ private void loadMap1() {
 		map[16][8] = "ROCK";
 		map[17][8] = "ROCK";	
 	}
+
+public int getRegionId() {
+	return mapId;
+}
 
 
 

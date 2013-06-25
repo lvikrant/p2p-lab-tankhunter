@@ -20,7 +20,7 @@ import network.ConnectionManager;
  */
 public class UpdateGameState extends Thread {
 
-	ConnectionManager man;
+	public ConnectionManager man;
 	boolean iAmRC = false;
 	IObjectController controller;
 	private Queue<NetworkObject> dataToBroadcast = new ConcurrentLinkedQueue<NetworkObject>();
@@ -37,10 +37,12 @@ public class UpdateGameState extends Thread {
 		man.Connect(target);
 
 		NetworkObject networkObject = new NetworkObject();
-		networkObject.type = dataType.Init;
-		man.Send(target, networkObject);
+		
 		new Thread(man).start();
 		new Thread(this).start();
+		
+		networkObject.type = dataType.Init;
+		man.Send(target, networkObject);
 
 	}
 	/**
@@ -73,13 +75,16 @@ public class UpdateGameState extends Thread {
 						tmpNo.type = dataType.Init;
 						tmpNo.tankData = controller.exportTankMap(); 
 						tmpNo.powerUpData = controller.exportPowerUpMap();
+						tmpNo.missileData = controller.exportMissileMap();
+						tmpNo.region = controller.getRegionId();
 						man.Send(no.target, tmpNo);
 					} else {
 						
 						controller.importTankMap(no.tankData);
 						controller.importPowerUpMap(no.powerUpData);
-						
-						//TODO: pass information up				
+						controller.importMissileMap(no.missileData);
+						controller.setElements(no.region);
+		
 					}
 
 					break;

@@ -169,5 +169,9 @@ public class ObjectController implements IObjectController{
 	public void enterRegion(NetworkTarget nt, Point pos, int angle) {
 		TANK_CONTROLLER.enterRegion(nt, pos, angle);	
 	}
+	
+	public int getRegionId(){
+		return MAP_ELEMENTS.getRegionId();
+	}
 
 }
