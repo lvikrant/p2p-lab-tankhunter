@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class NetworkTarget implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	public String IP;
 	public int PORT;
 	public String NAME;
@@ -30,5 +35,9 @@ public class NetworkTarget implements Serializable {
 	
 	public String getName(){
 		return NAME;
+	}
+	
+	public boolean equals(NetworkTarget nt){
+		return IP.equals(nt.getIP()) && PORT == nt.getPort();
 	}
 }

@@ -144,7 +144,7 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	   public void rotateTank(NetworkTarget nt, int angle){
 		   TankLabel tl = tankMap.get(nt);
 		   
-		   if(nt.getName().equals(gameWindow.getPlayerName())){
+		   if(nt.equals(gameWindow.getPlayer())){
 			   switch(angle){
 			   case 0  : tl.setIcon(greenTankRightIcon); 
 			             tl.setAngle(0);   
