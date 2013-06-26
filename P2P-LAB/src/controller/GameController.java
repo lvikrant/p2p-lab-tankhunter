@@ -92,9 +92,8 @@ public class GameController implements ActionListener, KeyListener{
 			
 		overlay = new UpdateGameState(OBJECT_CONTROLLER, new NetworkTarget("127.0.0.1", 8080));
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		    } catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 	}
