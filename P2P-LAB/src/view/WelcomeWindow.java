@@ -27,9 +27,22 @@ public class WelcomeWindow extends JFrame {
     private JLabel doublePlayer;
     private JLabel multiPlayer;
     
+    private JLabel nameLabel;
     private JTextField nameTextField;
     
-    private JLabel nameLabel;
+    private JLabel serverIPLabel;
+    private JTextField serverIPTextField;
+    
+    private JLabel clientIPLabel;
+    private JTextField clientIPTextField;
+    
+    private JLabel serverPortLabel;
+    private JTextField serverPortTextField;
+    
+    private JLabel clientPortLabel;
+    private JTextField clientPortTextField;
+    
+
 
     public WelcomeWindow() {
         setIconImage(new ImageIcon("src/resources/TankHunters.png").getImage());
@@ -122,21 +135,85 @@ public class WelcomeWindow extends JFrame {
         });       
        
          
+        nameLabel = new JLabel();
+        nameLabel.setText("Name:");
+        nameLabel.setBounds(320, 120, 100, 40);
+        nameLabel.setForeground(Color.blue);
+        nameLabel.setFont(new Font("Serif", Font.BOLD, 24)); 
+        
        nameTextField = new JTextField();
        nameTextField.setText("Evgheni");
        nameTextField.setBounds(400, 120, 150, 40);
        nameTextField.setForeground(Color.red);
        nameTextField.setFont(new Font("Serif", Font.BOLD, 24));
        
+       serverIPLabel = new JLabel();
+       serverIPLabel.setText("IP:");
+       serverIPLabel.setBounds(220, 160, 100, 40);
+       serverIPLabel.setForeground(Color.blue);
+       serverIPLabel.setFont(new Font("Serif", Font.BOLD, 24)); 
        
-       nameLabel = new JLabel();
-       nameLabel.setText("Name:");
-       nameLabel.setBounds(320, 120, 100, 40);
-       nameLabel.setForeground(Color.blue);
-       nameLabel.setFont(new Font("Serif", Font.BOLD, 24));
+       serverIPTextField = new JTextField();
+       serverIPTextField.setText("192.168.0.1");
+       serverIPTextField.setBounds(260, 160, 150, 40);
+       serverIPTextField.setForeground(Color.red);
+       serverIPTextField.setFont(new Font("Serif", Font.BOLD, 24));
+       
+       clientIPLabel = new JLabel();
+       clientIPLabel.setText("IP:");
+       clientIPLabel.setBounds(220, 200, 100, 40);
+       clientIPLabel.setForeground(Color.blue);
+       clientIPLabel.setFont(new Font("Serif", Font.BOLD, 24)); 
+       
+       clientIPTextField = new JTextField();
+       clientIPTextField.setText("192.168.0.2");
+       clientIPTextField.setBounds(260, 200, 150, 40);
+       clientIPTextField.setForeground(Color.red);
+       clientIPTextField.setFont(new Font("Serif", Font.BOLD, 24));
+       
+       
+       serverPortLabel = new JLabel();
+       serverPortLabel.setText("Port:");
+       serverPortLabel.setBounds(425, 160, 100, 40);
+       serverPortLabel.setForeground(Color.blue);
+       serverPortLabel.setFont(new Font("Serif", Font.BOLD, 24)); 
+       
+       serverPortTextField = new JTextField();
+       serverPortTextField.setText("8080");
+       serverPortTextField.setBounds(485, 160, 55, 40);
+       serverPortTextField.setForeground(Color.red);
+       serverPortTextField.setFont(new Font("Serif", Font.BOLD, 24));
+       
+       clientPortLabel = new JLabel();
+       clientPortLabel.setText("Port:");
+       clientPortLabel.setBounds(425, 200, 100, 40);
+       clientPortLabel.setForeground(Color.blue);
+       clientPortLabel.setFont(new Font("Serif", Font.BOLD, 24)); 
+       
+       clientPortTextField = new JTextField();
+       clientPortTextField.setText("8081");
+       clientPortTextField.setBounds(485, 200, 55, 40);
+       clientPortTextField.setForeground(Color.red);
+       clientPortTextField.setFont(new Font("Serif", Font.BOLD, 24));
+       
+       
+
        
         panel.add(nameLabel);  
         panel.add(nameTextField);
+        
+        panel.add(serverIPLabel);  
+        panel.add(serverIPTextField);
+        
+        panel.add(serverPortLabel);  
+        panel.add(serverPortTextField);
+        
+        panel.add(clientIPLabel);  
+        panel.add(clientIPTextField);
+        
+        panel.add(clientPortLabel);  
+        panel.add(clientPortTextField);
+        
         panel.add(singlePlayer);
         panel.add(doublePlayer);
         panel.add(multiPlayer);
