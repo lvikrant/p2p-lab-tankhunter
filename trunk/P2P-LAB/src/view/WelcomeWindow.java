@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import model.NetworkTarget;
 import model.Sound;
 
 /**
@@ -81,7 +82,8 @@ public class WelcomeWindow extends JFrame {
             public void mousePressed(java.awt.event.MouseEvent evt) {
             	   Sound.stop();
             	   frame.dispose();
-                   new GameWindow(2,nameTextField.getText());
+            	   new GameWindow(new NetworkTarget(serverIPTextField.getText(), new Integer(serverPortTextField.getText())),
+            			   new NetworkTarget(clientIPTextField.getText(), new Integer(clientPortTextField.getText()),nameTextField.getText()));
             }
         });
         
@@ -105,7 +107,7 @@ public class WelcomeWindow extends JFrame {
             public void mousePressed(java.awt.event.MouseEvent evt) {
             	  Sound.stop();
            	   frame.dispose();
-               new GameWindow(1,nameTextField.getText());
+               new GameWindow(new NetworkTarget(serverIPTextField.getText(), new Integer(serverPortTextField.getText()),nameTextField.getText()));
             }
         });
 
@@ -128,9 +130,8 @@ public class WelcomeWindow extends JFrame {
             }
 
             public void mousePressed(java.awt.event.MouseEvent evt) {
-            	  Sound.stop();
-            	  frame.dispose();
-                  new GameWindow(0,nameTextField.getText());
+            
+                  System.err.println("Not ready! Sorry =( ");
             }
         });       
        

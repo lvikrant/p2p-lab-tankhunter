@@ -51,8 +51,6 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 	private String space = "          ";
 
-	public final int GAMEMODE;
-
 	private JMenu menuMusic;
 	private JMenuItem menuItemPlayOrStopMusic;
 	
@@ -61,16 +59,45 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	private Timer movement;
 	private int onTheWay = 16;
 	private int angle = 0;
-
-	private final String PLAYER_NAME;
 	
 	GameController gc;
+	
+	private NetworkTarget myinfo;
 
-	public GameWindow(int parGameMode, String playerName) {
-		PLAYER_NAME = playerName;
+	/** SERVER */
+	
+	public GameWindow(NetworkTarget server) {
+	    initialWindow();
+	    myinfo = server;
+		
+		gc = new GameController(this, server);
+		addKeyListener(gc);
+		setResizable(false);
+		
+		initialMusic();
+
+	}
+	
+	/** CLIENT */
+	public GameWindow(NetworkTarget server, NetworkTarget client) {
+        initialWindow();
+        
+        myinfo = client;
+		
+		gc = new GameController(this, server , client);
+		addKeyListener(gc);
+		setResizable(false);
+		
+		initialMusic();
+
+	}
+
+	public NetworkTarget getPlayer() {
+		return myinfo;
+	}
+
+	private void initialWindow(){
 		setIconImage(new ImageIcon("src/resources/TankHunters.png").getImage());
-		GAMEMODE = parGameMode;
-
 
 		setBounds(50, 50, 1125, 722);
 		setLayout(null);
@@ -97,19 +124,8 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		regionArray[6].setLocation(0,832);
 		regionArray[7].setLocation(672,832);
 		regionArray[8].setLocation(1344,832);
-		
-		gc = new GameController(this, playerName,GAMEMODE);
-		addKeyListener(gc);
-		setResizable(false);
-		
-		initialMusic();
-
 	}
-
-	public String getPlayerName() {
-		return PLAYER_NAME;
-	}
-
+	
 	private void initialMusic() {
 
 		new Thread() {

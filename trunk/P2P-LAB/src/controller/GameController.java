@@ -20,8 +20,6 @@ import view.GameWindow;
 public class GameController implements ActionListener, KeyListener{
 	
 	private final NetworkTarget ME;	
-	private final NetworkTarget ENEMY = new NetworkTarget("255.168.0.42", 8082, "Enemy");
-	private final String PLAYER_NAME;
 
 	private final int POWERUP_SPAWNRATE  = 50; // Time till the next PowerUp spawns on the map
 	private final int POWERUP_LIMIT = 20;      // The max number of PowerUps that can be on the map
@@ -39,15 +37,20 @@ public class GameController implements ActionListener, KeyListener{
     private final ObjectController OBJECT_CONTROLLER;
     
     private boolean regionController;
-    private final int GAMEMODE;
     
     private UpdateGameState overlay;
     
     private NetworkTarget deadPlayer;
-	public GameController(GameWindow parGameWindow,String playerName, int mode) {
-	    
-		GAMEMODE = mode;
-		PLAYER_NAME = playerName;
+    
+    private NetworkTarget server;
+    
+    /***** SERVER ****************************************************************************************************/
+    
+    public GameController(GameWindow parGameWindow, NetworkTarget server) {
+    	regionController = true;
+ 
+    	
+    	ME = server;
 		
 		OBJECT_CONTROLLER = new ObjectController(this,POWERUP_LIMIT,TANK_LIMIT,MISSILE_LIMIT,0);
 		
@@ -59,42 +62,41 @@ public class GameController implements ActionListener, KeyListener{
 		respawn = new Timer(100,this);
 		respawn.setInitialDelay(1000);
 		
-		if(GAMEMODE == 1){
-			regionController = true;
-			gameTimer.start();
-		} else if (GAMEMODE == 2){
-			regionController = false;
-		}	
 		
 		
-		if(regionController){
-			overlay = new UpdateGameState(OBJECT_CONTROLLER, 8080);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			ME = overlay.man.getMe();
-			OBJECT_CONTROLLER.addTankRandom(ME);
-			OBJECT_CONTROLLER.addPowerUpRandom();
-			OBJECT_CONTROLLER.addPowerUpRandom();
-			OBJECT_CONTROLLER.addPowerUpRandom();
-			OBJECT_CONTROLLER.addPowerUpRandom();
-		} else {
-			overlay = new UpdateGameState(OBJECT_CONTROLLER, new NetworkTarget("127.0.0.1", 8080));
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			ME = overlay.man.getMe();
+		overlay = new UpdateGameState(OBJECT_CONTROLLER, 8080);
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		OBJECT_CONTROLLER.addTankRandom(ME);
+		OBJECT_CONTROLLER.addPowerUpRandom();
+		OBJECT_CONTROLLER.addPowerUpRandom();
+		OBJECT_CONTROLLER.addPowerUpRandom();
+		OBJECT_CONTROLLER.addPowerUpRandom();
+	   	gameTimer.start();	
+	}
+    
+    /***** CLIENT ****************************************************************************************************/
+    
+	public GameController(GameWindow parGameWindow, NetworkTarget ser, NetworkTarget client) {
+		regionController = false;
 		
+		ME = client;
+		server = ser;
 		
+		OBJECT_CONTROLLER = new ObjectController(this,POWERUP_LIMIT,TANK_LIMIT,MISSILE_LIMIT,0);
 		
-		
+		gameWindow = parGameWindow;
+			
+		overlay = new UpdateGameState(OBJECT_CONTROLLER, new NetworkTarget("127.0.0.1", 8080));
+		try {
+			Thread.sleep(1000);
+		    } catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 
 	
@@ -158,22 +160,6 @@ public class GameController implements ActionListener, KeyListener{
 		    case KeyEvent.VK_SPACE:
 		    	OBJECT_CONTROLLER.getTank(ME).fire();
 		    	break;
-		    case KeyEvent.VK_A:  	
-		    	OBJECT_CONTROLLER.moveTank(ENEMY, 180);
-		        break;
-		    case KeyEvent.VK_W:  
-		    	OBJECT_CONTROLLER.moveTank(ENEMY, 90);
-		        break;
-		    case KeyEvent.VK_S:  
-		    	OBJECT_CONTROLLER.moveTank(ENEMY, 270);
-		        break;
-		    case KeyEvent.VK_D: 
-		    	OBJECT_CONTROLLER.moveTank(ENEMY, 0);
-		        break;
-		    case KeyEvent.VK_CONTROL:
-		    	OBJECT_CONTROLLER.getTank(ENEMY).fire();
-		    	break;
-		    
 			}
 		} else {
 			//TODO
