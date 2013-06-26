@@ -69,11 +69,6 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	public GameWindow(NetworkTarget server) {
 	    initialWindow();
 	    myinfo = server;
-	    
-        for(int i = 0; i < 9; i++){
-			regionArray[i] = createNewRegion();
-			add(regionArray[i]);
-		}
 		
 		gc = new GameController(this, server);
 		addKeyListener(gc);
@@ -87,13 +82,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	public GameWindow(NetworkTarget server, NetworkTarget client) {
         initialWindow();
         
-        
         myinfo = client;
-        
-        for(int i = 0; i < 9; i++){
-			regionArray[i] = createNewRegion();
-			add(regionArray[i]);
-		}
 		
 		gc = new GameController(this, server , client);
 		addKeyListener(gc);
@@ -119,7 +108,22 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		setJMenuBar(getMenuBar0());
 		setVisible(true);
 
-		movement = new Timer(10, this);	
+		movement = new Timer(10, this);
+		
+		for(int i = 0; i < 9; i++){
+			regionArray[i] = createNewRegion();
+			add(regionArray[i]);
+		}
+		
+		regionArray[0].setLocation(0,0);
+		regionArray[1].setLocation(672,0);
+		regionArray[2].setLocation(1344,0);
+		regionArray[3].setLocation(0,416);
+		regionArray[4].setLocation(672,416);	
+		regionArray[5].setLocation(1344,416);
+		regionArray[6].setLocation(0,832);
+		regionArray[7].setLocation(672,832);
+		regionArray[8].setLocation(1344,832);
 	}
 	
 	private void initialMusic() {
@@ -446,15 +450,11 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		testPosition();
 	}	
 	
-	
+	//TODO set max region size here *******************************************************************************************************************************************************
 	public GameRegion createNewRegion(){
 		int random = (int) (Math.random() * 3);
-		return new GameRegion("src/resources/regions/region" + random +".png", this, random);	
-	}
-	
-	public void setRegion(int regionNumber, int regionType){
-		regionArray[regionNumber] = new GameRegion("src/resources/regions/region" + regionType +".png", this, regionType);
-		add(regionArray[regionNumber]);
+		return new GameRegion("src/resources/regions/region" + random +".png", this, random);
+		
 	}
 	
 	
