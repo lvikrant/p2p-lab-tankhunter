@@ -90,7 +90,7 @@ public class GameController implements ActionListener, KeyListener{
 		
 		gameWindow = parGameWindow;
 			
-		overlay = new UpdateGameState(OBJECT_CONTROLLER, new NetworkTarget("127.0.0.1", 8080));
+		overlay = new UpdateGameState(OBJECT_CONTROLLER, server);
 		try {
 			Thread.sleep(500);
 		    } catch (InterruptedException e) {
@@ -135,7 +135,6 @@ public class GameController implements ActionListener, KeyListener{
 			OBJECT_CONTROLLER.addTankRandom(deadPlayer);
 		}
 		
-  
 	}
 	
 
