@@ -76,7 +76,6 @@ public class GameController implements ActionListener, KeyListener{
 				e.printStackTrace();
 			}
 			ME = overlay.man.getMe();
-			OBJECT_CONTROLLER.addTankRandom(ENEMY);
 			OBJECT_CONTROLLER.addTankRandom(ME);
 			OBJECT_CONTROLLER.addPowerUpRandom();
 			OBJECT_CONTROLLER.addPowerUpRandom();
