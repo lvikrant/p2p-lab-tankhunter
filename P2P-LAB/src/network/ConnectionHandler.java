@@ -51,9 +51,10 @@ public class ConnectionHandler extends Thread {
 
 	public void send(NetworkObject data)
 	{
-
+		
+		System.out.println("Hello1");
 		toSend.add(data);
-
+		new Thread(this).start();
 	}
 
 
@@ -77,21 +78,25 @@ public class ConnectionHandler extends Thread {
 	{
 		NetworkObject data;
 
-
+		System.out.println("Hello2");
 		while(running.get())
 		{
+			//System.out.println("Hello3");
+			//System.out.println(baseSocket + "\n"+targetIP);
 			try
 			{
 
 				while(baseSocket.getInputStream().available() > 0)
 				{
-					
+					System.out.println("Hello4");
 					data = (NetworkObject)(in.readObject());
 					data.target.IP = baseSocket.getInetAddress().getHostAddress();
 					targetOpenPort = data.openPort;
 							
 					
 					synchronized (recived) {
+						System.out.println("Hello5");
+						System.out.println(data.type);
 						recived.add(data);
 					}
 					
@@ -110,8 +115,10 @@ public class ConnectionHandler extends Thread {
 				synchronized (toSend) {
 					while(!toSend.isEmpty())
 					{
+						System.out.println("Hello6");
+						
 						data = toSend.poll();
-
+						System.out.println(data.type);
 						//data.from = baseSocket.getInetAddress().getHostAddress();
 						data.target = new NetworkTarget("", conManger.myServerSocket.getLocalPort());
 						out.writeObject(data);

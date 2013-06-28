@@ -62,7 +62,16 @@ public class ConnectionManager extends Thread{
 			ConnectionHandler h = getHandlerByTarget(target);
 			if(h == null)
 			{
-				return false;
+				try {
+					h = new ConnectionHandler(new Socket(target.IP, target.PORT), this);
+				}
+				catch(Exception e) {
+					System.out.println(e);
+				}
+				handlers.add(h);
+				System.out.println("isEmpty"+handlers.isEmpty());
+				h.send(data);
+				return true;
 			}
 			else
 			{
@@ -251,6 +260,7 @@ public class ConnectionManager extends Thread{
 					Connect(n.target);
 
 					break;
+				case Init:
 				case Data:
 					synchronized (recived) {
 						recived.add(n);
