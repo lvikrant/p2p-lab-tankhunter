@@ -74,6 +74,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		addKeyListener(gc);
 		setResizable(false);
 		
+		gc.setMainRegion(regionArray[4].getRegionType());
 		initialMusic();
 
 	}
@@ -124,6 +125,8 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		regionArray[6].setLocation(0,832);
 		regionArray[7].setLocation(672,832);
 		regionArray[8].setLocation(1344,832);
+		
+		
 	}
 	
 	private void initialMusic() {
@@ -476,7 +479,6 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 	}	
 	
-	//TODO set max region size here *******************************************************************************************************************************************************
 	public GameRegion createNewRegion(){
 		int random = (int) (Math.random() * 3);
 		return new GameRegion("src/resources/regions/region" + random +".png", this, random);

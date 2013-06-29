@@ -198,8 +198,6 @@ public class WelcomeWindow extends JFrame {
        clientPortTextField.setFont(new Font("Serif", Font.BOLD, 24));
        
        
-
-       
         panel.add(nameLabel);  
         panel.add(nameTextField);
         
