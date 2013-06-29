@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import comparator.PointComparator;
+
+import model.NetworkObject;
+import model.NetworkObject.dataType;
 import model.PowerUp;
 
 
@@ -27,6 +30,12 @@ public class PowerUpController{
 			if(map.size() <= MAX_ELEMENTS){
 				map.put(powerUp.getPos(), powerUp);
 				gc.getMainRegion().addPowerUp(point,powerUp.getPowerUp());
+				
+				NetworkObject no = new NetworkObject();
+				no.type = dataType.AddPowerUp;
+				no.powerUp = powerUp;
+				gc.overlay.man.sendToAll(no);
+				
 				return true;
 			}		
 		}
