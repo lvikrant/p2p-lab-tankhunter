@@ -34,16 +34,9 @@ public class WelcomeWindow extends JFrame {
     private JLabel serverIPLabel;
     private JTextField serverIPTextField;
     
-    private JLabel clientIPLabel;
-    private JTextField clientIPTextField;
-    
     private JLabel serverPortLabel;
     private JTextField serverPortTextField;
-    
-    private JLabel clientPortLabel;
-    private JTextField clientPortTextField;
-    
-
+   
 
     public WelcomeWindow() {
         setIconImage(new ImageIcon("src/resources/TankHunters.png").getImage());
@@ -82,8 +75,7 @@ public class WelcomeWindow extends JFrame {
             public void mousePressed(java.awt.event.MouseEvent evt) {
             	   Sound.stop();
             	   frame.dispose();
-            	   new GameWindow(new NetworkTarget(serverIPTextField.getText(), new Integer(serverPortTextField.getText())),
-            			   new NetworkTarget(clientIPTextField.getText(), new Integer(clientPortTextField.getText()),nameTextField.getText()));
+            	   new GameWindow(new NetworkTarget(serverIPTextField.getText(), new Integer(serverPortTextField.getText())), 1);
             }
         });
         
@@ -160,18 +152,6 @@ public class WelcomeWindow extends JFrame {
        serverIPTextField.setForeground(Color.red);
        serverIPTextField.setFont(new Font("Serif", Font.BOLD, 24));
        
-       clientIPLabel = new JLabel();
-       clientIPLabel.setText("IP:");
-       clientIPLabel.setBounds(220, 200, 100, 40);
-       clientIPLabel.setForeground(Color.blue);
-       clientIPLabel.setFont(new Font("Serif", Font.BOLD, 24)); 
-       
-       clientIPTextField = new JTextField();
-       clientIPTextField.setText("192.168.0.2");
-       clientIPTextField.setBounds(260, 200, 150, 40);
-       clientIPTextField.setForeground(Color.red);
-       clientIPTextField.setFont(new Font("Serif", Font.BOLD, 24));
-       
        
        serverPortLabel = new JLabel();
        serverPortLabel.setText("Port:");
@@ -184,19 +164,8 @@ public class WelcomeWindow extends JFrame {
        serverPortTextField.setBounds(485, 160, 55, 40);
        serverPortTextField.setForeground(Color.red);
        serverPortTextField.setFont(new Font("Serif", Font.BOLD, 24));
-       
-       clientPortLabel = new JLabel();
-       clientPortLabel.setText("Port:");
-       clientPortLabel.setBounds(425, 200, 100, 40);
-       clientPortLabel.setForeground(Color.blue);
-       clientPortLabel.setFont(new Font("Serif", Font.BOLD, 24)); 
-       
-       clientPortTextField = new JTextField();
-       clientPortTextField.setText("8081");
-       clientPortTextField.setBounds(485, 200, 55, 40);
-       clientPortTextField.setForeground(Color.red);
-       clientPortTextField.setFont(new Font("Serif", Font.BOLD, 24));
-       
+           
+
        
         panel.add(nameLabel);  
         panel.add(nameTextField);
@@ -207,11 +176,6 @@ public class WelcomeWindow extends JFrame {
         panel.add(serverPortLabel);  
         panel.add(serverPortTextField);
         
-        panel.add(clientIPLabel);  
-        panel.add(clientIPTextField);
-        
-        panel.add(clientPortLabel);  
-        panel.add(clientPortTextField);
         
         panel.add(singlePlayer);
         panel.add(doublePlayer);

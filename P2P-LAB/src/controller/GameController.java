@@ -79,11 +79,10 @@ public class GameController implements ActionListener, KeyListener {
 
 	/***** CLIENT ****************************************************************************************************/
 
-	public GameController(GameWindow parGameWindow, NetworkTarget ser,
-			NetworkTarget client) {
+	public GameController(GameWindow parGameWindow, NetworkTarget ser, int mode) {
 		regionController = false;
 
-		ME = client;
+		ME = new NetworkTarget("192.168.0.1", 8080);
 		server = ser;
 
 		OBJECT_CONTROLLER = new ObjectController(this, POWERUP_LIMIT,
@@ -310,9 +309,12 @@ public class GameController implements ActionListener, KeyListener {
 
 		for (Map.Entry<NetworkTarget, Tank> entry : OBJECT_CONTROLLER
 				.exportTankMap().entrySet()) {
-			System.out.println(entry.getKey().getName() + "  Pos : "
-					+ entry.getValue().getPosX() + "|"
-					+ entry.getValue().getPosY());
+			System.out.println( 
+					"IP : " + entry.getKey().getIP() 
+					+ " Port : " + entry.getKey().getPort() 
+					+ " Name : " + entry.getKey().getName() 
+					+ "  Pos : " + entry.getValue().getPosX()
+					+ "|" + entry.getValue().getPosY());
 		}
 	}
 }

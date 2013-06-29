@@ -2,22 +2,20 @@ package model;
 
 import java.io.Serializable;
 
-public class TankInfo implements Serializable{
+public class MissileInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int posX;
 	private int posY;
 	private int angle;
-	private String status;
-	private int timeLeft;
+	private int range;
 	
-	public TankInfo(int parPosX, int parPosY, int parAngle, String parStatus, int parTimeLeft){
+	public MissileInfo(int parPosX, int parPosY, int  parAngle,int parRange){
 		posX = parPosX;
 		posY = parPosY;
 		angle = parAngle;
-		status = parStatus;
-		timeLeft = parTimeLeft;
+		range = parRange;
 	}
 
 	public int getPosX() {
@@ -32,11 +30,9 @@ public class TankInfo implements Serializable{
 		return angle;
 	}
 
-	public String getStatus() {
-		return status;
+	public int getRange() {
+		return range;
 	}
 
-	public int getTimeLeft() {
-		return timeLeft;
-	}
+
 }
