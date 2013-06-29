@@ -220,6 +220,10 @@ public class GameController implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_F3) {
 			printTankInfo();
 		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_F4) {
+			System.out.println(OBJECT_CONTROLLER.getRegionId());
+		}
 
 	}
 
@@ -292,6 +296,16 @@ public class GameController implements ActionListener, KeyListener {
 		return regionController;
 	}
 
+
+	public String getPowerUp(int posX, int posY) {
+		return OBJECT_CONTROLLER.getPowerUp(new Point(posX, posY)).getPowerUp();
+	}
+	
+	public void setMainRegion(int region){
+		OBJECT_CONTROLLER.setElements(region);
+	}
+
+	
 	public void printTankInfo() {
 
 		for (Map.Entry<NetworkTarget, Tank> entry : OBJECT_CONTROLLER
@@ -301,9 +315,4 @@ public class GameController implements ActionListener, KeyListener {
 					+ entry.getValue().getPosY());
 		}
 	}
-
-	public String getPowerUp(int posX, int posY) {
-		return OBJECT_CONTROLLER.getPowerUp(new Point(posX, posY)).getPowerUp();
-	}
-
 }

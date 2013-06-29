@@ -62,6 +62,8 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	private Image img;
 	
 	public GameWindow gameWindow;
+	
+	private final int REGION;
 
 	
 	/**< POWERUP ********************************************************************************/
@@ -79,7 +81,6 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	  
 		Border blackline = BorderFactory.createLineBorder(Color.red);
 		setBorder(blackline);
-
 		setVisible(true);
 	
 		
@@ -93,6 +94,7 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	
 
 	  public GameRegion(Image img, GameWindow gw,int region) {
+		REGION = region;
 		gameWindow = gw;
 	    this.img = img;
 	    Dimension size = new Dimension(672,416);
@@ -100,6 +102,10 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	    setSize(size);
 	    setLayout(null);
 	 
+	  }
+	  
+	  public int getRegionType(){
+		  return REGION;
 	  }
 	  
 	  
