@@ -93,9 +93,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 	}
 
-	public NetworkTarget getPlayer() {
-		System.out.println(myinfo.getIP());
-		System.out.println(myinfo.getPort());
+	public NetworkTarget getMe() {
 		return myinfo;
 	}
 
@@ -486,12 +484,6 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		int random = (int) (Math.random() * 3);
 		return new GameRegion("src/resources/regions/region" + random +".png", this, random);
 		
-	}
-	
-		
-	
-	public NetworkTarget getMyNetworkTarget(){
-		return gc.getMe();
 	}
 
 }
