@@ -3,12 +3,8 @@ package model;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.Timer;
-
 import controller.GameController;
-
-import view.GameRegion;
 
 public class Tank implements ActionListener {
 
@@ -16,9 +12,9 @@ public class Tank implements ActionListener {
 	private int posX = 0; // tank x-coordinate Position in fields {0..40}
 	private int posY = 0; // tank y-coordinate Position in fields {0..25}
 
-	private int movementSpeed = 300; // tank speed (field to field)
+	private int movementSpeed = 350; // tank speed (field to field)
 	private int kills = 0; // number of kills
-	private int range = 5; // attack range of the tank
+	private int range = 7; // attack range of the tank
 	private int attackRate = 2000; // attack rate of the tank
 	private Timer attackDelayTimer; // Timer for the shooting delay
 	private Timer moveDelayTimer;
@@ -32,7 +28,10 @@ public class Tank implements ActionListener {
 
 	private GameController gc; // Game Controller
 
-	private final NetworkTarget NT; // tank ID
+	private final NetworkTarget NT;
+	
+	private String status = "NONE";
+	private int timeLeft = 11;
 
 	public Tank(GameController parGC, NetworkTarget nt, Point pos, int angle) {
 		posX = (int) pos.getX();
@@ -72,6 +71,8 @@ public class Tank implements ActionListener {
 
 				if (nextField != "ROCK" && nextField != "TANK") {
 					if (nextField == "POWERUP") {
+						setStatus(gc.getPowerUp(posX,posY+1));
+						gc.manadgePowerUps();
 						gc.removePowerUp(posX, posY + 1);
 					}
 					posY++;
@@ -94,6 +95,8 @@ public class Tank implements ActionListener {
 
 				if (nextField != "ROCK" && nextField != "TANK") {
 					if (nextField == "POWERUP") {
+						setStatus(gc.getPowerUp(posX,posY - 1));
+						gc.manadgePowerUps();
 						gc.removePowerUp(posX, posY - 1);
 					}
 					gc.getMainRegion().moveTank(NT, 90);
@@ -116,6 +119,8 @@ public class Tank implements ActionListener {
 
 				if (nextField != "ROCK" && nextField != "TANK") {
 					if (nextField == "POWERUP") {
+						setStatus(gc.getPowerUp(posX-1,posY));
+						gc.manadgePowerUps();
 						gc.removePowerUp(posX - 1, posY);
 					}
 					posX--;
@@ -139,6 +144,8 @@ public class Tank implements ActionListener {
 
 				if (nextField != "ROCK" && nextField != "TANK") {
 					if (nextField == "POWERUP") {
+						setStatus(gc.getPowerUp(posX+1,posY));
+						gc.manadgePowerUps();
 						gc.removePowerUp(posX + 1, posY);
 					}
 					posX++;
@@ -148,6 +155,31 @@ public class Tank implements ActionListener {
 				gc.moveToNextRegion(new Point(posX, posY), 0);
 			}
 		}
+	}
+	
+	public void setStatus(String newStatus){
+		status = newStatus;
+		
+		
+		movementSpeed = 350;
+		range = 7;
+		attackRate = 2000;
+		
+		if(status.equals("RATE")){
+			attackRate = 1000;
+		}else if(status.equals("SPEED")){
+			movementSpeed = 250;
+			
+		}else if(status.equals("RANGE")){
+			range = 11;
+			
+		}else if(status.equals("SLOW")){
+			movementSpeed = 1000;
+			
+		}
+		
+		timeLeft = 11;
+		moveDelayTimer.setInitialDelay(movementSpeed);
 	}
 
 	public Point getPos() {
@@ -160,6 +192,14 @@ public class Tank implements ActionListener {
 
 	public int getSpeed() {
 		return movementSpeed;
+	}
+	
+	public int getRange() {
+		return range;
+	}
+	
+	public int getRate() {
+		return attackRate;
 	}
 
 	public void fire() {
@@ -183,6 +223,18 @@ public class Tank implements ActionListener {
 
 	public int getTankGridPosY() {
 		return posY;
+	}
+	
+	public void decTime(){
+		timeLeft--;
+	}
+	
+	public String getStatus(){
+		return status;
+	}
+	
+	public int getTimeLeft(){
+		return timeLeft;
 	}
 
 	public void destroy() {
