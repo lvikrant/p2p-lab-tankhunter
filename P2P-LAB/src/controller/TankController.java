@@ -16,8 +16,7 @@ public class TankController {
 
 	private final int TANK_LIMIT;
 
-	Map<NetworkTarget, Tank> map = new TreeMap<NetworkTarget, Tank>(
-			new NTComparator());
+	Map<NetworkTarget, Tank> map = new TreeMap<NetworkTarget, Tank>(new NTComparator());
 
 	public TankController(GameController gameController, int tankLimit) {
 		gc = gameController;
