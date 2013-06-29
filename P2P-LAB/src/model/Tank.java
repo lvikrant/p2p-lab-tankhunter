@@ -262,4 +262,9 @@ public class Tank implements ActionListener {
 	public int getAngle() {
 		return tankAngle;
 	}
+
+	public void setTimeLeft( int time) {
+		timeLeft = time;
+		
+	}
 }
