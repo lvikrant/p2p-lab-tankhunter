@@ -73,14 +73,16 @@ public class UpdateGameState extends Thread {
 					if(iAmRC) {
 						tmpNo = new NetworkObject();
 						tmpNo.type = dataType.Init;
-						tmpNo.tankData = controller.exportTankMap(); 
-						tmpNo.powerUpData = controller.exportPowerUpMap();
-						tmpNo.missileData = controller.exportMissileMap();
-						tmpNo.region = controller.getRegionId();
+						controller.addTankRandom(no.target);
+						tmpNo.tankData = controller.exportTankInfo(); 
+						//tmpNo.powerUpData = controller.exportPowerUpMap();
+						//tmpNo.missileData = controller.exportMissileMap();
+						//tmpNo.region = controller.getRegionId();
 						man.Send(no.target, tmpNo);
 					} else {
+						System.out.println("Hello10");
 						
-						controller.importTankMap(no.tankData);
+						controller.importTankInfo(no.tankData);
 						controller.importPowerUpMap(no.powerUpData);
 						controller.importMissileMap(no.missileData);
 						controller.setElements(no.region);
@@ -202,6 +204,4 @@ public class UpdateGameState extends Thread {
 		//connection.Send(target, networkObject);
 	}
 
-	public void receiveUpdatesFromRC(NetworkObject object) {
-	}
 }

@@ -57,8 +57,6 @@ public interface IObjectController {
     
     public boolean moveTank(NetworkTarget nt, int angle);
     
-    public Map<NetworkTarget, TankInfo> exportTankInfo();
-    
     public void importTankInfo(Map<NetworkTarget, TankInfo> parmap);
 
     /**
@@ -78,4 +76,6 @@ public interface IObjectController {
     public String getFieldInfo(Point point);
 
 	public int getRegionId();
+	
+	public Map<NetworkTarget, TankInfo> exportTankInfo();
 }
