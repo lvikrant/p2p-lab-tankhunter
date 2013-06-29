@@ -7,6 +7,7 @@ import model.Missile;
 import model.NetworkTarget;
 import model.PowerUp;
 import model.Tank;
+import model.TankInfo;
 
 public interface IObjectController {
 
