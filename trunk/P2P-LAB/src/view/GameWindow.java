@@ -49,7 +49,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	private JMenuItem menuItemExitGame;
 	private JMenuItem menuItemBack;
 
-	private String space = "          ";
+	private String space = "      ";
 
 	private JMenu menuMusic;
 	private JMenuItem menuItemPlayOrStopMusic;
@@ -148,11 +148,12 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			menuBar.add(getMenuMusic());
 
 			bonusLabel = new JLabel("Bonus : None" + space);
-			rangeLabel = new JLabel("Attack Range : 10" + space);
+			bonusTimeLabel = new JLabel("");
+			rangeLabel = new JLabel("Attack Range : 7" + space);
 			rangeLabel.setForeground(Color.BLUE);
-			speedLabel = new JLabel("Movement Speed : 2" + space);
+			speedLabel = new JLabel("Movement Speed : 350" + space);
 			speedLabel.setForeground(Color.DARK_GRAY);
-			rateLabel = new JLabel("Attack Rate : 1000" + space);
+			rateLabel = new JLabel("Attack Rate : 2000" + space);
 			rateLabel.setForeground(Color.MAGENTA);
 
 			killsLabel = new JLabel();
@@ -161,6 +162,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 			menuBar.add(timeLabel);
 			menuBar.add(bonusLabel);
+			menuBar.add(bonusTimeLabel);
 			menuBar.add(Box.createGlue());
 
 			killsLabel.setText("Kills : 0" + space);
@@ -365,23 +367,48 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	}
 
 	public void showBonus(String bonus) {
-		bonusLabel.setText(bonus);
+		bonusLabel.setText("Bonus : " + bonus);
+		
+		
+		if(bonus.equals("NONE")){
+			bonusLabel.setForeground(Color.BLACK);
+			
+		} else if(bonus.equals("RATE")){
+			bonusLabel.setForeground(Color.MAGENTA);
+			
+		}else if(bonus.equals("SPEED")){
+			bonusLabel.setForeground(Color.LIGHT_GRAY);
+			
+		}else if(bonus.equals("RANGE")){
+			bonusLabel.setForeground(Color.BLUE);
+			
+		}else if(bonus.equals("SLOW")){
+			bonusLabel.setForeground(new Color(70,200,40));
+			
+		}else if(bonus.equals("SHIELD")){
+			bonusLabel.setForeground(Color.RED);
+		}
+		
+		
 	}
 
 	public void showBonusTime(int time) {
-		bonusTimeLabel.setText(String.valueOf(time));
+		bonusTimeLabel.setText(space  + "Time left : "+ String.valueOf(time) + " sec");
+		if(time == 0){
+			bonusTimeLabel.setText("");
+		}
 	}
 
 	public void showAttackRange(int range) {
-		rangeLabel.setText("Attack Range : " + range);
+		rangeLabel.setText("Attack Range : " + range + space);
 	}
 
 	public void showMovementSpeed(int speed) {
-		speedLabel.setText("Movement Speed : " + speed);
+		speedLabel.setText("Movement Speed : " + speed + space);
 	}
 
 	public void showAttackRate(int rate) {
-		rateLabel.setText("Attack Rate : " + rate);
+		rateLabel.setText("Attack Rate : " + rate + space);
 
 	}
 
@@ -447,7 +474,6 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		regionArray[7].setLocation(544-(int)pos.getX()*32,736-(int)pos.getY()*32);
 		regionArray[8].setLocation(1216-(int)pos.getX()*32,736-(int)pos.getY()*32);
 
-		testPosition();
 	}	
 	
 	//TODO set max region size here *******************************************************************************************************************************************************
@@ -457,20 +483,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		
 	}
 	
-	
-	public void testPosition(){
-		for(int i = 0; i < 9; i++){
-			if(!((regionArray[i].getLocation().getX()%32)==0 && (regionArray[i].getLocation().getY()%32)==0)){
-			System.out.println(regionArray[i].getLocation().getX() + " , " + regionArray[i].getLocation().getY());
-			}
-			
-		}
 		
-		for(int i = 0; i < 9; i++){		
-			System.out.println(regionArray[i].getLocation().getX() + " , " + regionArray[i].getLocation().getY());	
-			
-		}
-	}
 	
 	public NetworkTarget getMyNetworkTarget(){
 		return gc.getPlayer();

@@ -222,7 +222,6 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	    	    	 } else {
 	    	    		tl.setWay(16);
 	    	    		tl.getMoveTimer().stop();
-	    	    		gameWindow.testPosition();
 	    	    	 }
 	    	} else {
 	    		if(tl.getWay() > 0){
@@ -245,7 +244,6 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	    	    	 } else {
 	    	    		tl.setWay(16);
 	    	    		tl.getMoveTimer().stop();
-	    	    		gameWindow.testPosition();
 	    	    	 }
 	    	}
 	    	
