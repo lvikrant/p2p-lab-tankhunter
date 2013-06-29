@@ -8,9 +8,11 @@ import java.util.Map;
 
 
 public class NetworkObject implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
 	public enum dataType {
-	    Ping, Pong, ConenctTo, Init, Move, Shoot, Data, Tank;
+	    Ping, Pong, ConenctTo, Init, Move, Shoot, Data, Tank, AddPowerUp, RemovePowerUp;
 	}
 	
 	public dataType type = dataType.Data;
@@ -38,9 +40,12 @@ public class NetworkObject implements Serializable {
     public Tank tank;
     public Missile missile;
     
+    public PowerUp powerUp;
+    
     public Map<NetworkTarget, TankInfo>  tankData;
     public Map<Point, PowerUp>  powerUpData;
     public Map<NetworkTarget, MissileInfo>  missileData;
     public int region;
+	public Point point;
 
 }

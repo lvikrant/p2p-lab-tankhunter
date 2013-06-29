@@ -4,6 +4,7 @@
  */
 package overlay;
 
+import java.awt.Point;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -93,7 +94,6 @@ public class UpdateGameState extends Thread {
 						controller.importTankInfo(no.tankData);
 						controller.importPowerUpMap(no.powerUpData);
 						controller.importMissileInfo(no.missileData);
-					
 		
 					}
 
@@ -116,6 +116,27 @@ public class UpdateGameState extends Thread {
 					} else {
 						
 						//controller.MoveMissile(no.dataTarget, no.missile);
+					}
+					break;
+					
+				case AddPowerUp:
+					if(iAmRC) {
+						tmpNo = new NetworkObject();
+						tmpNo.type = dataType.AddPowerUp;
+					//TODO	tmpNo.powerUp = ???
+					} else {			
+						controller.addPowerUp(no.powerUp);
+					}
+					break;
+					
+				case RemovePowerUp:
+					if(iAmRC) {
+						tmpNo = new NetworkObject();
+						tmpNo.type = dataType.RemovePowerUp;
+					//TODO	tmpNo.point = ???
+						
+					} else {			
+						controller.removePowerUp(no.point);
 					}
 					break;
 

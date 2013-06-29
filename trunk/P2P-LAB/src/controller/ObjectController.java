@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 import comparator.NTComparator;
 
+import model.NetworkObject;
 import model.RegionTypes;
 import model.Missile;
 import model.MissileInfo;
@@ -13,6 +14,7 @@ import model.NetworkTarget;
 import model.PowerUp;
 import model.Tank;
 import model.TankInfo;
+import model.NetworkObject.dataType;
 import interfaces.IObjectController;
 
 public class ObjectController implements IObjectController{
@@ -258,6 +260,12 @@ public class ObjectController implements IObjectController{
 
 	public int getRegionType() {
 		return MAP_ELEMENTS.getRegionType();
+	}
+
+	
+	public void addPowerUp(PowerUp powerUp) {
+		POWER_UP_CONTROLLER.add(powerUp);
+		
 	}
 
 }
