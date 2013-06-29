@@ -2,12 +2,16 @@ package controller;
 
 import java.awt.Point;
 import java.util.Map;
+import java.util.TreeMap;
+
+import comparator.NTComparator;
 
 import model.MapElements;
 import model.Missile;
 import model.NetworkTarget;
 import model.PowerUp;
 import model.Tank;
+import model.TankInfo;
 import interfaces.IObjectController;
 
 public class ObjectController implements IObjectController{
@@ -104,6 +108,24 @@ public class ObjectController implements IObjectController{
 	public Map<NetworkTarget, Tank> exportTankMap() {
 		return TANK_CONTROLLER.exportMap();
 	}
+	
+	
+	public Map<NetworkTarget, TankInfo> exportTankInfo() {
+		Map<NetworkTarget, TankInfo> map = new TreeMap<NetworkTarget, TankInfo>(new NTComparator());
+		
+		for (Map.Entry<NetworkTarget, Tank> entry : TANK_CONTROLLER.exportMap().entrySet()) {
+			int parPosX = entry.getValue().getPosX();
+			int parPosY = entry.getValue().getPosY();
+			int parAngle = entry.getValue().getAngle();
+			String parStatus = entry.getValue().getStatus();
+			int parTimeLeft = entry.getValue().getTimeLeft();
+			map.put(entry.getKey(), new TankInfo(parPosX, parPosY, parAngle, parStatus, parTimeLeft));
+		}
+		
+		return map;
+	}
+	
+	
 	
 	public boolean contains(NetworkTarget nt) {
 		return TANK_CONTROLLER.contains(nt);

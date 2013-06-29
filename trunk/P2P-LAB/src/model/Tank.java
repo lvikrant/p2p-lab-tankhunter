@@ -258,4 +258,8 @@ public class Tank implements ActionListener {
 			moveDelayTimer.stop();
 		}
 	}
+
+	public int getAngle() {
+		return tankAngle;
+	}
 }

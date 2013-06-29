@@ -1,10 +1,16 @@
 package comparator;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import model.NetworkTarget;
 
-public class NTComparator implements Comparator<NetworkTarget> {
+public class NTComparator implements Comparator<NetworkTarget>,Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public int compare(NetworkTarget e1, NetworkTarget e2) {
