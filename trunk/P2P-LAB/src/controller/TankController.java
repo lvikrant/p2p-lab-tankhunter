@@ -9,6 +9,7 @@ import comparator.NTComparator;
 import model.NetworkTarget;
 import model.Sound;
 import model.Tank;
+import model.TankInfo;
 
 public class TankController {
 
@@ -34,7 +35,7 @@ public class TankController {
 			if (map.size() <= TANK_LIMIT) {
 				map.put(nt, tank);
 				gc.getMainRegion().addTank(nt, pos, 0);
-				if(nt == gc.getPlayer()){
+				if(nt == gc.getMe()){
 					gc.setGamePanelMiddle(pos);
 				}
 				return true;
@@ -66,7 +67,7 @@ public class TankController {
 			Tank tank = new Tank(gc, nt, pos, angle);
 			map.put(nt, tank);
 			gc.getMainRegion().addTank(nt, pos, angle);
-			if(nt == gc.getPlayer()){
+			if(nt == gc.getMe()){
 			//	gc.setGamePanelMiddle(pos);
 			}
 			return true;
@@ -107,6 +108,19 @@ public class TankController {
 
 	public void importMap(Map<NetworkTarget, Tank> newMap) {
 		map = newMap;
+		
+		for (Map.Entry<NetworkTarget, Tank> entry : newMap.entrySet()) {
+		
+			int parPosX = entry.getValue().getPosX();
+			int parPosY = entry.getValue().getPosY();
+			int parAngle = entry.getValue().getAngle();
+			gc.gameWindow.getMainRegion().addTank(entry.getKey(), new Point(parPosX, parPosY), parAngle);
+			
+			if(entry.getKey().equals(gc.getMe())){
+				
+				gc.gameWindow.setGamePanelMiddle(new Point(parPosX,parPosY));
+			}
+		}
 	}
 
 	public Map<NetworkTarget, Tank> exportMap() {
@@ -123,7 +137,7 @@ public class TankController {
 			Tank tank = new Tank(gc, nt, pos, angle);
 			map.put(nt, tank);
 			gc.getMainRegion().enterRegion(nt, pos, angle);
-			if(nt == gc.getPlayer()){
+			if(nt == gc.getMe()){
 			//	gc.setGamePanelMiddle(pos);
 			}
 		}

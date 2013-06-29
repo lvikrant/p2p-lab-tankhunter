@@ -6,7 +6,9 @@ import java.util.TreeMap;
 
 import comparator.PointComparator;
 
+import model.NetworkTarget;
 import model.PowerUp;
+import model.Tank;
 
 public class PowerUpController{
 	
@@ -67,6 +69,10 @@ public class PowerUpController{
 	public void importMap(Map<Point, PowerUp> map){
 		removeAll();
 		this.map = map;
+		
+		for (Map.Entry<Point, PowerUp> entry : map.entrySet()) {
+			gc.gameWindow.getMainRegion().addPowerUp(entry.getKey(), entry.getValue().getPowerUp());
+		}
 	}
 	
 	public Map<Point, PowerUp> exportMap(){

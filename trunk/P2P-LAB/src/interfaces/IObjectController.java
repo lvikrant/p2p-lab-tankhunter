@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.Map;
 
 import model.Missile;
+import model.MissileInfo;
 import model.NetworkTarget;
 import model.PowerUp;
 import model.Tank;
@@ -78,4 +79,12 @@ public interface IObjectController {
 	public int getRegionId();
 	
 	public Map<NetworkTarget, TankInfo> exportTankInfo();
+
+	public void setMe(NetworkTarget networkTarget);
+
+	public NetworkTarget getMe();
+
+	public Map<NetworkTarget, MissileInfo> exportMissileInfo();
+
+	public void importMissileInfo(Map<NetworkTarget, MissileInfo> missileData);
 }
