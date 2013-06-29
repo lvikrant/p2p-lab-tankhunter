@@ -123,7 +123,7 @@ public class UpdateGameState extends Thread {
 					if(iAmRC) {
 						tmpNo = new NetworkObject();
 						tmpNo.type = dataType.AddPowerUp;
-					//TODO	tmpNo.powerUp = ???
+						tmpNo.powerUp = no.powerUp;// ???
 					} else {			
 						controller.addPowerUp(no.powerUp);
 					}

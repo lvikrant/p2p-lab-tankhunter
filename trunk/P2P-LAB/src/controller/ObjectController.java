@@ -264,6 +264,7 @@ public class ObjectController implements IObjectController{
 
 	
 	public void addPowerUp(PowerUp powerUp) {
+		System.out.println("YES!!!!!");
 		POWER_UP_CONTROLLER.add(powerUp);
 		
 	}
