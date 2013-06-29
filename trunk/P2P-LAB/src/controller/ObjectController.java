@@ -22,9 +22,10 @@ public class ObjectController implements IObjectController{
     private final MissileController MISSILE_CONTROLLER;
     
     private final MapElements MAP_ELEMENTS;
+    private GameController gc;
     
 	public ObjectController(GameController gameC, int powerUpLimit,int tankLimit, int missileLimit, int mapID) {
-		
+		gc = gameC;
 		POWER_UP_CONTROLLER = new PowerUpController(gameC,powerUpLimit);
 		TANK_CONTROLLER = new TankController(gameC,tankLimit);
 		MISSILE_CONTROLLER = new MissileController(gameC,missileLimit);
@@ -123,6 +124,23 @@ public class ObjectController implements IObjectController{
 		}
 		
 		return map;
+	}
+	
+	
+	public void importTankInfo(Map<NetworkTarget, TankInfo> parmap) {
+		
+		Map<NetworkTarget, Tank> map = new TreeMap<NetworkTarget, Tank>(new NTComparator());
+		
+		for (Map.Entry<NetworkTarget, TankInfo> entry : parmap.entrySet()) {
+			int posX = entry.getValue().getPosX();
+			int posY = entry.getValue().getPosY();
+			Tank tempTank = new Tank(gc, entry.getKey(), new Point(posX, posY), entry.getValue().getAngle());
+			tempTank.setStatus(entry.getValue().getStatus());
+			tempTank.setTimeLeft(entry.getValue().getTimeLeft());
+			map.put(entry.getKey(), tempTank );
+		}
+		
+		TANK_CONTROLLER.importMap(map);
 	}
 	
 	
