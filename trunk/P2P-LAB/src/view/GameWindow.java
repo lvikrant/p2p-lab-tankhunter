@@ -80,12 +80,12 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	}
 	
 	/** CLIENT */
-	public GameWindow(NetworkTarget server, NetworkTarget client) {
+	public GameWindow(NetworkTarget server, int mode) {
         initialWindow();
         
-        myinfo = client;
+     //   myinfo = client;
 		
-		gc = new GameController(this, server , client);
+		gc = new GameController(this, server , mode);
 		addKeyListener(gc);
 		setResizable(false);
 		
@@ -479,6 +479,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 	}	
 	
+
 	public GameRegion createNewRegion(){
 		int random = (int) (Math.random() * 3);
 		return new GameRegion("src/resources/regions/region" + random +".png", this, random);

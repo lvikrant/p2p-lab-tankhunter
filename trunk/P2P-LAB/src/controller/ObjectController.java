@@ -8,6 +8,7 @@ import comparator.NTComparator;
 
 import model.MapElements;
 import model.Missile;
+import model.MissileInfo;
 import model.NetworkTarget;
 import model.PowerUp;
 import model.Tank;
@@ -141,6 +142,36 @@ public class ObjectController implements IObjectController{
 		}
 		
 		TANK_CONTROLLER.importMap(map);
+	}
+	
+	public Map<NetworkTarget, MissileInfo> exportMissileInfo() {
+		Map<NetworkTarget, MissileInfo> map = new TreeMap<NetworkTarget, MissileInfo>(new NTComparator());
+		
+		for (Map.Entry<NetworkTarget, Missile> entry : MISSILE_CONTROLLER.exportMap().entrySet()) {
+			int parPosX = entry.getValue().getPosX();
+			int parPosY = entry.getValue().getPosY();
+			int parAngle = entry.getValue().getAngle();
+			int parRange = entry.getValue().getRange();
+			map.put(entry.getKey(), new MissileInfo(parPosX, parPosY, parAngle, parRange));
+		}
+		
+		return map;
+	}
+	
+	public void importMissileInfo(Map<NetworkTarget, MissileInfo> parmap) {
+		
+		Map<NetworkTarget, Missile> map = new TreeMap<NetworkTarget, Missile>(new NTComparator());
+		
+		for (Map.Entry<NetworkTarget, MissileInfo> entry : parmap.entrySet()) {
+			int posX = entry.getValue().getPosX();
+			int posY = entry.getValue().getPosY();
+			int angle = entry.getValue().getAngle();
+			int range = entry.getValue().getRange();
+			Missile tempMissile = new Missile(entry.getKey(), angle, range, posX, posY, gc);
+			map.put(entry.getKey(), tempMissile);
+		}
+		
+		MISSILE_CONTROLLER.importMap(map);
 	}
 	
 	
