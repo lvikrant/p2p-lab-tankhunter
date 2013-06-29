@@ -2,7 +2,7 @@ package model;
 
 import controller.GameController;
 
-public class MapElements {
+public class RegionTypes {
 	
 	private final int MAP_WIDTH;
 	private final int MAP_HEIGHT;
@@ -10,20 +10,20 @@ public class MapElements {
 	private int ID;
 	private GameController gc;
 
-public MapElements(GameController gc, int mapID) {
+public RegionTypes(GameController gc, int mapID) {
 	this.gc = gc;
 	MAP_WIDTH = gc.getMapWidth();
 	MAP_HEIGHT = gc.getMapHeight();
 	map = new String[MAP_WIDTH][MAP_HEIGHT];
 	clearMap();
-	setElements(mapID);
+	setRegion(mapID);
 }
 
 public String getFieldInfo(int posX, int posY){
     	return map[posX][posY];
     }
 
-public void setElements(int mapID) {
+public void setRegion(int mapID) {
 	ID = mapID;
 	switch(mapID){
 	case 0 : clearMap(); break;
@@ -89,7 +89,8 @@ private void loadMap1() {
 		map[17][8] = "ROCK";	
 	}
 
-public int getRegionId() {
+
+public int getRegionType() {
 	return ID;
 }
 

@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 import comparator.NTComparator;
 
-import model.MapElements;
+import model.RegionTypes;
 import model.Missile;
 import model.MissileInfo;
 import model.NetworkTarget;
@@ -22,7 +22,7 @@ public class ObjectController implements IObjectController{
     private final TankController TANK_CONTROLLER;
     private final MissileController MISSILE_CONTROLLER;
     
-    private final MapElements MAP_ELEMENTS;
+    private final RegionTypes MAP_ELEMENTS;
     private GameController gc;
     
 	public ObjectController(GameController gameC, int powerUpLimit,int tankLimit, int missileLimit, int mapID) {
@@ -30,7 +30,7 @@ public class ObjectController implements IObjectController{
 		POWER_UP_CONTROLLER = new PowerUpController(gameC,powerUpLimit);
 		TANK_CONTROLLER = new TankController(gameC,tankLimit);
 		MISSILE_CONTROLLER = new MissileController(gameC,missileLimit);
-		MAP_ELEMENTS = new MapElements(gameC,mapID);
+		MAP_ELEMENTS = new RegionTypes(gameC,mapID);
 		
 	}
 
@@ -194,10 +194,6 @@ public class ObjectController implements IObjectController{
 
 
 	/******************* MAP_ELEMENTS *********************************************************************************************/
-	
-	public void setElements(int mapID) {
-		MAP_ELEMENTS.setElements(mapID);
-	}
 
 	public String getFieldInfo(Point point) {
 		if(POWER_UP_CONTROLLER.contains(point)){
@@ -241,21 +237,27 @@ public class ObjectController implements IObjectController{
 		TANK_CONTROLLER.enterRegion(nt, pos, angle);	
 	}
 	
-	public int getRegionId(){
-		return MAP_ELEMENTS.getRegionId();
-	}
-
-
 
 	public void setMe(NetworkTarget networkTarget) {
 		gc.setMe(networkTarget);
 		
 	}
 
-
-	@Override
 	public NetworkTarget getMe() {
 		return gc.getMe();
+	}
+
+
+	public void setRegionType(int regionType) {
+		MAP_ELEMENTS.setRegion(regionType);	
+	}
+	
+	public void setNewRegionType(int regionType){
+		gc.gameWindow.setRegionType(regionType);
+	}
+
+	public int getRegionType() {
+		return MAP_ELEMENTS.getRegionType();
 	}
 
 }

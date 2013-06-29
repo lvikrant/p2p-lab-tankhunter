@@ -205,7 +205,7 @@ public class GameController implements ActionListener, KeyListener {
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_F4) {
-			System.out.println(OBJECT_CONTROLLER.getRegionId());
+			System.out.println("Region Type : " + OBJECT_CONTROLLER.getRegionType());
 		}
 
 	}
@@ -224,7 +224,7 @@ public class GameController implements ActionListener, KeyListener {
 		// TODO test if position is free!
 		OBJECT_CONTROLLER.removeTank(ME);
 		OBJECT_CONTROLLER.removeAllPowerUps();
-		OBJECT_CONTROLLER.setElements(0);
+	//	OBJECT_CONTROLLER.setRegionType(0);
 		gameWindow.moveToNextRegion(pos, angle);
 		switch (angle) {
 		case 0:
@@ -285,7 +285,8 @@ public class GameController implements ActionListener, KeyListener {
 	}
 	
 	public void setMainRegion(int region){
-		OBJECT_CONTROLLER.setElements(region);
+		System.out.println("OK!!");
+		OBJECT_CONTROLLER.setRegionType(region);
 	}
 
 	
@@ -305,5 +306,9 @@ public class GameController implements ActionListener, KeyListener {
 	public void setMe(NetworkTarget networkTarget) {
 		gameWindow.myinfo = networkTarget;
 		ME = networkTarget;
+	}
+
+	public void setRegionType(int regionType) {
+		OBJECT_CONTROLLER.setRegionType(regionType);	
 	}
 }

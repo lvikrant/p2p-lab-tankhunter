@@ -72,11 +72,8 @@ public interface IObjectController {
     /**
      * MAP_ELEMENTS *************************
      */
-    public void setElements(int mapID);
 
     public String getFieldInfo(Point point);
-
-	public int getRegionId();
 	
 	public Map<NetworkTarget, TankInfo> exportTankInfo();
 
@@ -87,4 +84,8 @@ public interface IObjectController {
 	public Map<NetworkTarget, MissileInfo> exportMissileInfo();
 
 	public void importMissileInfo(Map<NetworkTarget, MissileInfo> missileData);
+
+	public void setNewRegionType(int regionType);
+
+	public int getRegionType();
 }

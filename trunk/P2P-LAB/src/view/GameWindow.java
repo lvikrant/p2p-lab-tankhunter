@@ -73,9 +73,9 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		gc = new GameController(this, server);
 		addKeyListener(gc);
 		setResizable(false);
-		
-		gc.setMainRegion(regionArray[4].getRegionType());
 		initialMusic();
+		
+		gc.setRegionType(regionArray[4].getRegionType());
 
 	}
 	
@@ -484,6 +484,17 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		int random = (int) (Math.random() * 3);
 		return new GameRegion("src/resources/regions/region" + random +".png", this, random);
 		
+	}
+
+	public void setRegionType(int regionType) {
+		int oldPosX = (int) regionArray[4].getLocation().getX();
+		int oldPosY = (int) regionArray[4].getLocation().getY();
+		regionArray[4].setVisible(false);
+		remove(regionArray[4]);
+		
+		regionArray[4] = new GameRegion("src/resources/regions/region" + regionType +".png", this, regionType);
+		regionArray[4].setLocation(new Point(oldPosX, oldPosY));
+		add(regionArray[4]);
 	}
 
 }

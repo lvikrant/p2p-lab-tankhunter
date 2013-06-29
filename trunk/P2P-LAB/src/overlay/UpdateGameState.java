@@ -85,16 +85,15 @@ public class UpdateGameState extends Thread {
 						tmpNo.tankData = controller.exportTankInfo(); 
 						tmpNo.powerUpData = controller.exportPowerUpMap();
 						tmpNo.missileData = controller.exportMissileInfo();
-						//tmpNo.region = controller.getRegionId();
+						tmpNo.region = controller.getRegionType();
 						man.Send(no.target, tmpNo);
 					} else {
-						System.out.println("Hello10");
 						controller.setMe(new NetworkTarget("127.0.0.1", man.getMe().getPort()));
-						System.out.println(controller.getMe().getPort());
+						controller.setNewRegionType(no.region);
 						controller.importTankInfo(no.tankData);
 						controller.importPowerUpMap(no.powerUpData);
 						controller.importMissileInfo(no.missileData);
-						controller.setElements(no.region);
+					
 		
 					}
 
