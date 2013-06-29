@@ -5,10 +5,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import comparator.PointComparator;
-
-import model.NetworkTarget;
 import model.PowerUp;
-import model.Tank;
+
 
 public class PowerUpController{
 	
@@ -101,6 +99,12 @@ public class PowerUpController{
 	
 	public PowerUp get(Point point){
 		return map.get(point);
+	}
+
+	public void add(PowerUp powerUp) {
+		map.put(powerUp.getPos(), powerUp);
+		gc.getMainRegion().addPowerUp(powerUp.getPos(),powerUp.getPowerUp());
+		
 	}
 
 }

@@ -41,7 +41,7 @@ public class GameController implements ActionListener, KeyListener {
 
 	private boolean regionController;
 
-	private UpdateGameState overlay;
+	public UpdateGameState overlay;
 
 	private NetworkTarget deadPlayer;
 
