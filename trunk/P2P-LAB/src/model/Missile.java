@@ -47,6 +47,14 @@ public class Missile implements ActionListener {
 
 
 	}
+	
+	public int getAngle(){
+		return ANGLE;
+	}
+	
+	public int getRange() {
+		return range;
+	}
 
 	public int getPosX(){
 		return posX;
@@ -210,5 +218,7 @@ public class Missile implements ActionListener {
 			
 		}
 	}
+
+
 
 }
