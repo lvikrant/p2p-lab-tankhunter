@@ -1,9 +1,12 @@
 package comparator;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class PointComparator implements Comparator<Point> {
+public class PointComparator implements Comparator<Point>,Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public int compare(Point e1, Point e2) {

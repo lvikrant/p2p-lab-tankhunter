@@ -62,7 +62,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	
 	GameController gc;
 	
-	private NetworkTarget myinfo;
+	public NetworkTarget myinfo;
 
 	/** SERVER */
 	
@@ -83,7 +83,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	public GameWindow(NetworkTarget server, int mode) {
         initialWindow();
         
-     //   myinfo = client;
+ 
 		
 		gc = new GameController(this, server , mode);
 		addKeyListener(gc);
@@ -94,6 +94,8 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	}
 
 	public NetworkTarget getPlayer() {
+		System.out.println(myinfo.getIP());
+		System.out.println(myinfo.getPort());
 		return myinfo;
 	}
 
@@ -489,7 +491,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		
 	
 	public NetworkTarget getMyNetworkTarget(){
-		return gc.getPlayer();
+		return gc.getMe();
 	}
 
 }

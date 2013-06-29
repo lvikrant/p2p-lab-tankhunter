@@ -18,7 +18,7 @@ import view.GameWindow;
 
 public class GameController implements ActionListener, KeyListener {
 
-	private final NetworkTarget ME;
+	private NetworkTarget ME;
 
 	private final int POWERUP_SPAWNRATE = 50; // Time till the next PowerUp
 												// spawns on the map
@@ -54,8 +54,7 @@ public class GameController implements ActionListener, KeyListener {
 
 		ME = server;
 
-		OBJECT_CONTROLLER = new ObjectController(this, POWERUP_LIMIT,
-				TANK_LIMIT, MISSILE_LIMIT, 0);
+		OBJECT_CONTROLLER = new ObjectController(this, POWERUP_LIMIT,TANK_LIMIT, MISSILE_LIMIT, 0);
 
 		gameWindow = parGameWindow;
 
@@ -82,7 +81,7 @@ public class GameController implements ActionListener, KeyListener {
 	public GameController(GameWindow parGameWindow, NetworkTarget ser, int mode) {
 		regionController = false;
 
-		ME = new NetworkTarget("192.168.0.1", 8080);
+		
 		server = ser;
 
 		OBJECT_CONTROLLER = new ObjectController(this, POWERUP_LIMIT,
@@ -90,13 +89,19 @@ public class GameController implements ActionListener, KeyListener {
 
 		gameWindow = parGameWindow;
 
-		overlay = new UpdateGameState(OBJECT_CONTROLLER, new NetworkTarget(
-				"127.0.0.1", 8080));
+		
+		
+		overlay = new UpdateGameState(OBJECT_CONTROLLER, new NetworkTarget("127.0.0.1", 8080));
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
+		
+		
+		System.out.println("IP : " + ME.getIP() + " Port :" + ME.getPort() );
+		System.out.println(OBJECT_CONTROLLER.contains(ME));
 	}
 
 	public void destroyTank(NetworkTarget nt) {
@@ -171,7 +176,7 @@ public class GameController implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (regionController == true) {
+	
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_LEFT:
 				OBJECT_CONTROLLER.moveTank(ME, 180);
@@ -189,28 +194,7 @@ public class GameController implements ActionListener, KeyListener {
 				OBJECT_CONTROLLER.getTank(ME).fire();
 				break;
 			}
-		} else {
-			// TODO
-			System.err
-					.println("Get the permission to move or to fire from the region controller");
-			switch (e.getKeyCode()) {
-			case KeyEvent.VK_LEFT:
-				OBJECT_CONTROLLER.moveTank(ME, 180);
-				break;
-			case KeyEvent.VK_UP:
-				OBJECT_CONTROLLER.moveTank(ME, 90);
-				break;
-			case KeyEvent.VK_DOWN:
-				OBJECT_CONTROLLER.moveTank(ME, 270);
-				break;
-			case KeyEvent.VK_RIGHT:
-				OBJECT_CONTROLLER.moveTank(ME, 0);
-				break;
-			case KeyEvent.VK_SPACE:
-				OBJECT_CONTROLLER.getTank(ME).fire();
-				break;
-			}
-		}
+		
 
 		if (e.getKeyCode() == KeyEvent.VK_F2) {
 			OBJECT_CONTROLLER.addPowerUpRandom();
@@ -287,7 +271,7 @@ public class GameController implements ActionListener, KeyListener {
 		gameWindow.setGamePanelMiddle(pos);
 	}
 
-	public NetworkTarget getPlayer() {
+	public NetworkTarget getMe() {
 		return ME;
 	}
 
@@ -316,5 +300,10 @@ public class GameController implements ActionListener, KeyListener {
 					+ "  Pos : " + entry.getValue().getPosX()
 					+ "|" + entry.getValue().getPosY());
 		}
+	}
+
+	public void setMe(NetworkTarget networkTarget) {
+		gameWindow.myinfo = networkTarget;
+		ME = networkTarget;
 	}
 }

@@ -245,4 +245,17 @@ public class ObjectController implements IObjectController{
 		return MAP_ELEMENTS.getRegionId();
 	}
 
+
+
+	public void setMe(NetworkTarget networkTarget) {
+		gc.setMe(networkTarget);
+		
+	}
+
+
+	@Override
+	public NetworkTarget getMe() {
+		return gc.getMe();
+	}
+
 }

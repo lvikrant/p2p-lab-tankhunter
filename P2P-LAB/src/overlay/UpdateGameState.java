@@ -36,13 +36,21 @@ public class UpdateGameState extends Thread {
 		man = new ConnectionManager();
 		man.Connect(target);
 
+		
+		
 		NetworkObject networkObject = new NetworkObject();
 		
 		new Thread(man).start();
-		new Thread(this).start();
+		
+		
+		
 		
 		networkObject.type = dataType.Init;
 		man.Send(target, networkObject);
+		
+	
+		
+		new Thread(this).start();
 
 	}
 	/**
@@ -75,16 +83,17 @@ public class UpdateGameState extends Thread {
 						tmpNo.type = dataType.Init;
 						controller.addTankRandom(no.target);
 						tmpNo.tankData = controller.exportTankInfo(); 
-						//tmpNo.powerUpData = controller.exportPowerUpMap();
-						//tmpNo.missileData = controller.exportMissileMap();
+						tmpNo.powerUpData = controller.exportPowerUpMap();
+						tmpNo.missileData = controller.exportMissileInfo();
 						//tmpNo.region = controller.getRegionId();
 						man.Send(no.target, tmpNo);
 					} else {
 						System.out.println("Hello10");
-						
+						controller.setMe(new NetworkTarget("127.0.0.1", man.getMe().getPort()));
+						System.out.println(controller.getMe().getPort());
 						controller.importTankInfo(no.tankData);
 						controller.importPowerUpMap(no.powerUpData);
-						controller.importMissileMap(no.missileData);
+						controller.importMissileInfo(no.missileData);
 						controller.setElements(no.region);
 		
 					}

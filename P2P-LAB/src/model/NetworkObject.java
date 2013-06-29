@@ -40,7 +40,7 @@ public class NetworkObject implements Serializable {
     
     public Map<NetworkTarget, TankInfo>  tankData;
     public Map<Point, PowerUp>  powerUpData;
-    public Map<NetworkTarget, Missile>  missileData;
+    public Map<NetworkTarget, MissileInfo>  missileData;
     public int region;
 
 }
