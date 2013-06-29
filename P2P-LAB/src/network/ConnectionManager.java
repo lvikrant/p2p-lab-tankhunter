@@ -261,7 +261,10 @@ public class ConnectionManager extends Thread{
 
 					break;
 				case Init:
+					
+					
 				case Data:
+					System.out.println("Hello9");
 					synchronized (recived) {
 						recived.add(n);
 					}
