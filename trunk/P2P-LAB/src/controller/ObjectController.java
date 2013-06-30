@@ -43,8 +43,8 @@ public class ObjectController implements IObjectController{
 		POWER_UP_CONTROLLER.addRandom();
 	}
 	
-	public void addPowerUp(Point point) {
-		POWER_UP_CONTROLLER.add(point);
+	public void addPowerUp(Point point,String power) {
+		POWER_UP_CONTROLLER.add(point,power);
 	}
 	
 	public int getPowerUpMapSize(){
@@ -87,6 +87,11 @@ public class ObjectController implements IObjectController{
 	
 	public void addTankRandom(NetworkTarget nt){
 		TANK_CONTROLLER.addRandom(nt);
+	}
+	
+	public void addPowerUp(PowerUp powerUp) {
+		POWER_UP_CONTROLLER.add(powerUp.getPos(),powerUp.getPowerUp());
+		
 	}
 	
 	public void destroy(NetworkTarget nt){
@@ -263,10 +268,6 @@ public class ObjectController implements IObjectController{
 	}
 
 	
-	public void addPowerUp(PowerUp powerUp) {
-		System.out.println("YES!!!!!");
-		POWER_UP_CONTROLLER.add(powerUp);
-		
-	}
+
 
 }

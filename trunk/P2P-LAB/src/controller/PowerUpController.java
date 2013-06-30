@@ -23,13 +23,14 @@ public class PowerUpController{
 		MAX_ELEMENTS = maxelem;
 	}
 	
-	public boolean add(Point point){
+	public boolean add(Point point,String power){
 		if(gc.getFieldInfo(point).equals("FREE")){	
 			PowerUp powerUp = new PowerUp(point);
+			powerUp.setPower(power);
 			
 			if(map.size() <= MAX_ELEMENTS){
 				map.put(powerUp.getPos(), powerUp);
-				gc.getMainRegion().addPowerUp(point,powerUp.getPowerUp());
+				gc.getMainRegion().addPowerUp(point,power);
 				return true;
 			}		
 		}
@@ -108,12 +109,6 @@ public class PowerUpController{
 	
 	public PowerUp get(Point point){
 		return map.get(point);
-	}
-
-	public void add(PowerUp powerUp) {
-		map.put(powerUp.getPos(), powerUp);
-		gc.getMainRegion().addPowerUp(powerUp.getPos(),powerUp.getPowerUp());
-		
 	}
 
 }
