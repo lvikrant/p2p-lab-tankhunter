@@ -194,6 +194,19 @@ public class GameController implements ActionListener, KeyListener {
 			case KeyEvent.VK_SPACE:
 				OBJECT_CONTROLLER.getTank(ME).fire();
 				break;
+			//Altermnative	
+			case KeyEvent.VK_A:
+				OBJECT_CONTROLLER.moveTank(ME, 180);
+				break;
+			case KeyEvent.VK_W:
+				OBJECT_CONTROLLER.moveTank(ME, 90);
+				break;
+			case KeyEvent.VK_S:
+				OBJECT_CONTROLLER.moveTank(ME, 270);
+				break;
+			case KeyEvent.VK_D:
+				OBJECT_CONTROLLER.moveTank(ME, 0);
+				break;
 			}
 		
 

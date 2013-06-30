@@ -4,8 +4,9 @@ import java.awt.Point;
 import java.util.Map;
 import java.util.TreeMap;
 
-import comparator.NTComparator;
+import utils.Move;
 
+import comparator.NTComparator;
 import model.NetworkObject;
 import model.RegionTypes;
 import model.Missile;
@@ -220,12 +221,21 @@ public class ObjectController implements IObjectController{
 		if(TANK_CONTROLLER.contains(nt) == false){
 			return false;
 		}
+		
 		switch(angle){
-		case 0: TANK_CONTROLLER.get(nt).moveRight(); break; 
+		case 0: TANK_CONTROLLER.get(nt).moveRight(); 
+		
+		break; 
 		case 90: TANK_CONTROLLER.get(nt).moveUp(); break;
 		case 180: TANK_CONTROLLER.get(nt).moveLeft(); break;
 		case 270: TANK_CONTROLLER.get(nt).moveDown(); break;
 		}
+		
+		NetworkObject no = new NetworkObject();
+		no.type = dataType.MoveTank;
+		no.move = new Move(nt,angle);
+		gc.overlay.man.sendToAll(no);
+		
 		return true;
 	}
 
