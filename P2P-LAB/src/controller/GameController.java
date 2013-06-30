@@ -89,6 +89,10 @@ public class GameController implements ActionListener, KeyListener {
 				TANK_LIMIT, MISSILE_LIMIT, 0);
 
 		gameWindow = parGameWindow;
+		
+		gameTimer = new Timer(100, this);
+		respawn = new Timer(100, this);
+		respawn.setInitialDelay(1000);
 
 		
 		
@@ -98,11 +102,7 @@ public class GameController implements ActionListener, KeyListener {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		System.out.println("IP : " + ME.getIP() + " Port :" + ME.getPort() );
-		System.out.println(OBJECT_CONTROLLER.contains(ME));
+		gameTimer.start();	
 	}
 
 	public void destroyTank(NetworkTarget nt) {
@@ -163,12 +163,12 @@ public class GameController implements ActionListener, KeyListener {
 				manadgePowerUps();
 
 			}
-			if (gameTime % POWERUP_SPAWNRATE == 0) {
+			if (gameTime % POWERUP_SPAWNRATE == 0 && regionController) {
 				if (OBJECT_CONTROLLER.getPowerUpMapSize() < POWERUP_LIMIT) {
 					OBJECT_CONTROLLER.addPowerUpRandom();
 				}
 			}
-		} else if (e.getSource() == respawn) {
+		} else if (e.getSource() == respawn && regionController) {
 			respawn.stop();
 			OBJECT_CONTROLLER.addTankRandom(deadPlayer);
 		}
