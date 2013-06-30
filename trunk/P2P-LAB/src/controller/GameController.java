@@ -106,7 +106,6 @@ public class GameController implements ActionListener, KeyListener {
 	}
 
 	public void destroyTank(NetworkTarget nt) {
-
 		OBJECT_CONTROLLER.destroy(nt);
 		deadPlayer = nt;
 		respawn.start();
