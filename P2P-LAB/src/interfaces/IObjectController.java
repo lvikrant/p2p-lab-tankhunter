@@ -15,7 +15,7 @@ public interface IObjectController {
     /**
      * POWER_UP_CONTROLLER ******************
      */
-    public void addPowerUp(Point point);
+    public void addPowerUp(Point point, String power);
     
     public void addPowerUp(PowerUp powerUp);
 

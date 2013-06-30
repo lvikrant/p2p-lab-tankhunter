@@ -11,6 +11,7 @@ import javax.swing.Timer;
 
 import overlay.UpdateGameState;
 import model.NetworkTarget;
+import model.PowerUp;
 import model.Tank;
 
 import view.GameRegion;
@@ -207,6 +208,10 @@ public class GameController implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_F4) {
 			System.out.println("Region Type : " + OBJECT_CONTROLLER.getRegionType());
 		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_F5) {
+			printPowerUpInfo();
+		}
 
 	}
 
@@ -300,6 +305,16 @@ public class GameController implements ActionListener, KeyListener {
 					+ " Name : " + entry.getKey().getName() 
 					+ "  Pos : " + entry.getValue().getPosX()
 					+ "|" + entry.getValue().getPosY());
+		}
+	}
+	
+	public void printPowerUpInfo() {
+
+		for (Map.Entry<Point, PowerUp> entry : OBJECT_CONTROLLER.exportPowerUpMap().entrySet()) {
+			System.out.println( 
+					"PosX : " + entry.getKey().getX() 
+					+ " PosY : " + entry.getKey().getY() 
+					+ " Power : : " + entry.getValue().getPowerUp());
 		}
 	}
 

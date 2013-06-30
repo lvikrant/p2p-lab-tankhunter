@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import comparator.NTComparator;
 import comparator.PointComparator;
+import model.Missile;
+import model.MissileInfo;
 import model.NetworkTarget;
 
 
@@ -133,7 +135,8 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	   }
     
 	   public void remove(Point point){
-		   powerupMap.get(point).setVisible(false);
+		   System.out.println("REMOVE!!!");
+		   powerupMap.get(point).setLocation(-1000, -1000);
 		   remove(powerupMap.get(point));
 		   powerupMap.remove(point);
 	   }
@@ -395,7 +398,6 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	public void movePanels(int angle){
 	   gameWindow.movePanels(angle);
 	}
-
 
 	public void enterRegion(NetworkTarget nt, Point pos, int angle) {
 		TankLabel tl = null;
