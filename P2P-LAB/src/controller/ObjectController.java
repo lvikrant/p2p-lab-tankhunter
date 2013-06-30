@@ -231,10 +231,13 @@ public class ObjectController implements IObjectController{
 		case 270: TANK_CONTROLLER.get(nt).moveDown(); break;
 		}
 		
-		NetworkObject no = new NetworkObject();
-		no.type = dataType.MoveTank;
-		no.move = new Move(nt,angle);
-		gc.overlay.man.sendToAll(no);
+		if(gc.isRegionController()){
+			NetworkObject no = new NetworkObject();
+			no.type = dataType.MoveTank;
+			no.move = new Move(nt,angle);
+			gc.overlay.man.sendToAll(no);
+		}
+
 		
 		return true;
 	}
