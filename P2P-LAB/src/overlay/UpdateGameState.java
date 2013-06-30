@@ -121,10 +121,9 @@ public class UpdateGameState extends Thread {
 					
 				case AddPowerUp:
 					if(iAmRC) {
-						tmpNo = new NetworkObject();
-						tmpNo.type = dataType.AddPowerUp;
-						tmpNo.powerUp = no.powerUp;// ???
-					} else {			
+						
+					} else {	
+						System.out.println("Empfangen!");
 						controller.addPowerUp(no.powerUp);
 					}
 					break;

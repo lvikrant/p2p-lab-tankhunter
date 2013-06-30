@@ -261,7 +261,7 @@ public class ConnectionManager extends Thread{
 
 					break;
 				case Init:
-					
+					System.out.println("Init");
 					
 				case Data:
 					System.out.println("Hello9");
@@ -281,6 +281,10 @@ public class ConnectionManager extends Thread{
 					break;
 
 				default:
+					synchronized (recived) {
+						recived.add(n);
+					}
+
 					break;
 				}
 			}
