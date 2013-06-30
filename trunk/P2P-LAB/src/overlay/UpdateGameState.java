@@ -101,14 +101,13 @@ public class UpdateGameState extends Thread {
 					}
 
 					break;
-				case Move:
+				case MoveTank:
 					if(iAmRC) {
 						
 						//TODO: pass information up
 						
 					} else {
-						controller.moveTank(no.dataTarget, no.angle);
-									
+						controller.moveTank(no.move.getNetworkTarget(), no.move.getAngle());						
 					}
 
 					break;
@@ -138,6 +137,7 @@ public class UpdateGameState extends Thread {
 						controller.removePowerUp(no.point);
 					}
 					break;
+					
 					
 				case Ping:	//Answer Ping with Pong
 					NetworkObject toSend = new NetworkObject();
@@ -231,7 +231,7 @@ public class UpdateGameState extends Thread {
 
 		// Retrieve missile updates and send it to RC
 		NetworkObject networkObject = new NetworkObject();
-		networkObject.type = dataType.Move;
+		networkObject.type = dataType.MoveTank;
 		networkObject.tank = controller.getTank(target);
 		connection.Send(target, networkObject);
 		networkObject.type = dataType.Shoot;

@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.util.Map;
 
+import utils.Move;
+
 
 
 public class NetworkObject implements Serializable {
@@ -12,7 +14,7 @@ public class NetworkObject implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public enum dataType {
-	    Ping, Pong, ConenctTo, Init, Move, Shoot, Data, Tank, AddPowerUp, RemovePowerUp;
+	    Ping, Pong, ConenctTo, Init, MoveTank, Shoot, Data, Tank, AddPowerUp, RemovePowerUp;
 	}
 	
 	public dataType type = dataType.Data;
@@ -39,6 +41,8 @@ public class NetworkObject implements Serializable {
 	public int angle;
     public Tank tank;
     public Missile missile;
+    
+    public Move move;
     
     public PowerUp powerUp;
     
