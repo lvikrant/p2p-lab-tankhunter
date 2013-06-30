@@ -65,10 +65,16 @@ public class PowerUpController{
 	}
 	
 	public void remove(Point point){
-		
+		System.out.println("DIGIDI-DIGIDI");
 		if(map.containsKey(point)){
 			gc.getMainRegion().remove(point);
 			map.remove(point);
+			
+			NetworkObject no = new NetworkObject();
+			no.type = dataType.RemovePowerUp;
+			no.point = point;
+			gc.overlay.man.sendToAll(no);
+			
 		} else {
 			System.err.println("An der Stelle : " + point + " gibt es keinen PowerUp");
 		}

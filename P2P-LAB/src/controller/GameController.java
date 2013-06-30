@@ -21,7 +21,7 @@ public class GameController implements ActionListener, KeyListener {
 
 	private NetworkTarget ME;
 
-	private final int POWERUP_SPAWNRATE = 50; // Time till the next PowerUp
+	private final int POWERUP_SPAWNRATE = 500; // Time till the next PowerUp
 												// spawns on the map
 	private final int POWERUP_LIMIT = 20; // The max number of PowerUps that can
 											// be on the map

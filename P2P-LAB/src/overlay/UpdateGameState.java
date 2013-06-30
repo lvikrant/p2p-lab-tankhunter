@@ -133,9 +133,6 @@ public class UpdateGameState extends Thread {
 					
 				case RemovePowerUp:
 					if(iAmRC) {
-						tmpNo = new NetworkObject();
-						tmpNo.type = dataType.RemovePowerUp;
-					//TODO	tmpNo.point = ???
 						
 					} else {			
 						controller.removePowerUp(no.point);
