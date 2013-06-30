@@ -77,6 +77,9 @@ public class UpdateGameState extends Thread {
 
 			//check for new received messages
 			for(NetworkObject no: man.getNewData()){
+				
+				//TODO: add timestamp for no.sender
+				
 				switch(no.type) {
 				case Init:
 					if(iAmRC) {
@@ -137,6 +140,15 @@ public class UpdateGameState extends Thread {
 					} else {			
 						controller.removePowerUp(no.point);
 					}
+					break;
+					
+				case Ping:	//Answer Ping with Pong
+					NetworkObject toSend = new NetworkObject();
+					toSend.type = dataType.Ping;
+					man.Send(no.target, toSend );
+
+					break;
+				case Pong:
 					break;
 
 				default:
@@ -201,14 +213,12 @@ public class UpdateGameState extends Thread {
 
 	/**
 	 * Send updates too all peers
-	 * @param connection
-	 *      ConnectionManager object which contains all peers connectionHandlers
 	 * @param object 
-	 *      NetworkObject with data required to be send across
+	 *      NetworkObject with data required to be send to all
 	 */
-	public void sendUpdatesToALL(ConnectionManager connection, NetworkObject object) {
-		new Thread(connection).start();
-		connection.sendToAll(object);
+	public void sendUpdatesToALL(/*ConnectionManager connection,*/ NetworkObject object) {
+		
+		man.sendToAll(object);
 	}
 
 	/**
