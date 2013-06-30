@@ -250,43 +250,17 @@ public class ConnectionManager extends Thread{
 		IncommingConnectionHandler inHandler = new IncommingConnectionHandler(handlers, myServerSocket, myStartPort, this);
 		new Thread(inHandler).start();
 
+		
+		
+		
 		while(true)
 		{
-
 			for(NetworkObject n : getLowerData())
 			{
-				switch (n.type) {
-				case ConenctTo:
-					Connect(n.target);
-
-					break;
-				case Init:
-					System.out.println("Init");
-					
-				case Data:
-					System.out.println("Hello9");
-					synchronized (recived) {
-						recived.add(n);
-					}
-
-					break;
-				case Ping:
-					NetworkObject toSend = new NetworkObject();
-					toSend.type = dataType.Ping;
-					Send(n.target, toSend );
-
-					break;
-				case Pong:
-
-					break;
-
-				default:
-					synchronized (recived) {
-						recived.add(n);
-					}
-
-					break;
+				synchronized (recived) {
+					recived.add(n);
 				}
+				
 			}
 			try {
 				Thread.sleep(1);
