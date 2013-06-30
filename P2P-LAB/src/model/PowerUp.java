@@ -7,7 +7,7 @@ public class PowerUp implements Serializable{
      
 	private static final long serialVersionUID = 1L;
 
-	private final String POWERUP;
+	private String POWERUP;
 	
 	private final Point POSITION;
 	
@@ -30,6 +30,10 @@ public class PowerUp implements Serializable{
 	
 	public Point getPos(){
 		return POSITION;
+	}
+	
+	public void setPower(String power){
+		POWERUP = power;
 	}
 	
 
