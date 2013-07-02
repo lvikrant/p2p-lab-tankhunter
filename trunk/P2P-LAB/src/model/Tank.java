@@ -12,7 +12,7 @@ public class Tank implements ActionListener {
 	private int posX = 0; // tank x-coordinate Position in fields {0..40}
 	private int posY = 0; // tank y-coordinate Position in fields {0..25}
 
-	private int movementSpeed = 350; // tank speed (field to field)
+	private int movementSpeed = 400; // tank speed (field to field)
 	private int kills = 0; // number of kills
 	private int range = 7; // attack range of the tank
 	private int attackRate = 2000; // attack rate of the tank
@@ -45,7 +45,10 @@ public class Tank implements ActionListener {
 		attackDelayTimer.setInitialDelay(attackRate);
 
 		moveDelayTimer = new Timer(10, this);
+		
 		moveDelayTimer.setInitialDelay(movementSpeed);
+
+		
 
 		MAP_HEIGHT = gc.getMapHeight();
 		MAP_WIDTH = gc.getMapWidth();
@@ -60,7 +63,7 @@ public class Tank implements ActionListener {
 		return posY;
 	}
 
-	public void moveDown() {
+	public boolean moveDown() {
 		if (readyToMove) {
 			if (posY < MAP_HEIGHT - 1) {
 				readyToMove = false;
@@ -77,14 +80,16 @@ public class Tank implements ActionListener {
 					}
 					posY++;
 					gc.getMainRegion().moveTank(NT, 270);
+					return true;
 				}
 			} else {
 				gc.moveToNextRegion(new Point(posX, posY), 270);
 			}
 		}
+		return false;
 	}
 
-	public void moveUp() {
+	public boolean moveUp() {
 		if (readyToMove) {
 			if (posY > 0) {
 				readyToMove = false;
@@ -101,14 +106,16 @@ public class Tank implements ActionListener {
 					}
 					gc.getMainRegion().moveTank(NT, 90);
 					posY--;
+					return true;
 				}
 			} else {
 				gc.moveToNextRegion(new Point(posX, posY), 90);
 			}
 		}
+		return false;
 	}
 
-	public void moveLeft() {
+	public boolean moveLeft() {
 		if (readyToMove) {
 			if (posX > 0) {
 				readyToMove = false;
@@ -125,14 +132,16 @@ public class Tank implements ActionListener {
 					}
 					posX--;
 					gc.getMainRegion().moveTank(NT, 180);
+					return true;
 				}
 			} else {
 				gc.moveToNextRegion(new Point(posX, posY), 180);
 			}
 		}
+		return false;
 	}
 
-	public void moveRight() {
+	public boolean moveRight() {
 		if (readyToMove) {
 			if (posX < MAP_WIDTH - 1) {
 
@@ -150,11 +159,13 @@ public class Tank implements ActionListener {
 					}
 					posX++;
 					gc.getMainRegion().moveTank(NT, 0);
+					return true;
 				}
 			} else {
 				gc.moveToNextRegion(new Point(posX, posY), 0);
 			}
 		}
+		return false;
 	}
 	
 	public void setStatus(String newStatus){

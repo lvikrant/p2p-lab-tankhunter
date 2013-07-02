@@ -221,17 +221,15 @@ public class ObjectController implements IObjectController{
 		if(TANK_CONTROLLER.contains(nt) == false){
 			return false;
 		}
-		
+		boolean ready = false;
 		switch(angle){
-		case 0: TANK_CONTROLLER.get(nt).moveRight(); 
-		
-		break; 
-		case 90: TANK_CONTROLLER.get(nt).moveUp(); break;
-		case 180: TANK_CONTROLLER.get(nt).moveLeft(); break;
-		case 270: TANK_CONTROLLER.get(nt).moveDown(); break;
+		case 0: ready = TANK_CONTROLLER.get(nt).moveRight(); break; 
+		case 90: ready = TANK_CONTROLLER.get(nt).moveUp(); break;
+		case 180: ready = TANK_CONTROLLER.get(nt).moveLeft(); break;
+		case 270: ready = TANK_CONTROLLER.get(nt).moveDown(); break;
 		}
 		
-		if(gc.isRegionController()){
+		if(gc.isRegionController() && ready){
 			NetworkObject no = new NetworkObject();
 			no.type = dataType.MoveTank;
 			no.move = new Move(nt,angle);
