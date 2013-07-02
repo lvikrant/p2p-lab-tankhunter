@@ -175,7 +175,7 @@ public class ObjectController implements IObjectController{
 			int posY = entry.getValue().getPosY();
 			int angle = entry.getValue().getAngle();
 			int range = entry.getValue().getRange();
-			Missile tempMissile = new Missile(entry.getKey(), angle, range, posX, posY, gc);
+			Missile tempMissile = new Missile(gc, entry.getKey(), new Point(posX,posY), angle, range);
 			map.put(entry.getKey(), tempMissile);
 		}
 		
@@ -196,6 +196,20 @@ public class ObjectController implements IObjectController{
 	
 
 
+
+    public void addMissile(NetworkTarget nt, Point pos, int angle, int range){  
+    	MISSILE_CONTROLLER.add(nt, pos, angle, range);
+    	System.out.println("TEST!");
+    	if(gc.isRegionController()){
+    		NetworkObject no = new NetworkObject();
+			no.type = dataType.AddMissile;
+			no.dataTarget = nt;
+			no.point = pos;
+			no.angle = angle;
+			no.range = range;
+			gc.overlay.man.sendToAll(no);
+    	}
+    }
 
 
 

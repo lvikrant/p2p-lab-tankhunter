@@ -68,6 +68,7 @@ public interface IObjectController {
      * MISSILE_CONTROLLER *******************
      */
     
+    public void addMissile(NetworkTarget nt, Point pos, int angle, int range);
     
     public void importMissileMap(Map<NetworkTarget, Missile> map);
 

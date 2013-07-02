@@ -215,7 +215,7 @@ public class Tank implements ActionListener {
 
 	public void fire() {
 		if (readyToShoot) {
-			new Missile(NT, tankAngle, range, posX, posY, gc);
+			gc.addMissile(NT,new Point(posX,posY), tankAngle, range);
 			readyToShoot = false;
 			readyToMove = false;
 			moveDelayTimer.start();

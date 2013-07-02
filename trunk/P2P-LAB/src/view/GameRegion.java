@@ -266,6 +266,7 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	   }
 
 	   public void addMissile(NetworkTarget nt,Point point, int angle){
+		 
 		   MissileLabel ml = new MissileLabel(point,angle, this);
 		   missileMap.put(nt, ml);
 		   switch(angle){
@@ -282,7 +283,6 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 		   			ml.setLocation((int)point.getX()*32+12,(int)point.getY()*32+3);
 		   			break;
 		   }
-		   ml.getLabel().setVisible(true);
 		   add(ml.getLabel());
 	   }
 	   
@@ -347,10 +347,13 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	   }
 	   
 	   public void removeMissile(NetworkTarget nt){
-		   JLabel label = missileMap.get(nt).getLabel();
-		   label.setVisible(false);
-		   remove(label);
-		   missileMap.remove(nt);
+		   if(missileMap.containsKey(nt)){
+			   missileMap.get(nt).getLabel().setVisible(false);
+			   remove(missileMap.get(nt).getLabel());
+			   missileMap.remove(nt);
+		   }
+
+		   
 	   }
 	   
 		public void explodeMissile(NetworkTarget nt) {

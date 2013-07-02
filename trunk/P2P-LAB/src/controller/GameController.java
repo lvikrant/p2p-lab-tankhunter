@@ -334,4 +334,9 @@ public class GameController implements ActionListener, KeyListener {
 	public void setRegionType(int regionType) {
 		OBJECT_CONTROLLER.setRegionType(regionType);	
 	}
+
+	public void addMissile(NetworkTarget nt, Point pos, int angle, int range){
+		OBJECT_CONTROLLER.addMissile(nt, pos, angle, range);
+		
+	}
 }

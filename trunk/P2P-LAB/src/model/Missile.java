@@ -12,6 +12,8 @@ import controller.GameController;
 
 
 public class Missile implements ActionListener {
+	
+	boolean test = false;
 
 	private final int ANGLE; // missile angle {0, 90, 180, 270}
 	private final int MAP_HEIGHT;
@@ -29,23 +31,19 @@ public class Missile implements ActionListener {
 	
 
 
-	public Missile(NetworkTarget nt, int parAngle, int parRange, int tankPosX, int tankPosY,GameController parGC) {
+	public Missile(GameController parGC,NetworkTarget nt, Point pos,int parAngle, int parRange) {
 		gc = parGC;
 		ANGLE = parAngle;
 		NT = nt;
 		range = parRange;
 		MAP_HEIGHT = gc.getMapHeight();
 		MAP_WIDTH = gc.getMapWidth();
-		posX = tankPosX;
-		posY = tankPosY;
+		posX = (int)pos.getX();
+		posY = (int)pos.getY();
 		gc.getMainRegion().addMissile(NT,new Point(posX,posY), ANGLE);
 		move = new Timer(10, this);
 		move.setInitialDelay(200);
 		move.start();
-		
-		
-
-
 	}
 	
 	public int getAngle(){
@@ -170,46 +168,11 @@ public class Missile implements ActionListener {
 		}
 }
 	
-	/*
-	
-		} else if (onMyWay == 0 && explode) {
-			gc.setMapEntry(mGridPosX, mGridPosY, "FREE");
-			move.stop();
-		//	missileLabel.setVisible(false);
-		//	gc.gameWindow.gp.remove(missileLabel);
-		//	expLabel.setBounds(mPosX, mPosY, 22, 22);
-		//	expLabel.setVisible(true);
-			explosion.start();
-		}
-
-		if (onMyWay > 0) {
-			switch (parAngle) {
-			case 0:
-				mPosX = mPosX + 2;
-				break;
-			case 90:
-				mPosY = mPosY - 2;
-				break;
-			case 180:
-				mPosX = mPosX - 2;
-				break;
-			case 270:
-				mPosY = mPosY + 2;
-				break;
-			}
-	//		missileLabel.setBounds(mPosX, mPosY, 24, 24);
-			onMyWay--;
-		}
-
-	}
-	*/
-	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == move) {
 			move.stop();
-			System.out.println("Position X : " + posX +" Y : " + posY + " Rabge : " + range);
 			if(range > 0){
 				move();
 			} else {
