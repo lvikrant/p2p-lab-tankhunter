@@ -86,8 +86,8 @@ public class ObjectController implements IObjectController{
 		TANK_CONTROLLER.add(nt, point, angle);
 	}
 	
-	public void addTankRandom(NetworkTarget nt){
-		TANK_CONTROLLER.addRandom(nt);
+	public void addTankRandom(NetworkTarget nt, boolean init){
+		TANK_CONTROLLER.addRandom(nt,init);
 	}
 	
 	public void addPowerUp(PowerUp powerUp) {
