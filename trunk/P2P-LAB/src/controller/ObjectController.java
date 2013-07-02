@@ -194,15 +194,24 @@ public class ObjectController implements IObjectController{
 	
 	/** MISSILE_CONTROLLER ********************/
 	
-
+	public void forceAddMissile(NetworkTarget nt, Point pos, int angle, int range){
+		MISSILE_CONTROLLER.add(nt, pos, angle, range);
+	}
 
 
     public void addMissile(NetworkTarget nt, Point pos, int angle, int range){  
-    	MISSILE_CONTROLLER.add(nt, pos, angle, range);
-    	System.out.println("TEST!");
     	if(gc.isRegionController()){
+    		MISSILE_CONTROLLER.add(nt, pos, angle, range);
     		NetworkObject no = new NetworkObject();
 			no.type = dataType.AddMissile;
+			no.dataTarget = nt;
+			no.point = pos;
+			no.angle = angle;
+			no.range = range;
+			gc.overlay.man.sendToAll(no);
+    	} else {
+    		NetworkObject no = new NetworkObject();
+			no.type = dataType.AddMissileRequest;
 			no.dataTarget = nt;
 			no.point = pos;
 			no.angle = angle;
