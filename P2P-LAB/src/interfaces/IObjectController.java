@@ -60,6 +60,8 @@ public interface IObjectController {
     
     public boolean moveTank(NetworkTarget nt, int angle);
     
+    public void forceMoveTank(NetworkTarget nt, int angle);
+    
     public void importTankInfo(Map<NetworkTarget, TankInfo> parmap);
 
     /**

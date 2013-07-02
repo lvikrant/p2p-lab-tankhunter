@@ -216,11 +216,7 @@ public class ObjectController implements IObjectController{
 		
 	}
 
-
-	public boolean moveTank(NetworkTarget nt, int angle) {
-		if(TANK_CONTROLLER.contains(nt) == false){
-			return false;
-		}
+	public void forceMoveTank(NetworkTarget nt, int angle) { 
 		boolean ready = false;
 		switch(angle){
 		case 0: ready = TANK_CONTROLLER.get(nt).moveRight(); break; 
@@ -229,11 +225,38 @@ public class ObjectController implements IObjectController{
 		case 270: ready = TANK_CONTROLLER.get(nt).moveDown(); break;
 		}
 		
-		if(gc.isRegionController() && ready){
+	}
+	
+
+	public boolean moveTank(NetworkTarget nt, int angle) {
+		if(TANK_CONTROLLER.contains(nt) == false){
+			return false;
+		}
+		
+		
+		if(gc.isRegionController()){
+			
+			boolean ready = false;
+			switch(angle){
+			case 0: ready = TANK_CONTROLLER.get(nt).moveRight(); break; 
+			case 90: ready = TANK_CONTROLLER.get(nt).moveUp(); break;
+			case 180: ready = TANK_CONTROLLER.get(nt).moveLeft(); break;
+			case 270: ready = TANK_CONTROLLER.get(nt).moveDown(); break;
+			}
+			if(ready) {
+				NetworkObject no = new NetworkObject();
+				no.type = dataType.MoveTank;
+				no.move = new Move(nt,angle);
+				gc.overlay.man.sendToAll(no);
+			}
+			
+		} else {
 			NetworkObject no = new NetworkObject();
-			no.type = dataType.MoveTank;
+			no.type = dataType.MoveRequest;
 			no.move = new Move(nt,angle);
+			//gc.overlay.sendUpdatesToRC(controller, connection, target)
 			gc.overlay.man.sendToAll(no);
+			
 		}
 
 		
