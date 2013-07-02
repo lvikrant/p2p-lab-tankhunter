@@ -70,10 +70,6 @@ public class GameController implements ActionListener, KeyListener {
 			e.printStackTrace();
 		}
 		OBJECT_CONTROLLER.addTankRandom(ME);
-		OBJECT_CONTROLLER.addPowerUpRandom();
-		OBJECT_CONTROLLER.addPowerUpRandom();
-		OBJECT_CONTROLLER.addPowerUpRandom();
-		OBJECT_CONTROLLER.addPowerUpRandom();
 		gameTimer.start();
 	}
 
@@ -164,7 +160,7 @@ public class GameController implements ActionListener, KeyListener {
 			}
 			if (gameTime % POWERUP_SPAWNRATE == 0 && regionController) {
 				if (OBJECT_CONTROLLER.getPowerUpMapSize() < POWERUP_LIMIT) {
-					OBJECT_CONTROLLER.addPowerUpRandom();
+				//	OBJECT_CONTROLLER.addPowerUpRandom();
 				}
 			}
 		} else if (e.getSource() == respawn && regionController) {

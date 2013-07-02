@@ -154,7 +154,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			bonusTimeLabel = new JLabel("");
 			rangeLabel = new JLabel("Attack Range : 7" + space);
 			rangeLabel.setForeground(Color.BLUE);
-			speedLabel = new JLabel("Movement Speed : 350" + space);
+			speedLabel = new JLabel("Movement Speed : 400" + space);
 			speedLabel.setForeground(Color.DARK_GRAY);
 			rateLabel = new JLabel("Attack Rate : 2000" + space);
 			rateLabel.setForeground(Color.MAGENTA);
