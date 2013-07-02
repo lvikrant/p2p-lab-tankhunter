@@ -9,9 +9,6 @@ import javax.swing.Timer;
 public class MissileLabel {
 
 	private JLabel label;
-	
-	public JLabel[] missileLabels = new JLabel[60];
-	
 	private int posX;
 	private int posY;
 	private final int ANGLE;
@@ -27,7 +24,7 @@ public class MissileLabel {
 		posX = (int)point.getX();
 		posY = (int)point.getY();
 		label = new JLabel();
-		label.setBounds(posX, posY, 32, 32);	
+		label.setBounds(-9999, -9999,32, 32);
 		moveTimer = new Timer(10,gp);
 	
 	}

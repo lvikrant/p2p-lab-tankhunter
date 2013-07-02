@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 import model.Missile;
 import model.NetworkTarget;
+import model.Tank;
 import comparator.NTComparator;
 
 public class MissileController {
@@ -20,6 +21,10 @@ public class MissileController {
 	public MissileController(GameController gameController, int missileLimit) {
 		gc = gameController;
 		MISSILE_LIMIT = missileLimit;
+	}
+	
+	public void add(NetworkTarget nt, Point pos, int angle, int range) {	
+			map.put(nt, new Missile(gc, nt, pos, angle,range));
 	}
 
 	public boolean contains(Point point) {

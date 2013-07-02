@@ -144,7 +144,13 @@ public class UpdateGameState extends Thread {
 						controller.removePowerUp(no.point);
 					}
 					break;
-					
+				case AddMissile:
+					if(iAmRC) {
+						
+					} else {			
+						controller.addMissile(no.dataTarget, no.point, no.angle, no.range);
+					}
+					break;	
 					
 				case Ping:	//Answer Ping with Pong
 					NetworkObject toSend = new NetworkObject();
