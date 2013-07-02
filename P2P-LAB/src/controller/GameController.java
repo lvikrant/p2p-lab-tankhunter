@@ -69,7 +69,7 @@ public class GameController implements ActionListener, KeyListener {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		OBJECT_CONTROLLER.addTankRandom(ME);
+		OBJECT_CONTROLLER.addTankRandom(ME,false);
 		gameTimer.start();
 	}
 
@@ -165,7 +165,7 @@ public class GameController implements ActionListener, KeyListener {
 			}
 		} else if (e.getSource() == respawn && regionController) {
 			respawn.stop();
-			OBJECT_CONTROLLER.addTankRandom(deadPlayer);
+			OBJECT_CONTROLLER.addTankRandom(deadPlayer, false);
 		}
 
 	}

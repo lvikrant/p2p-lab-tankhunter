@@ -42,7 +42,7 @@ public interface IObjectController {
      */
     public void addTank(NetworkTarget nt, Point point, int angle);
 
-    public void addTankRandom(NetworkTarget nt);
+    public void addTankRandom(NetworkTarget nt, boolean init);
 
     public void destroy(NetworkTarget nt);
 

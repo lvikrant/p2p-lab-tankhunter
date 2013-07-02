@@ -73,6 +73,7 @@ public class Sound {
             player = new AdvancedPlayer(mp3_file);
             // infoPanel.labelCurrentSong.setText("Current Song : " +
             // currentSong);
+            
             new Thread() {
                 public void run() {
                     try {
@@ -94,6 +95,8 @@ public class Sound {
             // Wenn Layer Exception auftrit:
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     "Fehlermeldung", JOptionPane.OK_OPTION);
+        }catch (IndexOutOfBoundsException e) {
+
         }
 
     }

@@ -6,10 +6,12 @@ import java.util.TreeMap;
 
 import comparator.NTComparator;
 
+import model.NetworkObject;
 import model.NetworkTarget;
 import model.Sound;
 import model.Tank;
 import model.TankInfo;
+import model.NetworkObject.dataType;
 
 public class TankController {
 
@@ -24,11 +26,22 @@ public class TankController {
 		TANK_LIMIT = tankLimit;
 	}
 
-	boolean addRandom(NetworkTarget nt) {
+	boolean addRandom(NetworkTarget nt, boolean init) {
 
 		int posX = (int) (Math.random() * (gc.getMapWidth()));
 		int posY = (int) (Math.random() * (gc.getMapHeight()));
 		Point pos = new Point(posX, posY);
+		
+		int random = (int)Math.random()* 3;
+		
+		int angle = 0;
+		switch(random){
+		case 0 : angle = 0; break;
+		case 1 : angle = 90; break;
+		case 2 : angle = 180; break;
+		case 3 : angle = 270; break;
+		}
+
 
 		if (gc.getFieldInfo(pos).equals("FREE")) {
 			Tank tank = new Tank(gc, nt, pos, 0);
@@ -38,13 +51,23 @@ public class TankController {
 				if(nt == gc.getMe()){
 					gc.setGamePanelMiddle(pos);
 				}
+				
+				if(gc.isRegionController() && !init){
+		    		NetworkObject no = new NetworkObject();
+					no.type = dataType.AddTank;
+					no.dataTarget = nt;
+					no.point = pos;
+					no.angle = angle;
+					gc.overlay.man.sendToAll(no);
+				}
+
 				return true;
 			} else {
 				return false;
 			}
 
 		} else {
-			return addRandom(nt);
+			return addRandom(nt, init);
 		}
 	}
 

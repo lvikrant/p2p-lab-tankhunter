@@ -85,7 +85,7 @@ public class UpdateGameState extends Thread {
 					if(iAmRC) {
 						tmpNo = new NetworkObject();
 						tmpNo.type = dataType.Init;
-						controller.addTankRandom(no.target);
+						controller.addTankRandom(no.target, true);
 						tmpNo.tankData = controller.exportTankInfo(); 
 						tmpNo.powerUpData = controller.exportPowerUpMap();
 						tmpNo.missileData = controller.exportMissileInfo();
@@ -146,14 +146,29 @@ public class UpdateGameState extends Thread {
 					break;
 					
 				case AddMissile:
+					if(iAmRC) {
+						
+					}else {
 						controller.forceAddMissile(no.dataTarget, no.point, no.angle, no.range);
-					break;	
+					}
+						break;	
 					
 				case AddMissileRequest:
 					if(iAmRC) {
 						controller.addMissile(no.dataTarget, no.point, no.angle, no.range);
 					}
+					
 					break;
+				
+				case AddTank:
+					if(iAmRC) {
+						
+					} else {
+						controller.addTank(no.dataTarget, no.point, no.angle);
+					}
+					
+				break;
+					
 				case Ping:	//Answer Ping with Pong
 					NetworkObject toSend = new NetworkObject();
 					toSend.type = dataType.Ping;
