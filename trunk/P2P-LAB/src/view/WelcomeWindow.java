@@ -145,7 +145,7 @@ public class WelcomeWindow extends JFrame {
        serverIPLabel.setFont(new Font("Serif", Font.BOLD, 24)); 
        
        serverIPTextField = new JTextField();
-       serverIPTextField.setText("192.168.0.1");
+       serverIPTextField.setText("127.0.0.1");
        serverIPTextField.setBounds(260, 160, 150, 40);
        serverIPTextField.setForeground(Color.red);
        serverIPTextField.setFont(new Font("Serif", Font.BOLD, 24));

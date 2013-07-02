@@ -92,7 +92,7 @@ public class GameController implements ActionListener, KeyListener {
 
 		
 		
-		overlay = new UpdateGameState(OBJECT_CONTROLLER, new NetworkTarget("127.0.0.1", 8080));
+		overlay = new UpdateGameState(OBJECT_CONTROLLER, server);
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {

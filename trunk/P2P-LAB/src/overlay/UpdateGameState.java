@@ -90,9 +90,10 @@ public class UpdateGameState extends Thread {
 						tmpNo.powerUpData = controller.exportPowerUpMap();
 						tmpNo.missileData = controller.exportMissileInfo();
 						tmpNo.region = controller.getRegionType();
+						tmpNo.dataTarget = no.target;
 						man.Send(no.target, tmpNo);
 					} else {
-						controller.setMe(new NetworkTarget("127.0.0.1", man.getMe().getPort()));
+						controller.setMe(no.dataTarget);
 						controller.setNewRegionType(no.region);
 						controller.importTankInfo(no.tankData);
 						controller.importPowerUpMap(no.powerUpData);
@@ -107,10 +108,16 @@ public class UpdateGameState extends Thread {
 						//TODO: pass information up
 						
 					} else {
-						controller.moveTank(no.move.getNetworkTarget(), no.move.getAngle());						
+						controller.forceMoveTank(no.move.getNetworkTarget(), no.move.getAngle());						
 					}
 
 					break;
+					case MoveRequest:
+						if(iAmRC) {
+							controller.moveTank(no.move.getNetworkTarget(), no.move.getAngle());
+						}
+						
+						break;
 				case Shoot:
 					if(iAmRC) {
 						
