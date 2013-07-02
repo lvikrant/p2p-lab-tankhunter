@@ -43,15 +43,28 @@ public class ConnectionManager extends Thread{
 
 	public ConnectionManager()
 	{
-
+		init();
 	}
 
 	public ConnectionManager(int port)
 	{
 		myStartPort = port;
+		init();
+	}
+	
+	private void init()
+	{
+		try {
+			myServerSocket = new ServerSocket(myStartPort);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		IncommingConnectionHandler inHandler = new IncommingConnectionHandler(handlers, myServerSocket, myStartPort, this);
+		new Thread(inHandler).start();
 	}
 
-	public void Connect(NetworkTarget target)
+	private void Connect(NetworkTarget target)
 	{
 		Connect(target.IP, target.PORT);
 	}
@@ -64,6 +77,7 @@ public class ConnectionManager extends Thread{
 			{
 				try {
 					h = new ConnectionHandler(new Socket(target.IP, target.PORT), this);
+					new Thread(h).start();
 				}
 				catch(Exception e) {
 					System.out.println(e);
@@ -102,9 +116,11 @@ public class ConnectionManager extends Thread{
 		return new NetworkTarget(myServerSocket.getInetAddress().toString(), myServerSocket.getLocalPort());
 	}
 
-	public void Connect(String host, int port)
+	private void Connect(String host, int port)
 	{
 		ConnectionHandler handler;
+		if(getHandlerByTarget(new NetworkTarget(host,port)) == null)
+				return;
 
 		try
 		{
@@ -134,13 +150,8 @@ public class ConnectionManager extends Thread{
 						if(h.targetOpenPort == port || h.baseSocket.getPort() == port)
 							return;
 					}
-
-
 				}
-
 			}
-
-
 
 			Socket newConnection = new Socket(host, port);
 			handler = new ConnectionHandler(newConnection, this);
@@ -153,7 +164,7 @@ public class ConnectionManager extends Thread{
 		}
 		catch(Exception ex)
 		{
-
+			ex.printStackTrace();
 		}
 	}
 
@@ -241,14 +252,7 @@ public class ConnectionManager extends Thread{
 	public void run()
 	{
 
-		try {
-			myServerSocket = new ServerSocket(myStartPort);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		IncommingConnectionHandler inHandler = new IncommingConnectionHandler(handlers, myServerSocket, myStartPort, this);
-		new Thread(inHandler).start();
+		
 
 		
 		

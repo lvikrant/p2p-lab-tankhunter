@@ -35,22 +35,13 @@ public class UpdateGameState extends Thread {
 		controller = _controller;
 		iAmRC = false;
 		man = new ConnectionManager();
-		man.Connect(target);
+		//man.Connect(target);
 
-		
-		
 		NetworkObject networkObject = new NetworkObject();
-		
-		new Thread(man).start();
-		
-		
-		
 		
 		networkObject.type = dataType.Init;
 		man.Send(target, networkObject);
-		
-	
-		
+		new Thread(man).start();
 		new Thread(this).start();
 
 	}
