@@ -14,7 +14,7 @@ public class NetworkObject implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public enum dataType {
-	    Ping, Pong, ConenctTo, Init, MoveTank, MoveRequest, Shoot, Data, Tank, AddPowerUp, RemovePowerUp, AddMissile;
+	    Ping, Pong, ConenctTo, Init, MoveTank, MoveRequest, Shoot, Data, Tank, AddPowerUp, RemovePowerUp, AddMissile, AddMissileRequest;
 	}
 	
 	public dataType type = dataType.Data;

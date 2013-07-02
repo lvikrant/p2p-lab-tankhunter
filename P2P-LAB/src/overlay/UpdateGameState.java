@@ -112,7 +112,7 @@ public class UpdateGameState extends Thread {
 					}
 
 					break;
-					case MoveRequest:
+				case MoveRequest:
 						if(iAmRC) {
 							controller.moveTank(no.move.getNetworkTarget(), no.move.getAngle());
 						}
@@ -144,14 +144,16 @@ public class UpdateGameState extends Thread {
 						controller.removePowerUp(no.point);
 					}
 					break;
+					
 				case AddMissile:
-					if(iAmRC) {
-						
-					} else {			
-						controller.addMissile(no.dataTarget, no.point, no.angle, no.range);
-					}
+						controller.forceAddMissile(no.dataTarget, no.point, no.angle, no.range);
 					break;	
 					
+				case AddMissileRequest:
+					if(iAmRC) {
+						controller.addMissile(no.dataTarget, no.point, no.angle, no.range);
+					}
+					break;
 				case Ping:	//Answer Ping with Pong
 					NetworkObject toSend = new NetworkObject();
 					toSend.type = dataType.Ping;
