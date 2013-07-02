@@ -73,7 +73,6 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		gc = new GameController(this, server);
 		addKeyListener(gc);
 		setResizable(false);
-		initialMusic();
 		
 		gc.setRegionType(regionArray[4].getRegionType());
 
@@ -89,7 +88,6 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		addKeyListener(gc);
 		setResizable(false);
 		
-		initialMusic();
 
 	}
 
@@ -204,7 +202,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	private JMenuItem getMenuItemPlay() {
 
 		if (menuItemPlayOrStopMusic == null) {
-			menuItemPlayOrStopMusic = new JMenuItem("Stop");
+			menuItemPlayOrStopMusic = new JMenuItem("Play");
 
 			menuItemPlayOrStopMusic.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
