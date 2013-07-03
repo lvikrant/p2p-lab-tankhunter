@@ -321,7 +321,7 @@ public class ObjectController implements IObjectController{
 				no.type = dataType.MoveTank;
 				no.move = new Move(nt,angle,TANK_CONTROLLER.get(nt).getPos());
 				gc.overlay.man.sendToAll(no);
-				System.err.println("X Times");
+				System.err.println("Y Times");
 			}
 			
 		}
