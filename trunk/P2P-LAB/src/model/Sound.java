@@ -79,7 +79,7 @@ public class Sound {
                     try {
                         player.play();
                     } catch (JavaLayerException e) {
-                        e.printStackTrace();
+
                     } catch (ArrayIndexOutOfBoundsException e) {
 
                     }
@@ -97,6 +97,8 @@ public class Sound {
             // Wenn Layer Exception auftrit:
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     "Fehlermeldung", JOptionPane.OK_OPTION);
+        } catch (ArrayIndexOutOfBoundsException e) {
+
         }
  
 
