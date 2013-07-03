@@ -99,7 +99,7 @@ public class UpdateGameState extends Thread {
 						//TODO: pass information up
 						
 					} else {
-						controller.forceMoveTank(no.move.getNetworkTarget(), no.move.getAngle());						
+						controller.forceMoveTank(no.move.getNetworkTarget(), no.move.getAngle(), no.move.getLocation());						
 					}
 
 					break;

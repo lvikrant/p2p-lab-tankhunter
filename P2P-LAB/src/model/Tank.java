@@ -222,7 +222,7 @@ public class Tank implements ActionListener {
 	
 	public void fire(NetworkTarget nt, Point pos, int angle, int range) {
 		if (readyToShoot) {
-			System.err.println("New missile!");
+			System.err.println("");
 			new Missile(gc, nt, pos, angle,range);
 			restart();
 		}
