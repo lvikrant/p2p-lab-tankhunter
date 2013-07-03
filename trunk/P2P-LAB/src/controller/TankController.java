@@ -167,4 +167,14 @@ public class TankController {
 		
 	}
 
+	public void jumpTank(NetworkTarget nt, int angle, Point pos) {
+			if(map.containsKey(nt)){
+				map.get(nt).setPosition(pos);
+				map.get(nt).setTankAngle(angle);
+				gc.gameWindow.getMainRegion().jumpTank(nt,angle,pos);
+				gc.gameWindow.setGamePanelMiddle(pos);
+			}
+		
+	}
+
 }
