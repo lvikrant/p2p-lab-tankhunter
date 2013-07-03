@@ -298,7 +298,6 @@ public class GameController implements ActionListener, KeyListener {
 	}
 	
 	public void setMainRegion(int region){
-		System.out.println("OK!!");
 		OBJECT_CONTROLLER.setRegionType(region);
 	}
 

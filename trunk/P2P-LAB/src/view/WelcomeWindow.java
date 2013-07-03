@@ -23,7 +23,6 @@ public class WelcomeWindow extends JFrame {
     private JPanel panel;
     private JLabel tankLogo;
     private JLabel singlePlayer;
-    private JLabel doublePlayer;
     private JLabel multiPlayer;
     
     private JLabel nameLabel;
@@ -52,34 +51,34 @@ public class WelcomeWindow extends JFrame {
         panel.setLayout(null);
         panel.setBounds(getBounds());
         
-        
-        doublePlayer = new JLabel();
-        doublePlayer.setText("Play Client");
-        doublePlayer.setBounds(70, 200, 310, 40);
-        doublePlayer.setForeground(Color.blue);
-        doublePlayer.setFont(new Font("Serif", Font.BOLD, 24));
-        doublePlayer.addMouseListener(new java.awt.event.MouseAdapter() {
+        multiPlayer = new JLabel();
+        multiPlayer.setText("Join Game");
+        multiPlayer.setBounds(350, 100, 310, 40);
+       
+        multiPlayer.setForeground(Color.blue);
+        multiPlayer.setFont(new Font("Serif", Font.BOLD, 24));
+        multiPlayer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-            	doublePlayer.setForeground(Color.RED);
-            	doublePlayer.setFont(new Font("Serif", Font.BOLD, 26));
+                multiPlayer.setForeground(Color.RED);
+                multiPlayer.setFont(new Font("Serif", Font.BOLD, 26));
 
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-            	doublePlayer.setForeground(Color.blue);
-            	doublePlayer.setFont(new Font("Serif", Font.BOLD, 24));
+                multiPlayer.setForeground(Color.blue);
+                multiPlayer.setFont(new Font("Serif", Font.BOLD, 24));
             }
 
             public void mousePressed(java.awt.event.MouseEvent evt) {
-            	   Sound.stop();
-            	   frame.dispose();
-            	   new GameWindow(new NetworkTarget(serverIPTextField.getText(), new Integer(serverPortTextField.getText())), 1);
+            	Sound.stop();
+          	   	frame.dispose();
+          	   	new GameWindow(new NetworkTarget(serverIPTextField.getText(), new Integer(serverPortTextField.getText())), 1);
             }
-        });
+        }); 
         
         singlePlayer = new JLabel();
-        singlePlayer.setText("Play Server");
-        singlePlayer.setBounds(70, 160, 210, 40);
+        singlePlayer.setText("Create Game");
+        singlePlayer.setBounds(350, 140, 210, 40);
         singlePlayer.setForeground(Color.blue);
         singlePlayer.setFont(new Font("Serif", Font.BOLD, 24));
         singlePlayer.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -101,65 +100,43 @@ public class WelcomeWindow extends JFrame {
             }
         });
 
-        multiPlayer = new JLabel();
-        multiPlayer.setText("Play Multiplayer");
-        multiPlayer.setBounds(70, 120, 310, 40);
-       
-        multiPlayer.setForeground(Color.blue);
-        multiPlayer.setFont(new Font("Serif", Font.BOLD, 24));
-        multiPlayer.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                multiPlayer.setForeground(Color.RED);
-                multiPlayer.setFont(new Font("Serif", Font.BOLD, 26));
-
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                multiPlayer.setForeground(Color.blue);
-                multiPlayer.setFont(new Font("Serif", Font.BOLD, 24));
-            }
-
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-            
-                  System.err.println("Not ready! Sorry =( ");
-            }
-        });       
+      
        
          
         nameLabel = new JLabel();
         nameLabel.setText("Name:");
-        nameLabel.setBounds(320, 120, 100, 40);
+        nameLabel.setBounds(50, 120, 100, 40);
         nameLabel.setForeground(Color.blue);
         nameLabel.setFont(new Font("Serif", Font.BOLD, 24)); 
         
        nameTextField = new JTextField();
        nameTextField.setText("Evgheni");
-       nameTextField.setBounds(400, 120, 150, 40);
+       nameTextField.setBounds(120, 120, 150, 40);
        nameTextField.setForeground(Color.red);
        nameTextField.setFont(new Font("Serif", Font.BOLD, 24));
        
        serverIPLabel = new JLabel();
        serverIPLabel.setText("IP:");
-       serverIPLabel.setBounds(220, 160, 100, 40);
+       serverIPLabel.setBounds(50, 160, 100, 40);
        serverIPLabel.setForeground(Color.blue);
        serverIPLabel.setFont(new Font("Serif", Font.BOLD, 24)); 
        
        serverIPTextField = new JTextField();
        serverIPTextField.setText("127.0.0.1");
-       serverIPTextField.setBounds(260, 160, 150, 40);
+       serverIPTextField.setBounds(120, 160, 150, 40);
        serverIPTextField.setForeground(Color.red);
        serverIPTextField.setFont(new Font("Serif", Font.BOLD, 24));
        
        
        serverPortLabel = new JLabel();
        serverPortLabel.setText("Port:");
-       serverPortLabel.setBounds(425, 160, 100, 40);
+       serverPortLabel.setBounds(50, 200, 100, 40);
        serverPortLabel.setForeground(Color.blue);
        serverPortLabel.setFont(new Font("Serif", Font.BOLD, 24)); 
        
        serverPortTextField = new JTextField();
        serverPortTextField.setText("8080");
-       serverPortTextField.setBounds(485, 160, 55, 40);
+       serverPortTextField.setBounds(120, 200, 55, 40);
        serverPortTextField.setForeground(Color.red);
        serverPortTextField.setFont(new Font("Serif", Font.BOLD, 24));
            
@@ -176,7 +153,6 @@ public class WelcomeWindow extends JFrame {
         
         
         panel.add(singlePlayer);
-        panel.add(doublePlayer);
         panel.add(multiPlayer);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
