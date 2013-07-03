@@ -194,6 +194,14 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 
 	   }
 	   
+		public void jumpTank(NetworkTarget nt, int angle, Point pos) {
+			if(tankMap.containsKey(nt)){
+				tankMap.get(nt).setLocation(pos);
+				tankMap.get(nt).setAngle(angle);
+			}
+			
+		}
+	   
 
 	   
 	   public void removeTank(NetworkTarget nt){

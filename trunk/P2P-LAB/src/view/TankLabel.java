@@ -81,4 +81,10 @@ public class TankLabel {
 	public void setDead(boolean d){
 		dead = d;
 	}
+
+	public void setLocation(Point pos) {
+		posX = (int) pos.getX()*32;
+		posY = (int) pos.getY()*32;
+		
+	}
 }
