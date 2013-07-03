@@ -58,6 +58,8 @@ public interface IObjectController {
 
     public boolean contains(Point point);
     
+    public boolean moveTank(NetworkTarget nt, int angle, Point pos);
+    
     public boolean moveTank(NetworkTarget nt, int angle);
     
     public void forceMoveTank(NetworkTarget nt, int angle,Point pos);

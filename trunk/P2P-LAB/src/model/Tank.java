@@ -78,8 +78,9 @@ public class Tank implements ActionListener {
 						gc.manadgePowerUps();
 						gc.removePowerUp(posX, posY + 1);
 					}
-					posY++;
+					
 					gc.getMainRegion().moveTank(NT, 270);
+					posY++;
 					return true;
 				}
 			} else {
@@ -130,8 +131,9 @@ public class Tank implements ActionListener {
 						gc.manadgePowerUps();
 						gc.removePowerUp(posX - 1, posY);
 					}
-					posX--;
+					
 					gc.getMainRegion().moveTank(NT, 180);
+					posX--;
 					return true;
 				}
 			} else {
@@ -157,8 +159,9 @@ public class Tank implements ActionListener {
 						gc.manadgePowerUps();
 						gc.removePowerUp(posX + 1, posY);
 					}
-					posX++;
+					
 					gc.getMainRegion().moveTank(NT, 0);
+					posX++;
 					return true;
 				}
 			} else {

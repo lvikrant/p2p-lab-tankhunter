@@ -249,9 +249,11 @@ public class ObjectController implements IObjectController{
 	}
 
 	public void forceMoveTank(NetworkTarget nt, int angle, Point pos) {
-		
-		if(!TANK_CONTROLLER.get(nt).getPos().equals(pos)){
-			TANK_CONTROLLER.jumpTank(nt, angle, pos);
+	//	System.err.println(pos);
+	//	System.err.println(TANK_CONTROLLER.get(nt).getPos());	
+		if(!(TANK_CONTROLLER.get(nt).getPosX() == pos.getX() && TANK_CONTROLLER.get(nt).getPosY() == pos.getY())){
+		//	TANK_CONTROLLER.jumpTank(nt, angle, pos);
+	//		System.err.println("NOW");	
 		}
 		
 		switch(angle){
@@ -264,12 +266,11 @@ public class ObjectController implements IObjectController{
 	}
 	
 
-	public boolean moveTank(NetworkTarget nt, int angle) {
+	public boolean moveTank(NetworkTarget nt, int angle, Point pos) {
 		if(TANK_CONTROLLER.contains(nt) == false){
 			return false;
 		}
-		
-		
+			
 		if(gc.isRegionController()){
 			
 			boolean ready = false;
@@ -281,10 +282,10 @@ public class ObjectController implements IObjectController{
 			}
 			if(ready) {
 				NetworkObject no = new NetworkObject();
-				Point pos = TANK_CONTROLLER.get(nt).getPos();
 				no.type = dataType.MoveTank;
 				no.move = new Move(nt,angle,pos);
 				gc.overlay.man.sendToAll(no);
+				System.err.println("X Times");
 			}
 			
 		} else {
@@ -293,6 +294,34 @@ public class ObjectController implements IObjectController{
 			no.move = new Move(nt,angle);
 			//gc.overlay.sendUpdatesToRC(controller, connection, target)
 			gc.overlay.man.sendToAll(no);
+			
+		}
+
+		
+		return true;
+	}
+	
+	public boolean moveTank(NetworkTarget nt, int angle) {
+		if(TANK_CONTROLLER.contains(nt) == false){
+			return false;
+		}
+			
+		if(gc.isRegionController()){
+			
+			boolean ready = false;
+			switch(angle){
+			case 0: ready = TANK_CONTROLLER.get(nt).moveRight(); break; 
+			case 90: ready = TANK_CONTROLLER.get(nt).moveUp(); break;
+			case 180: ready = TANK_CONTROLLER.get(nt).moveLeft(); break;
+			case 270: ready = TANK_CONTROLLER.get(nt).moveDown(); break;
+			}
+			if(ready) {
+				NetworkObject no = new NetworkObject();
+				no.type = dataType.MoveTank;
+				no.move = new Move(nt,angle,TANK_CONTROLLER.get(nt).getPos());
+				gc.overlay.man.sendToAll(no);
+				System.err.println("X Times");
+			}
 			
 		}
 
