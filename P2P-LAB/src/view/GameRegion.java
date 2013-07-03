@@ -288,7 +288,10 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	   
 	   
 	   public void moveMissile(NetworkTarget nt){
-		   missileMap.get(nt).getMoveTimer().start();
+		   if(missileMap.containsKey(nt)){
+			   missileMap.get(nt).getMoveTimer().start();
+		   }
+		  
 	   } 
 	   
 	   public void showExplosion(NetworkTarget nt){
@@ -357,10 +360,11 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	   }
 	   
 		public void explodeMissile(NetworkTarget nt) {
-			MissileLabel ml = missileMap.get(nt);
-			ml.setExploded(true);
-			ml.setFly(16);
-			ml.getMoveTimer().start();
+			if(missileMap.containsKey(nt)){
+				missileMap.get(nt).setExploded(true);
+				missileMap.get(nt).setFly(16);
+				missileMap.get(nt).getMoveTimer().start();
+			}
 		}
 
 	@Override

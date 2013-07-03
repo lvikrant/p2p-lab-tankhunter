@@ -196,6 +196,11 @@ public class ObjectController implements IObjectController{
 	
 	public void forceAddMissile(NetworkTarget nt, Point pos, int angle, int range){
 		MISSILE_CONTROLLER.add(nt, pos, angle, range);
+		if(TANK_CONTROLLER.contains(nt)){
+			TANK_CONTROLLER.get(nt).fire(nt, pos, angle, range);
+		}
+		
+		
 	}
 
 
@@ -208,7 +213,7 @@ public class ObjectController implements IObjectController{
 			no.point = pos;
 			no.angle = angle;
 			no.range = range;
-			gc.overlay.man.sendToAll(no);
+			gc.overlay.man.sendToAll(no);		
     	} else {
     		NetworkObject no = new NetworkObject();
 			no.type = dataType.AddMissileRequest;

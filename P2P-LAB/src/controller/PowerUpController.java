@@ -75,12 +75,7 @@ public class PowerUpController{
 				no.type = dataType.RemovePowerUp;
 				no.point = point;
 				gc.overlay.man.sendToAll(no);
-			} else {
-				//TODO anfrage starten!
-			}
-			
-		} else {
-			System.err.println("An der Stelle : " + point + " gibt es keinen PowerUp");
+			}			
 		}
 	}
 	

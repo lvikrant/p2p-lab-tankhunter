@@ -91,7 +91,7 @@ public class TankController {
 			map.put(nt, tank);
 			gc.getMainRegion().addTank(nt, pos, angle);
 			if(nt == gc.getMe()){
-			//	gc.setGamePanelMiddle(pos);
+				gc.setGamePanelMiddle(pos);
 			}
 			return true;
 		}

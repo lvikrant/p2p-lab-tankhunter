@@ -83,7 +83,7 @@ public class Tank implements ActionListener {
 					return true;
 				}
 			} else {
-				gc.moveToNextRegion(new Point(posX, posY), 270);
+			//	gc.moveToNextRegion(new Point(posX, posY), 270);
 			}
 		}
 		return false;
@@ -109,7 +109,7 @@ public class Tank implements ActionListener {
 					return true;
 				}
 			} else {
-				gc.moveToNextRegion(new Point(posX, posY), 90);
+			//	gc.moveToNextRegion(new Point(posX, posY), 90);
 			}
 		}
 		return false;
@@ -135,7 +135,7 @@ public class Tank implements ActionListener {
 					return true;
 				}
 			} else {
-				gc.moveToNextRegion(new Point(posX, posY), 180);
+			//	gc.moveToNextRegion(new Point(posX, posY), 180);
 			}
 		}
 		return false;
@@ -162,7 +162,7 @@ public class Tank implements ActionListener {
 					return true;
 				}
 			} else {
-				gc.moveToNextRegion(new Point(posX, posY), 0);
+			//	gc.moveToNextRegion(new Point(posX, posY), 0);
 			}
 		}
 		return false;
@@ -216,11 +216,27 @@ public class Tank implements ActionListener {
 	public void fire() {
 		if (readyToShoot) {
 			gc.addMissile(NT,new Point(posX,posY), tankAngle, range);
-			readyToShoot = false;
-			readyToMove = false;
-			moveDelayTimer.start();
-			attackDelayTimer.start();
+			restart();
 		}
+	}
+	
+	public void fire(NetworkTarget nt, Point pos, int angle, int range) {
+		if (readyToShoot) {
+			System.err.println("New missile!");
+			new Missile(gc, nt, pos, angle,range);
+			restart();
+		}
+	}
+	
+	public boolean readyToShoot(){
+		return readyToShoot;
+	}
+	
+	public void restart(){
+		readyToShoot = false;
+		readyToMove = false;
+		moveDelayTimer.start();
+		attackDelayTimer.start();
 	}
 
 	public void setPosition(Point parPoint) {
@@ -261,6 +277,7 @@ public class Tank implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == attackDelayTimer) {
 			readyToShoot = true;
+			System.out.println("ready to shoot!");
 			attackDelayTimer.stop();
 		}
 
@@ -278,4 +295,6 @@ public class Tank implements ActionListener {
 		timeLeft = time;
 		
 	}
+
+
 }
