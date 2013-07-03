@@ -248,13 +248,17 @@ public class ObjectController implements IObjectController{
 		
 	}
 
-	public void forceMoveTank(NetworkTarget nt, int angle) { 
-		boolean ready = false;
+	public void forceMoveTank(NetworkTarget nt, int angle, Point pos) {
+		
+		if(!TANK_CONTROLLER.get(nt).getPos().equals(pos)){
+			TANK_CONTROLLER.jumpTank(nt, angle, pos);
+		}
+		
 		switch(angle){
-		case 0: ready = TANK_CONTROLLER.get(nt).moveRight(); break; 
-		case 90: ready = TANK_CONTROLLER.get(nt).moveUp(); break;
-		case 180: ready = TANK_CONTROLLER.get(nt).moveLeft(); break;
-		case 270: ready = TANK_CONTROLLER.get(nt).moveDown(); break;
+		case 0: TANK_CONTROLLER.get(nt).moveRight(); break; 
+		case 90: TANK_CONTROLLER.get(nt).moveUp(); break;
+		case 180: TANK_CONTROLLER.get(nt).moveLeft(); break;
+		case 270: TANK_CONTROLLER.get(nt).moveDown(); break;
 		}
 		
 	}
@@ -277,8 +281,9 @@ public class ObjectController implements IObjectController{
 			}
 			if(ready) {
 				NetworkObject no = new NetworkObject();
+				Point pos = TANK_CONTROLLER.get(nt).getPos();
 				no.type = dataType.MoveTank;
-				no.move = new Move(nt,angle);
+				no.move = new Move(nt,angle,pos);
 				gc.overlay.man.sendToAll(no);
 			}
 			
