@@ -90,6 +90,10 @@ public class ObjectController implements IObjectController{
 		TANK_CONTROLLER.addRandom(nt,init);
 	}
 	
+	public void jumpTank(NetworkTarget nt, int angle,Point pos){
+		TANK_CONTROLLER.jumpTank(nt,angle,pos);
+	}
+	
 	public void addPowerUp(PowerUp powerUp) {
 		POWER_UP_CONTROLLER.add(powerUp.getPos(),powerUp.getPowerUp());
 		
