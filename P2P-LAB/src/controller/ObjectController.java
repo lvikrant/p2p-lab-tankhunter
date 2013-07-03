@@ -249,11 +249,12 @@ public class ObjectController implements IObjectController{
 	}
 
 	public void forceMoveTank(NetworkTarget nt, int angle, Point pos) {
-	//	System.err.println(pos);
-	//	System.err.println(TANK_CONTROLLER.get(nt).getPos());	
-		if(!(TANK_CONTROLLER.get(nt).getPosX() == pos.getX() && TANK_CONTROLLER.get(nt).getPosY() == pos.getY())){
-		//	TANK_CONTROLLER.jumpTank(nt, angle, pos);
-	//		System.err.println("NOW");	
+		System.err.println(pos);
+		System.err.println(TANK_CONTROLLER.get(nt).getPos());
+		
+		if(!(TANK_CONTROLLER.get(nt).getPos().equals(pos))){
+		      //	TANK_CONTROLLER.jumpTank(nt, angle, pos);
+	          //		System.err.println("NOW");	
 		}
 		
 		switch(angle){
