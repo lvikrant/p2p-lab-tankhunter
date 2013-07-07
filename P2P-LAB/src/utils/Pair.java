@@ -1,6 +1,8 @@
 package utils;
 
 import java.sql.Timestamp;
+import java.util.Date;
+import java.sql.Timestamp;
 /*Types:
  * 0: RC
  * 1: Peer
@@ -12,9 +14,8 @@ import java.sql.Timestamp;
 public class Pair {
 	
 	private int type;
-	//private int timeStamp;
-	java.util.Date date= new java.util.Date();
-	java.sql.Timestamp timeStamp = new Timestamp(date.getTime());
+	Date date= new java.util.Date();
+	Timestamp timeStamp = new Timestamp(date.getTime());
 	
 	public Pair(int type, Timestamp timeStamp){
 		this.type = type;
