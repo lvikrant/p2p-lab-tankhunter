@@ -7,7 +7,6 @@ package overlay;
 import java.awt.Point;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
 import interfaces.IObjectController;
 import model.NetworkObject;
 import model.NetworkObject.dataType;

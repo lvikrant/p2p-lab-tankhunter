@@ -4,18 +4,20 @@ import java.awt.Dimension;
 import java.sql.Timestamp;
 import java.util.Map;
 import java.util.TreeMap;
-
+import network.ConnectionManager;
 import utils.Pair;
-
+import model.NetworkObject;
 import model.NetworkTarget;
-
+import model.NetworkObject.dataType;
 import comparator.NTComparator;
+import java.util.Date;
 
 public class OverlayManager {
 
 	Map<NetworkTarget, Pair > map;
-	java.util.Date date= new java.util.Date();
-
+	Date date= new Date();
+	ConnectionManager man = new ConnectionManager();
+	NetworkObject networkObject = new NetworkObject();
 
 	public OverlayManager(){
 		map  = new TreeMap<NetworkTarget, Pair>(new NTComparator());
@@ -61,40 +63,54 @@ public class OverlayManager {
 	public void importOverlayInfo(Map<NetworkTarget, Pair> parMap){
 		map = parMap;
 	}
+	
+	
 
 	public void checkPeerAlive(NetworkTarget nt) {
-		
+
 		if(map.containsKey(nt)) {
-			if(map.get(nt).getType()==0)
-			{
-				//RC failure
-				if(map.get(nt).getTimeStamp().before(new Timestamp(System.currentTimeMillis()))==true)
-				{
+
+			// Check Timestamp expiration
+			if(map.get(nt).getTimeStamp().before(new Timestamp(System.currentTimeMillis()))==true) {
+
+				if(map.get(nt).getType()==0) {
+
+					//CASE 1: RC failure
 					/*send ping message, if replies in 10 msec, peer alive else dead
 					 * If RC dead, get backup RC
-					*/
-					//map.get(nt)
+					 */
+					NetworkObject toSend = new NetworkObject();
+					toSend.type = dataType.Ping;
+					man.Send(nt, toSend);
+					
+					
+					//if fails, remove it from list
+					map.remove(nt);
+					// Assign new backup RC
+					//map.get(nt).getType()
 				}
 				
-			}
-			else
-			{
-				//Peer failure
-				/*
-				 * Send ping message, if replies in 10 msec, peer alive else dead
-				 * IF dead, inform RC and remove peer from list
-				 */
-				if(map.get(nt).getTimeStamp().before(new Timestamp(System.currentTimeMillis()))==true)
+				//CASE 2: Peer failure
+				else
 				{
+					//Peer failure
+					/*
+					 * Send ping message, if replies in 10 msec, peer alive else dead
+					 * IF dead, inform RC and remove peer from list
+					 */
+					NetworkObject toSend = new NetworkObject();
+					toSend.type = dataType.Ping;
+					man.Send(nt, toSend);
 					
-					//check if the peer is Backup RC
-					if(map.get(nt).getType()==2||map.get(nt).getType()==3||map.get(nt).getType()==4)
-					{
-						
-					}
+					//Receive pong
+					
+					
+					//if fails, remove it from list
+					map.remove(nt);
 				}
 			}
 		}
+
 	}
 
 	public void assignBackup(NetworkTarget nt) {
