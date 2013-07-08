@@ -112,7 +112,7 @@ public class Music {
                             "Fehlermeldung", JOptionPane.OK_OPTION);
                 }
             }
-        }.start();
+        };//.start();
     }
 
     /**

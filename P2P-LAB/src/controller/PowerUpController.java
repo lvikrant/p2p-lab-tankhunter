@@ -51,7 +51,7 @@ public class PowerUpController{
 				NetworkObject no = new NetworkObject();
 				no.type = dataType.AddPowerUp;
 				no.powerUp = powerUp;
-				gc.overlay.man.sendToAll(no);
+				gc.overlay.SendToAllClients(no);
 				
 		    	return true;
 		    } else {
@@ -74,7 +74,7 @@ public class PowerUpController{
 				NetworkObject no = new NetworkObject();
 				no.type = dataType.RemovePowerUp;
 				no.point = point;
-				gc.overlay.man.sendToAll(no);
+				gc.overlay.SendToAllClients(no);
 			}			
 		}
 	}
