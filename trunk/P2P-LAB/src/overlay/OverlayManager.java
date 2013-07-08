@@ -2,6 +2,9 @@ package overlay;
 
 import java.awt.Dimension;
 import java.sql.Timestamp;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import network.ConnectionManager;
@@ -16,16 +19,17 @@ public class OverlayManager {
 
 	Map<NetworkTarget, Pair > map;
 	Date date= new Date();
-	ConnectionManager man = new ConnectionManager();
+	UpdateGameState upGameState;
 	NetworkObject networkObject = new NetworkObject();
 
-	public OverlayManager(){
+	public OverlayManager(UpdateGameState upGameState){
+		this.upGameState = upGameState;
 		map  = new TreeMap<NetworkTarget, Pair>(new NTComparator());
 	}
 
 
-	public void addEntry(NetworkTarget nt, int type, Timestamp timeStamp){
-		map.put(nt, new Pair(type, timeStamp));
+	public void addEntry(NetworkTarget nt, int type, Date date2){
+		map.put(nt, new Pair(type, date2));
 	}
 
 	public int getType(NetworkTarget nt){
@@ -35,7 +39,7 @@ public class OverlayManager {
 		return -1;
 	}
 
-	public Timestamp getTimeStamp(NetworkTarget nt){
+	public Date getTimeStamp(NetworkTarget nt){
 		if(map.containsKey(nt)){
 			return map.get(nt).getTimeStamp();
 		}
@@ -64,6 +68,29 @@ public class OverlayManager {
 		map = parMap;
 	}
 	
+	public NetworkTarget getRC() {
+		Iterator it = map.entrySet().iterator();
+		while(it.hasNext()) {
+			Map.Entry data = (Map.Entry)it.next();
+			if(((Pair)(data.getValue())).getType() == 0)
+				return (NetworkTarget)data.getKey();
+		}
+		return null;
+	}
+	
+	public List<NetworkTarget> getClients() {
+		
+		List<NetworkTarget> list = new LinkedList<NetworkTarget>();
+		
+		Iterator it = map.entrySet().iterator();
+		while(it.hasNext()) {
+			Map.Entry data = (Map.Entry)it.next();
+			if(((Pair)(data.getValue())).getType() == 1)
+				list.add((NetworkTarget)data.getKey());
+		}
+		return list;
+	}
+	
 	
 
 	public void checkPeerAlive(NetworkTarget nt) {
@@ -81,7 +108,7 @@ public class OverlayManager {
 					 */
 					NetworkObject toSend = new NetworkObject();
 					toSend.type = dataType.Ping;
-					man.Send(nt, toSend);
+					upGameState.man.Send(nt, toSend);
 					
 					
 					//if fails, remove it from list
@@ -100,7 +127,7 @@ public class OverlayManager {
 					 */
 					NetworkObject toSend = new NetworkObject();
 					toSend.type = dataType.Ping;
-					man.Send(nt, toSend);
+					upGameState.man.Send(nt, toSend);
 					
 					//Receive pong
 					

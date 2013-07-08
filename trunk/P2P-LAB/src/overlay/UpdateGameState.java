@@ -5,6 +5,7 @@
 package overlay;
 
 import java.awt.Point;
+import java.util.Date;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import interfaces.IObjectController;
@@ -21,9 +22,10 @@ import network.ConnectionManager;
 public class UpdateGameState extends Thread {
 
 	public ConnectionManager man;
+	private OverlayManager overlayManager = new OverlayManager(this);
 	boolean iAmRC = false;
 	IObjectController controller;
-	private Queue<NetworkObject> dataToBroadcast = new ConcurrentLinkedQueue<NetworkObject>();
+	//private Queue<NetworkObject> dataToBroadcast = new ConcurrentLinkedQueue<NetworkObject>();
 	
 	
 	/**
@@ -33,7 +35,8 @@ public class UpdateGameState extends Thread {
 	public UpdateGameState(IObjectController _controller, NetworkTarget target) {
 		controller = _controller;
 		iAmRC = false;
-		man = new ConnectionManager();
+		overlayManager.addEntry(target, 0, new Date());
+		man = new ConnectionManager(overlayManager);
 		//man.Connect(target);
 
 		NetworkObject networkObject = new NetworkObject();
@@ -51,10 +54,27 @@ public class UpdateGameState extends Thread {
 	public UpdateGameState(IObjectController _controller, int port) {
 		controller = _controller;
 		iAmRC = true;
-		man = new ConnectionManager(port);
+		man = new ConnectionManager(port, overlayManager);
 		new Thread(man).start();
 		new Thread(this).start();
 
+	}
+	
+	public void SendToAllClients(NetworkObject data) {
+		for(NetworkTarget target : overlayManager.getClients()) {
+			man.Send(target, data);
+		}
+		
+		
+	}
+	public void SendToRC(NetworkObject data) {
+		man.Send(overlayManager.getRC(), data);
+	}
+	public void SendToOtherRc(NetworkObject data) {
+		
+	}
+	public void AddNewClient(NetworkTarget target) {
+		overlayManager.addEntry(target, 1, new Date());
 	}
 
 
@@ -73,15 +93,33 @@ public class UpdateGameState extends Thread {
 				switch(no.type) {
 				case Init:
 					if(iAmRC) {
+						//Add new Tank
+						controller.addTankRandom(no.target, true);
+						
+						//Add Tank for the existing clients
+						tmpNo = new NetworkObject();
+						tmpNo.type = dataType.AddTank;
+						tmpNo.angle = controller.getTank(no.target).getAngle();
+						tmpNo.point = controller.getTank(no.target).getPos();
+						tmpNo.dataTarget = no.target;
+						
+						SendToAllClients(tmpNo);
+						
+						
+						
+						
+						
+						
+						//Send Init to the new client
 						tmpNo = new NetworkObject();
 						tmpNo.type = dataType.Init;
-						controller.addTankRandom(no.target, true);
 						tmpNo.tankData = controller.exportTankInfo(); 
 						tmpNo.powerUpData = controller.exportPowerUpMap();
 						tmpNo.missileData = controller.exportMissileInfo();
 						tmpNo.region = controller.getRegionType();
 						tmpNo.dataTarget = no.target;
 						man.Send(no.target, tmpNo);
+						overlayManager.addEntry(no.target,1,new Date());
 					} else {
 						controller.setMe(no.dataTarget);
 						controller.setNewRegionType(no.region);
@@ -173,7 +211,7 @@ public class UpdateGameState extends Thread {
 				}
 			}
 			
-			
+			/*
 			//check if messages have to been send
 			synchronized (dataToBroadcast) {
 				for(NetworkObject no: dataToBroadcast) {
@@ -181,6 +219,7 @@ public class UpdateGameState extends Thread {
 				}
 				
 			}
+			*/
 		
 			try {
 				Thread.sleep(1);
@@ -228,15 +267,19 @@ public class UpdateGameState extends Thread {
 		 */
 	}
 
+	
 	/**
 	 * Send updates too all peers
 	 * @param object 
 	 *      NetworkObject with data required to be send to all
 	 */
-	public void sendUpdatesToALL(/*ConnectionManager connection,*/ NetworkObject object) {
+	/*
+	
+	private void sendUpdatesToALL( NetworkObject object) {
 		
 		man.sendToAll(object);
 	}
+	*/
 
 	/**
 	 * A peer can send updates to the RC 

@@ -217,7 +217,7 @@ public class ObjectController implements IObjectController{
 			no.point = pos;
 			no.angle = angle;
 			no.range = range;
-			gc.overlay.man.sendToAll(no);		
+			gc.overlay.SendToAllClients(no);	
     	} else {
     		NetworkObject no = new NetworkObject();
 			no.type = dataType.AddMissileRequest;
@@ -225,7 +225,7 @@ public class ObjectController implements IObjectController{
 			no.point = pos;
 			no.angle = angle;
 			no.range = range;
-			gc.overlay.man.sendToAll(no);
+			gc.overlay.SendToRC(no);
     	}
     }
 
@@ -285,7 +285,7 @@ public class ObjectController implements IObjectController{
 				NetworkObject no = new NetworkObject();
 				no.type = dataType.MoveTank;
 				no.move = new Move(nt,angle,pos);
-				gc.overlay.man.sendToAll(no);
+				gc.overlay.SendToAllClients(no);
 				System.err.println("X Times");
 			}
 			
@@ -294,7 +294,7 @@ public class ObjectController implements IObjectController{
 			no.type = dataType.MoveRequest;
 			no.move = new Move(nt,angle);
 			//gc.overlay.sendUpdatesToRC(controller, connection, target)
-			gc.overlay.man.sendToAll(no);
+			gc.overlay.SendToRC(no);
 			
 		}
 
@@ -320,7 +320,7 @@ public class ObjectController implements IObjectController{
 				NetworkObject no = new NetworkObject();
 				no.type = dataType.MoveTank;
 				no.move = new Move(nt,angle,TANK_CONTROLLER.get(nt).getPos());
-				gc.overlay.man.sendToAll(no);
+				gc.overlay.SendToAllClients(no);
 				System.err.println("Y Times");
 			}
 			

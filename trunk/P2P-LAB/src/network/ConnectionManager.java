@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import overlay.OverlayManager;
+
 import model.NetworkObject;
 import model.NetworkTarget;
 import model.NetworkObject.dataType;
@@ -39,16 +41,19 @@ public class ConnectionManager extends Thread{
 	int myStartPort = 0;
 
 	public ServerSocket myServerSocket = null;
+	OverlayManager overlay = null;
 
 
-	public ConnectionManager()
+	public ConnectionManager(OverlayManager overlay)
 	{
+		this.overlay = overlay;
 		init();
 	}
 
-	public ConnectionManager(int port)
+	public ConnectionManager(int port, OverlayManager overlay)
 	{
 		myStartPort = port;
+		this.overlay = overlay;
 		init();
 	}
 	
@@ -169,7 +174,7 @@ public class ConnectionManager extends Thread{
 	}
 
 
-	public void sendToAll(NetworkObject data)
+	private void sendToAll(NetworkObject data)
 	{
 		synchronized (handlers) {
 			for(ConnectionHandler h : handlers)

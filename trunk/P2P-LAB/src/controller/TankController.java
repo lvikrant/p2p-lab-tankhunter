@@ -58,7 +58,7 @@ public class TankController {
 					no.dataTarget = nt;
 					no.point = pos;
 					no.angle = angle;
-					gc.overlay.man.sendToAll(no);
+					gc.overlay.SendToAllClients(no);
 				}
 
 				return true;
