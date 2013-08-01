@@ -171,6 +171,29 @@ public class Tank implements ActionListener {
 		return false;
 	}
 	
+	public boolean checkIfNewRegion(int angle) {
+		switch(angle){
+		case 0:
+			if (posX < MAP_WIDTH - 1)
+				return false;
+			break; 
+		case 90: 
+			if (posY > 0) 
+				return false;
+			break;
+		case 180: 
+			if (posX > 0) 
+				return false;
+			break;
+		case 270: 
+			if (posY < MAP_HEIGHT - 1) 
+				return false;
+			break;
+		}
+		return true;
+		
+	}
+	
 	public void setStatus(String newStatus){
 		status = newStatus;
 		

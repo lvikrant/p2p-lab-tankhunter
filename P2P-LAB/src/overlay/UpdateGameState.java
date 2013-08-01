@@ -104,12 +104,7 @@ public class UpdateGameState extends Thread {
 						tmpNo.dataTarget = no.target;
 						
 						SendToAllClients(tmpNo);
-						
-						
-						
-						
-						
-						
+
 						//Send Init to the new client
 						tmpNo = new NetworkObject();
 						tmpNo.type = dataType.Init;
@@ -211,15 +206,6 @@ public class UpdateGameState extends Thread {
 				}
 			}
 			
-			/*
-			//check if messages have to been send
-			synchronized (dataToBroadcast) {
-				for(NetworkObject no: dataToBroadcast) {
-					man.sendToAll(no);
-				}
-				
-			}
-			*/
 		
 			try {
 				Thread.sleep(1);
