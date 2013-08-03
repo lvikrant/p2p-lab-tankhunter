@@ -203,8 +203,6 @@ public class ObjectController implements IObjectController{
 		if(TANK_CONTROLLER.contains(nt)){
 			TANK_CONTROLLER.get(nt).fire(nt, pos, angle, range);
 		}
-
-
 	}
 
 
