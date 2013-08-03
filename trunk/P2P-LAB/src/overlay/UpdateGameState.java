@@ -67,7 +67,12 @@ public class UpdateGameState extends Thread {
 		for(NetworkTarget target : overlayManager.getClients()) {
 			man.Send(target, data);
 		}
-
+	}
+	
+	public void SendToAllBackupRCs(NetworkObject data) {
+		for(NetworkTarget target : overlayManager.getBackupRCs()) {
+			man.Send(target, data);
+		}
 	}
 	
 	public void SendToOneClien(NetworkObject no, NetworkTarget nt){
@@ -77,6 +82,9 @@ public class UpdateGameState extends Thread {
 	public void SendToRC(NetworkObject data) {
 		man.Send(overlayManager.getRC(), data);
 	}
+	
+	
+	
 	public void SendToOtherRc(NetworkObject data) {
 
 	}
@@ -227,10 +235,9 @@ public class UpdateGameState extends Thread {
 					break;
 				case ExitPermission:
 					if(iAmRC) {
-						
+						controller.exitGamePermission(no.dataTarget);
 					} else {
 						controller.exitGamePermission();
-					//	overlayManager.deleteEntry(controller.getMe());
 					}
 					break;
 				default:

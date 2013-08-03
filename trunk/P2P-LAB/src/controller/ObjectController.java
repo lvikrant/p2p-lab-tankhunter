@@ -3,9 +3,6 @@ package controller;
 import java.awt.Point;
 import java.util.Map;
 import java.util.TreeMap;
-
-import overlay.OverlayManager;
-
 import utils.Move;
 
 import comparator.NTComparator;
@@ -29,6 +26,8 @@ public class ObjectController implements IObjectController{
 
 	private final RegionTypes MAP_ELEMENTS;
 	private GameController gc;
+	
+	private boolean readyToBecomeRC = false;
 
 	public ObjectController(GameController gameC, int powerUpLimit,int tankLimit, int missileLimit, int mapID) {
 		gc = gameC;
@@ -397,7 +396,11 @@ public class ObjectController implements IObjectController{
 				System.exit(0);
 			}  else {
 				
-				//TODO inform backupRC
+				NetworkObject no = new NetworkObject();
+				no.type = dataType.ExitRequest;
+				no.dataTarget = gc.getMe();
+				gc.overlay.SendToAllBackupRCs(no);
+				
 			}
 			
 		} else {
@@ -419,21 +422,41 @@ public class ObjectController implements IObjectController{
 			NetworkObject no = new NetworkObject();
 			no.type = dataType.ExitPermission;
 			gc.overlay.SendToOneClien(no,nt);
-			
 			gc.overlay.getOverlayManager().deleteEntry(nt);
-			
-			
 		} else {
-	
+			
+			NetworkObject no = new NetworkObject();
+			no.type = dataType.ExitPermission;
+			no.dataTarget = gc.getMe();
+			gc.overlay.SendToOneClien(no,nt);
+
 		}	
 	}
 
 	@Override
 	public void exitGamePermission() {
-		if(gc.isRegionController()){
-			//TODO make BackupRC the new RC
-		} else {
-				System.exit(0);			
+		if(!gc.isRegionController()){
+			System.exit(0);	
+		}
+	}
+
+
+	@Override
+	public void exitGamePermission(NetworkTarget nt) {
+		
+		if(readyToBecomeRC == false){
+			
+
+			NetworkObject no = new NetworkObject();
+			no.type = dataType.ExitAck;
+	//		no.peers
+			gc.overlay.SendToOneClien(no,nt);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.exit(0);
 		}
 	}
 

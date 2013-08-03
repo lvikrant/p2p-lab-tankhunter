@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import utils.Pair;
 import model.NetworkObject;
 import model.NetworkTarget;
+import model.TankInfo;
 import model.NetworkObject.dataType;
 import comparator.NTComparator;
 import java.util.Date;
@@ -173,4 +174,15 @@ public class OverlayManager {
 	}
 
 
+	public List<NetworkTarget> getBackupRCs() {
+		
+		List<NetworkTarget> list = new LinkedList<NetworkTarget>();
+		
+		for (Map.Entry<NetworkTarget, Pair> entry : map.entrySet()){
+			if(entry.getValue().getType() == 2){
+				list.add(entry.getKey());
+			}
+		}	
+		return list;
+	}
 }
