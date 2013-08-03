@@ -180,4 +180,13 @@ public class TankController {
 					}
 			}	
 	}
+
+	public void rotateTank(NetworkTarget nt, int angle) {
+		if(map.containsKey(nt)){
+			map.get(nt).rotate(angle);
+		} else {
+			System.err.println("BAD");
+		}
+	    		
+	}
 }
