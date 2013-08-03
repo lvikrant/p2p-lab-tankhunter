@@ -386,7 +386,7 @@ public class ObjectController implements IObjectController{
 		TANK_CONTROLLER.rotateTank(nt,angle);
 	}
 
-	public void sendExitGameRequest(NetworkTarget nt) {	
+	public void sendExitGameRequest() {	
 		if(gc.isRegionController()){
 			//TODO request to BackupRC
 		} else {
