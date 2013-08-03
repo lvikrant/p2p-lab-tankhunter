@@ -47,6 +47,7 @@ public class OverlayManager {
 	{
 		map.remove(nt);
 	}
+	
 	public int getType(NetworkTarget nt){
 		if(map.containsKey(nt)){
 			return map.get(nt).getType();

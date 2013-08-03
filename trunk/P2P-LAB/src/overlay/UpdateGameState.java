@@ -230,7 +230,7 @@ public class UpdateGameState extends Thread {
 						
 					} else {
 						controller.exitGamePermission();
-						overlayManager.deleteEntry(controller.getMe());
+					//	overlayManager.deleteEntry(controller.getMe());
 					}
 					break;
 				default:
