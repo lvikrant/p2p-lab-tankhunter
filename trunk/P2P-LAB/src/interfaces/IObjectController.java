@@ -65,6 +65,8 @@ public interface IObjectController {
     public void forceMoveTank(NetworkTarget nt, int angle,Point pos);
     
     public void importTankInfo(Map<NetworkTarget, TankInfo> parmap);
+    
+    public void rotateTank(NetworkTarget nt, int angle);
 
     /**
      * MISSILE_CONTROLLER *******************
@@ -97,4 +99,6 @@ public interface IObjectController {
 	public void setNewRegionType(int regionType);
 
 	public int getRegionType();
+
+	public void exitGame(NetworkTarget nt);
 }
