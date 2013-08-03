@@ -322,5 +322,11 @@ public class Tank implements ActionListener {
 		
 	}
 
+	public void rotate(int angle) {
+		tankAngle = angle;
+		gc.gameWindow.getMainRegion().rotateTank(NT, angle);
+		
+	}
+
 
 }
