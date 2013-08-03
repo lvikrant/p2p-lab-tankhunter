@@ -400,18 +400,30 @@ public class ObjectController implements IObjectController{
 	
 	public void getExitGameRequest(NetworkTarget nt) {
 		if(gc.isRegionController()){
-			TANK_CONTROLLER.remove(nt);	
+			TANK_CONTROLLER.remove(nt);
+			
+			NetworkObject no = new NetworkObject();
+			no.type = dataType.ExitPermission;
+			no.dataTarget = nt;
+			gc.overlay.SendToAllClients(no);
+			
+			//TODO remove from Network
+			
+			
 		} else {
-			// TODO become a RC
+	
 		}	
 	}
-	
-	public void exitGamePermission(){
-		
+
+	@Override
+	public void exitGamePermission(NetworkTarget nt) {
 		if(gc.isRegionController()){
 			//TODO make BackupRC the new RC
 		} else {
-			System.exit(0);
+			if(gc.getMe().equals(nt)){
+				System.exit(0);		
+			}
+			
 		}
 	}
 

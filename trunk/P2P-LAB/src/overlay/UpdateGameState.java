@@ -220,9 +220,8 @@ public class UpdateGameState extends Thread {
 				case ExitPermission:
 					if(iAmRC) {
 						
-						
 					} else {
-				//		controller.exitGame(no.dataTarget);
+						controller.exitGamePermission(no.dataTarget);
 					}
 					break;
 				default:
