@@ -205,7 +205,7 @@ public class UpdateGameState extends Thread {
 					if(iAmRC) {
 
 					} else {
-						controller.rotateTank(no.move.getNetworkTarget(), no.move.getAngle());
+						controller.rotateTank(no.dataTarget, no.angle);
 					}
 					break;
 
