@@ -249,12 +249,15 @@ public class ObjectController implements IObjectController{
 	}
 
 	public void forceMoveTank(NetworkTarget nt, int angle, Point pos) {
-		System.err.println(pos);
-		System.err.println(TANK_CONTROLLER.get(nt).getPos());
 
-		if(!(TANK_CONTROLLER.get(nt).getPos().equals(pos))){
-			//	TANK_CONTROLLER.jumpTank(nt, angle, pos);
-			//		System.err.println("NOW");	
+
+		if(!(TANK_CONTROLLER.get(nt).getPos().equals(pos))){		
+			System.err.println("NOT SYNCHRONISED");
+			
+			System.err.println("Server Pos" + pos);
+			System.err.println("Client Pos" + TANK_CONTROLLER.get(nt).getPos());
+			
+			TANK_CONTROLLER.jumpTank(nt, angle, pos);
 		}
 
 		switch(angle){
@@ -268,6 +271,9 @@ public class ObjectController implements IObjectController{
 
 
 	public boolean moveTank(NetworkTarget nt, int angle) {
+		
+		Point pos = TANK_CONTROLLER.get(nt).getPos();
+		
 		if(TANK_CONTROLLER.contains(nt) == false){
 			return false;
 		}
@@ -305,7 +311,7 @@ public class ObjectController implements IObjectController{
 			if(ready) {
 				NetworkObject no = new NetworkObject();
 				no.type = dataType.MoveTank;
-				no.move = new Move(nt,angle,TANK_CONTROLLER.get(nt).getPos());
+				no.move = new Move(nt,angle,pos);
 				gc.overlay.SendToAllClients(no);
 				System.err.println("X Times");
 			}
