@@ -120,7 +120,12 @@ public class Music {
      */
     public static void stop() {
         stopMusic = true;
-        player.close();
+        try{
+        	player.close();	
+        } catch (NullPointerException e){
+        	
+        }
+        
     }
 
     public static void Pause() {

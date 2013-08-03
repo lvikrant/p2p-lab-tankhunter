@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.File;
 
 import javax.swing.Box;
@@ -239,9 +238,10 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			menuItemBack.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					Music.stop();
 					new WelcomeWindow();
 					dispose();
-					Music.stop();
+					
 				}
 			});
 		}
