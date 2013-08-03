@@ -384,26 +384,24 @@ public class ObjectController implements IObjectController{
 
 	public void rotateTank(NetworkTarget nt, int angle) {
 		TANK_CONTROLLER.rotateTank(nt,angle);
-		
 	}
 
-
-	@Override
-	public void exitGame(NetworkTarget nt) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void exitGameRequest() {
-		NetworkObject no = new NetworkObject();
-		no.type = dataType.ExitRequest;
-		no.dataTarget = gc.getMe();
-		
+	public void sendExitGameRequest(NetworkTarget nt) {	
 		if(gc.isRegionController()){
 			//TODO request to BackupRC
 		} else {
+			NetworkObject no = new NetworkObject();
+			no.type = dataType.ExitRequest;
 			gc.overlay.SendToRC(no);
+		}	
+	}
+	
+	
+	public void getExitGameRequest(NetworkTarget nt) {
+		if(gc.isRegionController()){
+			TANK_CONTROLLER.remove(nt);	
+		} else {
+			// TODO become a RC
 		}	
 	}
 	

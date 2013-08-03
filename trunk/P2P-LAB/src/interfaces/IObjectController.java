@@ -5,10 +5,12 @@ import java.util.Map;
 
 import model.Missile;
 import model.MissileInfo;
+import model.NetworkObject;
 import model.NetworkTarget;
 import model.PowerUp;
 import model.Tank;
 import model.TankInfo;
+import model.NetworkObject.dataType;
 
 public interface IObjectController {
 
@@ -100,5 +102,9 @@ public interface IObjectController {
 
 	public int getRegionType();
 
-	public void exitGame(NetworkTarget nt);
+//	public void sendExitGameRequest(NetworkTarget nt);
+	
+	public void getExitGameRequest(NetworkTarget nt);
+	
+	public void exitGamePermission();
 }

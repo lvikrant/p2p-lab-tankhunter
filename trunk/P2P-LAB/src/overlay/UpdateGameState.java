@@ -211,8 +211,8 @@ public class UpdateGameState extends Thread {
 
 				case ExitRequest:
 					if(iAmRC) {
-						
-						
+						controller.getExitGameRequest(no.dataTarget);
+						//TODO remove from Network
 					} else {
 						
 					}
