@@ -340,4 +340,8 @@ public class GameController implements ActionListener, KeyListener {
 		OBJECT_CONTROLLER.addMissile(nt, pos, angle, range);
 		
 	}
+	
+	public void exitGameRequest(){
+		OBJECT_CONTROLLER.exitGameRequest();
+	}
 }

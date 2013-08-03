@@ -395,6 +395,24 @@ public class ObjectController implements IObjectController{
 	}
 
 
+	public void exitGameRequest() {
+		
+		
+		NetworkObject no = new NetworkObject();
+		no.type = dataType.ExitRequest;
+		no.dataTarget = gc.getMe();
+		
+		if(gc.isRegionController()){
+			//TODO request to BackupRC
+		} else {
+			gc.overlay.SendToRC(no);
+		}
+		
+		
+		
+	}
+
+
 
 
 }
