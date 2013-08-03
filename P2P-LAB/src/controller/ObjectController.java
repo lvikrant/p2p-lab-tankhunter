@@ -392,6 +392,7 @@ public class ObjectController implements IObjectController{
 		} else {
 			NetworkObject no = new NetworkObject();
 			no.type = dataType.ExitRequest;
+			no.dataTarget = gc.getMe();
 			gc.overlay.SendToRC(no);
 		}	
 	}
