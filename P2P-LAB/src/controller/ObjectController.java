@@ -420,7 +420,7 @@ public class ObjectController implements IObjectController{
 			no.type = dataType.ExitPermission;
 			gc.overlay.SendToOneClien(no,nt);
 			
-			//gc.overlay.methode(nt);
+			gc.overlay.getOverlayManager().deleteEntry(nt);
 			
 			
 		} else {
