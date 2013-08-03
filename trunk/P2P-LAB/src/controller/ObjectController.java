@@ -396,8 +396,6 @@ public class ObjectController implements IObjectController{
 
 
 	public void exitGameRequest() {
-		
-		
 		NetworkObject no = new NetworkObject();
 		no.type = dataType.ExitRequest;
 		no.dataTarget = gc.getMe();
@@ -406,10 +404,16 @@ public class ObjectController implements IObjectController{
 			//TODO request to BackupRC
 		} else {
 			gc.overlay.SendToRC(no);
+		}	
+	}
+	
+	public void exitGamePermission(){
+		
+		if(gc.isRegionController()){
+			//TODO make BackupRC the new RC
+		} else {
+			System.exit(0);
 		}
-		
-		
-		
 	}
 
 
