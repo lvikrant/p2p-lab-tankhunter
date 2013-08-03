@@ -7,6 +7,9 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 
 import javax.swing.Box;
@@ -97,6 +100,14 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 
 	private void initialWindow(){
 		setIconImage(new ImageIcon("src/resources/TankHunters.png").getImage());
+		
+		addWindowListener( 
+			    new WindowAdapter() { 
+			        public void windowClosing(WindowEvent e) { 
+			            gc.exitGameRequest(); 
+			        } 
+			    } 
+			);
 
 		setBounds(50, 50, 1125, 722);
 		setLayout(null);
