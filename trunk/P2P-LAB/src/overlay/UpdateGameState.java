@@ -26,8 +26,8 @@ public class UpdateGameState extends Thread {
 	boolean iAmRC = false;
 	IObjectController controller;
 	//private Queue<NetworkObject> dataToBroadcast = new ConcurrentLinkedQueue<NetworkObject>();
-	
-	
+
+
 	/**
 	 * Start as client
 	 * @param target NetworkTarget of the RC to connect to
@@ -40,7 +40,7 @@ public class UpdateGameState extends Thread {
 		//man.Connect(target);
 
 		NetworkObject networkObject = new NetworkObject();
-		
+
 		networkObject.type = dataType.Init;
 		man.Send(target, networkObject);
 		new Thread(man).start();
@@ -59,19 +59,19 @@ public class UpdateGameState extends Thread {
 		new Thread(this).start();
 
 	}
-	
+
 	public void SendToAllClients(NetworkObject data) {
 		for(NetworkTarget target : overlayManager.getClients()) {
 			man.Send(target, data);
 		}
-		
-		
+
+
 	}
 	public void SendToRC(NetworkObject data) {
 		man.Send(overlayManager.getRC(), data);
 	}
 	public void SendToOtherRc(NetworkObject data) {
-		
+
 	}
 	public void AddNewClient(NetworkTarget target) {
 		overlayManager.addEntry(target, 1, new Date());
@@ -87,22 +87,22 @@ public class UpdateGameState extends Thread {
 
 			//check for new received messages
 			for(NetworkObject no: man.getNewData()){
-				
+
 				//TODO: add timestamp for no.sender
-				
+
 				switch(no.type) {
 				case Init:
 					if(iAmRC) {
 						//Add new Tank
 						controller.addTankRandom(no.target, true);
-						
+
 						//Add Tank for the existing clients
 						tmpNo = new NetworkObject();
 						tmpNo.type = dataType.AddTank;
 						tmpNo.angle = controller.getTank(no.target).getAngle();
 						tmpNo.point = controller.getTank(no.target).getPos();
 						tmpNo.dataTarget = no.target;
-						
+
 						SendToAllClients(tmpNo);
 
 						//Send Init to the new client
@@ -121,92 +121,108 @@ public class UpdateGameState extends Thread {
 						controller.importTankInfo(no.tankData);
 						controller.importPowerUpMap(no.powerUpData);
 						controller.importMissileInfo(no.missileData);
-		
+
 					}
 
 					break;
 				case MoveTank:
 					if(iAmRC) {
-						
+
 						//TODO: pass information up
-						
+
 					} else {
 						controller.forceMoveTank(no.move.getNetworkTarget(), no.move.getAngle(), no.move.getLocation());						
 					}
 
 					break;
 				case MoveRequest:
-						if(iAmRC) {
-							controller.moveTank(no.move.getNetworkTarget(), no.move.getAngle());
-						}
-						
-						break;
+					if(iAmRC) {
+						controller.moveTank(no.move.getNetworkTarget(), no.move.getAngle());
+					}
+
+					break;
 				case Shoot:
 					if(iAmRC) {
-						
+
 						//TODO: pass information up
 					} else {
-						
+
 						//controller.MoveMissile(no.dataTarget, no.missile);
 					}
 					break;
-					
+
 				case AddPowerUp:
 					if(iAmRC) {
-						
+
 					} else {	
 						System.out.println("Empfangen!");
 						controller.addPowerUp(no.powerUp);
 					}
 					break;
-					
+
 				case RemovePowerUp:
 					if(iAmRC) {
-						
+
 					} else {			
 						controller.removePowerUp(no.point);
 					}
 					break;
-					
+
 				case AddMissile:
 					if(iAmRC) {
-						
+
 					}else {
 						controller.forceAddMissile(no.dataTarget, no.point, no.angle, no.range);
 					}
-						break;	
-					
+					break;	
+
 				case AddMissileRequest:
 					if(iAmRC) {
 						controller.addMissile(no.dataTarget, no.point, no.angle, no.range);
 					}
-					
+
 					break;
-				
+
 				case AddTank:
 					if(iAmRC) {
-						
+
 					} else {
 						controller.addTank(no.dataTarget, no.point, no.angle);
 					}
-					
-				break;
-					
-				case Ping:	//Answer Ping with Pong
-					NetworkObject toSend = new NetworkObject();
-					toSend.type = dataType.Ping;
-					man.Send(no.target, toSend );
 
 					break;
+
+				case Ping:	//Answer Ping with Pong
+				NetworkObject toSend = new NetworkObject();
+				toSend.type = dataType.Ping;
+				man.Send(no.target, toSend );
+
+				break;
 				case Pong:
+					break;
+
+				case RotateTank:
+					if(iAmRC) {
+
+					} else {
+						controller.rotateTank(no.move.getNetworkTarget(), no.move.getAngle());
+					}
+					break;
+
+				case Exit:
+					if(iAmRC) {
+
+					} else {
+						controller.exitGame(no.dataTarget);
+					}
 					break;
 
 				default:
 					break;
 				}
 			}
-			
-		
+
+
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
@@ -216,7 +232,7 @@ public class UpdateGameState extends Thread {
 
 
 
-			
+
 
 
 		}
@@ -253,19 +269,19 @@ public class UpdateGameState extends Thread {
 		 */
 	}
 
-	
+
 	/**
 	 * Send updates too all peers
 	 * @param object 
 	 *      NetworkObject with data required to be send to all
 	 */
 	/*
-	
+
 	private void sendUpdatesToALL( NetworkObject object) {
-		
+
 		man.sendToAll(object);
 	}
-	*/
+	 */
 
 	/**
 	 * A peer can send updates to the RC 
