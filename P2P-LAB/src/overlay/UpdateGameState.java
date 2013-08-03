@@ -209,14 +209,22 @@ public class UpdateGameState extends Thread {
 					}
 					break;
 
-				case Exit:
+				case ExitRequest:
 					if(iAmRC) {
-
+						
+						
+					} else {
+						
+					}
+					break;
+				case ExitPermission:
+					if(iAmRC) {
+						
+						
 					} else {
 						controller.exitGame(no.dataTarget);
 					}
 					break;
-
 				default:
 					break;
 				}

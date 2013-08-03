@@ -17,7 +17,8 @@ public class NetworkObject implements Serializable {
 	    Ping, Pong, ConenctTo, Init, AddTank, MoveTank, 
 	    MoveRequest, Shoot, Data, Tank, AddPowerUp, 
 	    RemovePowerUp, AddMissile, AddMissileRequest,
-	    Exit,RotateTank;
+	    ExitPermission,ExitRequest,
+	    RotateTank;
 	}
 	
 	public dataType type = dataType.Data;
