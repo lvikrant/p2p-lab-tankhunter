@@ -32,6 +32,10 @@ public class OverlayManager {
 		map.put(nt, new Pair(type, date2));
 	}
 
+	public void deleteEntry(NetworkTarget nt)
+	{
+		map.remove(nt);
+	}
 	public int getType(NetworkTarget nt){
 		if(map.containsKey(nt)){
 			return map.get(nt).getType();
