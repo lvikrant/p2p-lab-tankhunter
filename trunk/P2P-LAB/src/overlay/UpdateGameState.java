@@ -26,8 +26,7 @@ public class UpdateGameState extends Thread {
 	boolean iAmRC = false;
 	IObjectController controller;
 	//private Queue<NetworkObject> dataToBroadcast = new ConcurrentLinkedQueue<NetworkObject>();
-
-
+	
 	/**
 	 * Start as client
 	 * @param target NetworkTarget of the RC to connect to
@@ -47,6 +46,10 @@ public class UpdateGameState extends Thread {
 		new Thread(this).start();
 
 	}
+	
+	public OverlayManager getOverlayManager(){
+		return overlayManager;
+	}
 	/**
 	 * Start as RC
 	 * @param port Port to listen at
@@ -65,8 +68,12 @@ public class UpdateGameState extends Thread {
 			man.Send(target, data);
 		}
 
-
 	}
+	
+	public void SendToOneClien(NetworkObject no, NetworkTarget nt){
+		man.Send(nt, no);
+	}
+	
 	public void SendToRC(NetworkObject data) {
 		man.Send(overlayManager.getRC(), data);
 	}
@@ -114,6 +121,7 @@ public class UpdateGameState extends Thread {
 						tmpNo.region = controller.getRegionType();
 						tmpNo.dataTarget = no.target;
 						man.Send(no.target, tmpNo);
+						System.out.println("SEX");
 						overlayManager.addEntry(no.target,1,new Date());
 					} else {
 						controller.setMe(no.dataTarget);
@@ -221,7 +229,8 @@ public class UpdateGameState extends Thread {
 					if(iAmRC) {
 						
 					} else {
-						controller.exitGamePermission(no.dataTarget);
+						controller.exitGamePermission();
+						overlayManager.deleteEntry(controller.getMe());
 					}
 					break;
 				default:
