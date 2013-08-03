@@ -62,7 +62,37 @@ private void clearMap(){
 }
 
 private void loadMap1() {
-			clearMap();	
+			clearMap();
+			
+     map[3][2] = "ROCK";
+     map[2][3] = "ROCK";
+     
+     map[11][3] = "ROCK";
+     
+     map[4][4] = "ROCK";
+     map[7][4] = "ROCK";
+     map[13][4] = "ROCK";
+     
+     map[4][5] = "ROCK";
+     map[9][5] = "ROCK";
+     
+     map[7][6] = "ROCK";
+     map[12][6] = "ROCK";
+     map[13][6] = "ROCK";
+     
+     map[3][7] = "ROCK";
+     
+     map[13][8] = "ROCK";
+     
+     map[5][9] = "ROCK";
+     map[6][9] = "ROCK";
+     map[16][9] = "ROCK";
+     
+     map[2][10] = "ROCK";
+     map[8][10] = "ROCK";
+     map[11][10] = "ROCK";
+     map[18][10] = "ROCK";
+		
 	}
 
 
