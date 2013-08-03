@@ -103,7 +103,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		
 		setTitle("Tank Hunters");
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setJMenuBar(getMenuBar0());
 		setVisible(true);
 
@@ -244,7 +244,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			menuItemExitGame.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.exit(0);
+					gc.exitGameRequest();
 				}
 			});
 		}
