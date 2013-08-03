@@ -370,6 +370,26 @@ public class ObjectController implements IObjectController{
 	}
 
 
+	@Override
+	public boolean moveTank(NetworkTarget nt, int angle, Point pos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	public void rotateTank(NetworkTarget nt, int angle) {
+		TANK_CONTROLLER.rotateTank(nt,angle);
+		
+	}
+
+
+	@Override
+	public void exitGame(NetworkTarget nt) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 
 }
