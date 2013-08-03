@@ -1,13 +1,11 @@
 package overlay;
 
-import java.awt.Dimension;
 import java.sql.Timestamp;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import network.ConnectionManager;
 import utils.Pair;
 import model.NetworkObject;
 import model.NetworkTarget;
@@ -27,8 +25,21 @@ public class OverlayManager {
 		map  = new TreeMap<NetworkTarget, Pair>(new NTComparator());
 	}
 
+	
+	public boolean hasClients(){
+		System.out.println("Size: "  + map.size());
+		for (Map.Entry<NetworkTarget, Pair> entry : map.entrySet()) {
+		
+			if(entry.getValue().getType() == 1){
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public void addEntry(NetworkTarget nt, int type, Date date2){
+		System.out.println("HERE");
+		System.out.println(nt.getIP());
 		map.put(nt, new Pair(type, date2));
 	}
 

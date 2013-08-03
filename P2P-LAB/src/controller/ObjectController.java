@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.util.Map;
 import java.util.TreeMap;
 
+import overlay.OverlayManager;
+
 import utils.Move;
 
 import comparator.NTComparator;
@@ -387,14 +389,26 @@ public class ObjectController implements IObjectController{
 	}
 
 	public void sendExitGameRequest() {	
+		
 		if(gc.isRegionController()){
-			//TODO request to BackupRC
+			
+			if(!gc.overlay.getOverlayManager().hasClients()){
+				//TODO send to all RC : EXIT-MESSAGE
+				System.exit(0);
+			}  else {
+				
+				//TODO inform backupRC
+			}
+			
 		} else {
+			
 			NetworkObject no = new NetworkObject();
 			no.type = dataType.ExitRequest;
 			no.dataTarget = gc.getMe();
 			gc.overlay.SendToRC(no);
+			
 		}	
+		
 	}
 	
 	
@@ -404,10 +418,9 @@ public class ObjectController implements IObjectController{
 			
 			NetworkObject no = new NetworkObject();
 			no.type = dataType.ExitPermission;
-			no.dataTarget = nt;
-			gc.overlay.SendToAllClients(no);
+			gc.overlay.SendToOneClien(no,nt);
 			
-			//TODO remove from Network
+			//gc.overlay.methode(nt);
 			
 			
 		} else {
@@ -416,14 +429,11 @@ public class ObjectController implements IObjectController{
 	}
 
 	@Override
-	public void exitGamePermission(NetworkTarget nt) {
+	public void exitGamePermission() {
 		if(gc.isRegionController()){
 			//TODO make BackupRC the new RC
 		} else {
-			if(gc.getMe().equals(nt)){
-				System.exit(0);		
-			}
-			
+				System.exit(0);			
 		}
 	}
 
