@@ -107,4 +107,6 @@ public interface IObjectController {
 	public void getExitGameRequest(NetworkTarget nt);
 	
 	public void exitGamePermission();
+
+	public void exitGamePermission(NetworkTarget dataTarget);
 }
