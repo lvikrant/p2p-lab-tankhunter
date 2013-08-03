@@ -311,7 +311,12 @@ public class ObjectController implements IObjectController{
 				no.type = dataType.MoveTank;
 				no.move = new Move(nt,angle,pos);
 				gc.overlay.SendToAllClients(no);
-				System.err.println("X Times");
+			} else {
+				NetworkObject no = new NetworkObject();
+				no.type = dataType.RotateTank;
+				no.dataTarget = nt;
+				no.angle = angle;
+				gc.overlay.SendToAllClients(no);
 			}
 
 		} else {
