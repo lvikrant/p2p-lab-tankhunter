@@ -342,6 +342,6 @@ public class GameController implements ActionListener, KeyListener {
 	}
 	
 	public void exitGameRequest(){
-		OBJECT_CONTROLLER.exitGameRequest();
+		OBJECT_CONTROLLER.sendExitGameRequest();
 	}
 }

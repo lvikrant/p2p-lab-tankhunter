@@ -222,7 +222,7 @@ public class UpdateGameState extends Thread {
 						
 						
 					} else {
-						controller.exitGame(no.dataTarget);
+				//		controller.exitGame(no.dataTarget);
 					}
 					break;
 				default:
