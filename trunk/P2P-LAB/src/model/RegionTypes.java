@@ -7,11 +7,9 @@ public class RegionTypes {
 	private final int MAP_WIDTH;
 	private final int MAP_HEIGHT;
 	private String[][] map;
-	private int ID;
-	private GameController gc;
+	private int id;
 
 public RegionTypes(GameController gc, int mapID) {
-	this.gc = gc;
 	MAP_WIDTH = gc.getMapWidth();
 	MAP_HEIGHT = gc.getMapHeight();
 	map = new String[MAP_WIDTH][MAP_HEIGHT];
@@ -24,7 +22,8 @@ public String getFieldInfo(int posX, int posY){
     }
 
 public void setRegion(int mapID) {
-	ID = mapID;
+	System.err.println("SET REGION " + mapID);
+	id = mapID;
 	switch(mapID){
 	case 0 : clearMap(); break;
 	case 1 : loadMap1(); break;
@@ -97,9 +96,24 @@ private void loadMap1() {
 
 
 public int getRegionType() {
-	return ID;
+	return id;
 }
 
-
+public void printRegioType(){
+	
+	System.out.println("RegionType : " + id);
+	for (int i = 0; i < MAP_HEIGHT; i++) {	
+		for (int a = 0; a < MAP_WIDTH; a++) {
+	    
+     
+        	if(map[a][i].equals("FREE")){
+        		System.out.print("_");
+        	} else {
+        		System.out.print("X");
+        	}
+        }
+	    System.out.println();
+    }
+}
 
 }
