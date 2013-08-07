@@ -368,6 +368,7 @@ public class ObjectController implements IObjectController{
 	}
 
 	public void setNewRegionType(int regionType){
+		MAP_ELEMENTS.setRegion(regionType);
 		gc.gameWindow.setRegionType(regionType);
 	}
 
@@ -458,6 +459,11 @@ public class ObjectController implements IObjectController{
 			}
 			System.exit(0);
 		}
+	}
+
+
+	public void printRegionType() {
+		
 	}
 
 

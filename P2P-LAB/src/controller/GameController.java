@@ -216,7 +216,7 @@ public class GameController implements ActionListener, KeyListener {
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_F4) {
-			System.out.println("Region Type : " + OBJECT_CONTROLLER.getRegionType());
+			OBJECT_CONTROLLER.printRegionType();
 		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_F5) {
