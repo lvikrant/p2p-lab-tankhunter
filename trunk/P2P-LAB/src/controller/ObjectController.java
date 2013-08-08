@@ -280,7 +280,8 @@ public class ObjectController implements IObjectController{
 
 
 		if(gc.isRegionController()){
-
+			
+			/*
 
 			if(TANK_CONTROLLER.get(nt).checkIfNewRegion(angle)) {
 				if(gc.getMe().equals(nt)){
@@ -295,11 +296,11 @@ public class ObjectController implements IObjectController{
 					
 				}
 
-
+			 
 
 			}
 
-
+			*/
 			boolean ready = false;
 			switch(angle){
 			case 0: ready = TANK_CONTROLLER.get(nt).moveRight(); break; 
