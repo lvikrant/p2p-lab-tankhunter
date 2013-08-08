@@ -120,7 +120,12 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		movement = new Timer(10, this);
 		
 		for(int i = 0; i < 9; i++){
-			regionArray[i] = createNewRegion();
+			if(i == 4){
+				regionArray[i] = createNewRegion(true);
+			}else{
+				regionArray[i] = createNewRegion(false);
+			}
+
 			add(regionArray[i]);
 		}
 		
@@ -277,9 +282,9 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		  	regionArray[6] = regionArray[7];
 		  	regionArray[7] = regionArray[8];
 
-		  	regionArray[2] = createNewRegion();
-		  	regionArray[5] = createNewRegion();
-		  	regionArray[8] = createNewRegion();
+		  	regionArray[2] = createNewRegion(false);
+		  	regionArray[5] = createNewRegion(false);
+		  	regionArray[8] = createNewRegion(false);
 		  	
 		  	getContentPane().add(regionArray[2]);
 			getContentPane().add(regionArray[5]);
@@ -302,9 +307,9 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			regionArray[8] = regionArray[5];  	
 			regionArray[5] = regionArray[2];
 
-			regionArray[0] = createNewRegion();
-			regionArray[1] = createNewRegion();
-			regionArray[2] = createNewRegion();
+			regionArray[0] = createNewRegion(false);
+			regionArray[1] = createNewRegion(false);
+			regionArray[2] = createNewRegion(false);
 		  	
 
 		  
@@ -328,9 +333,9 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			regionArray[8] = regionArray[7];
 			regionArray[7] = regionArray[6];
 		  	
-			regionArray[0] = createNewRegion();
-			regionArray[3] = createNewRegion();
-			regionArray[6] = createNewRegion();
+			regionArray[0] = createNewRegion(false);
+			regionArray[3] = createNewRegion(false);
+			regionArray[6] = createNewRegion(false);
 		  	
 		  	getContentPane().add(regionArray[0]);
 			getContentPane().add(regionArray[3]);
@@ -353,9 +358,9 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			regionArray[2] = regionArray[5];
 			regionArray[5] = regionArray[8];
 		  	
-			regionArray[6] = createNewRegion();
-			regionArray[7] = createNewRegion();
-			regionArray[8] = createNewRegion();
+			regionArray[6] = createNewRegion(false);
+			regionArray[7] = createNewRegion(false);
+			regionArray[8] = createNewRegion(false);
 		  	
 		  	getContentPane().add(regionArray[6]);
 			getContentPane().add(regionArray[7]);
@@ -489,9 +494,14 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 	}	
 	
 
-	public GameRegion createNewRegion(){
+	public GameRegion createNewRegion(boolean border){
 		int random = (int) (Math.random() * 3);
-		return new GameRegion("src/resources/regions/region" + random +".png", this, random);
+		
+		if(border){
+			return new GameRegion("src/resources/regions/region" + random +".png", this, random, true);
+		} else {
+			return new GameRegion("src/resources/regions/region" + random +".png", this, random, false);
+		}
 		
 	}
 
@@ -501,7 +511,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		regionArray[4].setVisible(false);
 		remove(regionArray[4]);
 		
-		regionArray[4] = new GameRegion("src/resources/regions/region" + regionType +".png", this, regionType);
+		regionArray[4] = new GameRegion("src/resources/regions/region" + regionType +".png", this, regionType, true);
 		regionArray[4].setLocation(new Point(oldPosX, oldPosY));
 		add(regionArray[4]);
 	}
@@ -523,7 +533,12 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 			regionArray[i].setVisible(false);
 			remove(regionArray[i]);
 			
-			regionArray[i] = new GameRegion("src/resources/regions/region" + regionTypes[i] +".png", this, regionTypes[i]);
+			if(i == 4){
+				regionArray[i] = new GameRegion("src/resources/regions/region" + regionTypes[i] +".png", this, regionTypes[i], true);
+			} else{
+				regionArray[i] = new GameRegion("src/resources/regions/region" + regionTypes[i] +".png", this, regionTypes[i], false);
+			}
+			
 			regionArray[i].setLocation(new Point(oldPosX, oldPosY));
 			add(regionArray[i]);
 		}

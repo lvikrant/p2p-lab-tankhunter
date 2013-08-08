@@ -77,12 +77,16 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	
 	
 	
-	  public GameRegion(String img, GameWindow gw, int region) {
-		this(new ImageIcon(img).getImage(), gw, region);
+	  public GameRegion(String img, GameWindow gw, int region, boolean border) {
+		this(new ImageIcon(img).getImage(), gw, region, border);
 		gameWindow = gw;
 	  
-		Border blackline = BorderFactory.createLineBorder(Color.red);
-		setBorder(blackline);
+		if(border){
+			Border line = BorderFactory.createMatteBorder(4, 4, 4, 4, Color.red);
+			
+			setBorder(line);
+		}
+
 		setVisible(true);
 	
 		
@@ -95,7 +99,7 @@ public class GameRegion extends JPanel implements ActionListener,GameVisualisati
 	  }
 	
 
-	  public GameRegion(Image img, GameWindow gw,int region) {
+	  public GameRegion(Image img, GameWindow gw,int region, boolean border) {
 		REGION = region;
 		gameWindow = gw;
 	    this.img = img;
