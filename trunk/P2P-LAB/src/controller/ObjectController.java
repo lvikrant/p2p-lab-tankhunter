@@ -367,13 +367,14 @@ public class ObjectController implements IObjectController{
 		MAP_ELEMENTS.setRegion(regionType);	
 	}
 
-	public void setNewRegionType(int regionType){
-		MAP_ELEMENTS.setRegion(regionType);
-		gc.gameWindow.setRegionType(regionType);
+	public void setNewRegionTypes(int[] regionTypes){
+		MAP_ELEMENTS.setRegion(regionTypes[4]);
+		gc.gameWindow.setRegionTypes(regionTypes);
+		//Alle
 	}
 
-	public int getRegionType() {
-		return MAP_ELEMENTS.getRegionType();
+	public int[] getRegionTypes() {
+		return gc.gameWindow.getRegionTypes();
 	}
 
 

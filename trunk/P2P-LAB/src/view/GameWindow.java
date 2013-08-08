@@ -495,7 +495,7 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		
 	}
 
-	public void setRegionType(int regionType) {
+	public void setMainRegionType(int regionType) {
 		int oldPosX = (int) regionArray[4].getLocation().getX();
 		int oldPosY = (int) regionArray[4].getLocation().getY();
 		regionArray[4].setVisible(false);
@@ -504,6 +504,31 @@ public class GameWindow extends JFrame implements InformationVisualisation,
 		regionArray[4] = new GameRegion("src/resources/regions/region" + regionType +".png", this, regionType);
 		regionArray[4].setLocation(new Point(oldPosX, oldPosY));
 		add(regionArray[4]);
+	}
+	
+	public int[] getRegionTypes() {
+		int[] result = new int[9];
+		for(int i = 0; i < 9; i++){
+			result[i] = regionArray[i].getRegionType();
+		}
+		return result;
+	}
+	
+	public void setRegionTypes(int[] regionTypes) {
+		int oldPosX;
+		int oldPosY;
+		for(int i = 0; i < 9; i++){
+			oldPosX = (int) regionArray[i].getLocation().getX();
+			oldPosY = (int) regionArray[i].getLocation().getY();
+			regionArray[i].setVisible(false);
+			remove(regionArray[i]);
+			
+			regionArray[i] = new GameRegion("src/resources/regions/region" + regionTypes[i] +".png", this, regionTypes[i]);
+			regionArray[i].setLocation(new Point(oldPosX, oldPosY));
+			add(regionArray[i]);
+		}
+		
+
 	}
 
 }

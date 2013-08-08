@@ -98,9 +98,9 @@ public interface IObjectController {
 
 	public void importMissileInfo(Map<NetworkTarget, MissileInfo> missileData);
 
-	public void setNewRegionType(int regionType);
+	public void setNewRegionTypes(int[] regionTypes);
 
-	public int getRegionType();
+	public int[] getRegionTypes();
 
 //	public void sendExitGameRequest(NetworkTarget nt);
 	
