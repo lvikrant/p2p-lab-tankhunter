@@ -126,14 +126,14 @@ public class UpdateGameState extends Thread {
 						tmpNo.tankData = controller.exportTankInfo(); 
 						tmpNo.powerUpData = controller.exportPowerUpMap();
 						tmpNo.missileData = controller.exportMissileInfo();
-						tmpNo.region = controller.getRegionType();
+						tmpNo.regions = controller.getRegionTypes();
 						tmpNo.dataTarget = no.target;
 						man.Send(no.target, tmpNo);
 						System.out.println("SEX");
 						overlayManager.addEntry(no.target,1,new Date());
 					} else {
 						controller.setMe(no.dataTarget);
-						controller.setNewRegionType(no.region);
+						controller.setNewRegionTypes(no.regions);
 						controller.importTankInfo(no.tankData);
 						controller.importPowerUpMap(no.powerUpData);
 						controller.importMissileInfo(no.missileData);
