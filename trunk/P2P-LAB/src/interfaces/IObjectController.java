@@ -106,9 +106,10 @@ public interface IObjectController {
 	
 	public void getExitGameRequest(NetworkTarget nt);
 	
-	public void getBackupRCAck();
-	
+		
 	public void exitGamePermission();
 
 	public void exitGamePermission(NetworkTarget dataTarget);
+
+	public void becomeRC();
 }

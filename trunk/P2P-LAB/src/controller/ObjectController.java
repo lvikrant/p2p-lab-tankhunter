@@ -278,8 +278,8 @@ public class ObjectController implements IObjectController{
 
 	public boolean moveTank(NetworkTarget nt, int angle) {
 
-	
-		
+
+
 		if(!TANK_CONTROLLER.contains(nt)){
 			return false;
 		}
@@ -424,15 +424,17 @@ public class ObjectController implements IObjectController{
 			no.type = dataType.ExitRequest;
 			no.dataTarget = gc.getMe();
 			gc.overlay.SendToRC(no);
-
 		}	
-
 	}
 
-	public void getBackupRCAck() {
+	/*public void sendBackupRCAck() {
 
-
-	}
+		NetworkObject no = new NetworkObject();
+		no.type = dataType.ExitPermission;
+		no.dataTarget = gc.getMe();
+		gc.overlay.SendToRC(no);
+		readyToBecomeRC = true;
+	}*/
 
 	public void getExitGameRequest(NetworkTarget nt) {
 		if(gc.isRegionController()){
@@ -457,15 +459,22 @@ public class ObjectController implements IObjectController{
 		if(!gc.isRegionController()){
 			System.exit(0);	
 		}
+		else {
+
+			NetworkObject no = new NetworkObject();
+			no.type = dataType.ExitPermission;
+			no.dataTarget= gc.getMe();
+			gc.overlay.SendToRC(no);
+		}
 	}
 
 
 	@Override
 	public void exitGamePermission(NetworkTarget nt) {
 
-		if(readyToBecomeRC == false){
+		if(readyToBecomeRC == false) {
 
-
+			readyToBecomeRC = true;
 			NetworkObject no = new NetworkObject();
 			no.type = dataType.ExitAck;
 			//		no.peers
@@ -477,15 +486,23 @@ public class ObjectController implements IObjectController{
 			}
 			System.exit(0);
 		}
-		else {
-
-
-		}
 	}
 
 
 	public void printRegionType() {
 
+	}
+
+
+	@Override
+	public void becomeRC() {
+		NetworkObject no = new NetworkObject();
+		no.type = dataType.NewRC;	
+		no.dataTarget = gc.getMe();
+		gc.overlay.SendToAllClients(no);	
+		gc.setRC(true);
+
+		//TODO :  Send to other RCs
 	}
 
 

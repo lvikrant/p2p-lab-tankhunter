@@ -26,7 +26,7 @@ public class UpdateGameState extends Thread {
 	boolean iAmRC = false;
 	IObjectController controller;
 	//private Queue<NetworkObject> dataToBroadcast = new ConcurrentLinkedQueue<NetworkObject>();
-	
+
 	/**
 	 * Start as client
 	 * @param target NetworkTarget of the RC to connect to
@@ -46,7 +46,7 @@ public class UpdateGameState extends Thread {
 		new Thread(this).start();
 
 	}
-	
+
 	public OverlayManager getOverlayManager(){
 		return overlayManager;
 	}
@@ -68,23 +68,23 @@ public class UpdateGameState extends Thread {
 			man.Send(target, data);
 		}
 	}
-	
+
 	public void SendToAllBackupRCs(NetworkObject data) {
 		for(NetworkTarget target : overlayManager.getBackupRCs()) {
 			man.Send(target, data);
 		}
 	}
-	
+
 	public void SendToOneClient(NetworkObject no, NetworkTarget nt){
 		man.Send(nt, no);
 	}
-	
+
 	public void SendToRC(NetworkObject data) {
 		man.Send(overlayManager.getRC(), data);
 	}
-	
-	
-	
+
+
+
 	public void SendToOtherRc(NetworkObject data) {
 
 	}
@@ -109,14 +109,14 @@ public class UpdateGameState extends Thread {
 				case Init:
 					if(iAmRC) {
 						//Add new Tank
-						controller.addTankRandom(no.target, true);
+						controller.addTankRandom(no.dataTarget, true);
 
 						//Add Tank for the existing clients
 						tmpNo = new NetworkObject();
 						tmpNo.type = dataType.AddTank;
-						tmpNo.angle = controller.getTank(no.target).getAngle();
-						tmpNo.point = controller.getTank(no.target).getPos();
-						tmpNo.dataTarget = no.target;
+						tmpNo.angle = controller.getTank(no.dataTarget).getAngle();
+						tmpNo.point = controller.getTank(no.dataTarget).getPos();
+						tmpNo.dataTarget = no.dataTarget;
 
 						SendToAllClients(tmpNo);
 
@@ -127,10 +127,10 @@ public class UpdateGameState extends Thread {
 						tmpNo.powerUpData = controller.exportPowerUpMap();
 						tmpNo.missileData = controller.exportMissileInfo();
 						tmpNo.regions = controller.getRegionTypes();
-						tmpNo.dataTarget = no.target;
-						man.Send(no.target, tmpNo);
+						tmpNo.dataTarget = no.dataTarget;
+						man.Send(no.dataTarget, tmpNo);
 						System.out.println("SEX");
-						overlayManager.addEntry(no.target,1,new Date());
+						overlayManager.addEntry(no.dataTarget,1,new Date());
 					} else {
 						controller.setMe(no.dataTarget);
 						controller.setNewRegionTypes(no.regions);
@@ -209,11 +209,11 @@ public class UpdateGameState extends Thread {
 					break;
 
 				case Ping:	//Answer Ping with Pong
-				NetworkObject toSend = new NetworkObject();
-				toSend.type = dataType.Ping;
-				man.Send(no.target, toSend );
+					NetworkObject toSend = new NetworkObject();
+					toSend.type = dataType.Ping;
+					man.Send(no.dataTarget, toSend );
 
-				break;
+					break;
 				case Pong:
 					break;
 
@@ -227,20 +227,41 @@ public class UpdateGameState extends Thread {
 
 				case ExitRequest:
 					if(iAmRC) {
-						controller.getExitGameRequest(no.dataTarget);
-						controller.getBackupRCAck();
+						controller.getExitGameRequest(no.dataTarget);						
 						//TODO remove from Network
-					} else {
-						
+					} else { 
+						controller.exitGamePermission();
 					}
 					break;
+
 				case ExitPermission:
 					if(iAmRC) {
+						//TODO : Send information to backup RC
 						controller.exitGamePermission(no.dataTarget);
 					} else {
 						controller.exitGamePermission();
 					}
 					break;
+
+				case ExitAck:
+
+					if(!iAmRC) {
+
+						controller.becomeRC();
+					}
+					break;
+
+				case NewRC:
+					if(iAmRC) {
+						
+					} else {
+						
+						overlayManager.setType(no.dataTarget, 0);
+					}
+					
+					break;
+
+					
 				default:
 					break;
 				}
