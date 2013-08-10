@@ -42,13 +42,14 @@ public class TankController {
 		case 3 : angle = 270; break;
 		}
 
-
+		System.err.println("ADD!");
 		if (gc.getFieldInfo(pos).equals("FREE")) {
 			Tank tank = new Tank(gc, nt, pos, 0);
 			if (map.size() <= TANK_LIMIT) {
 				map.put(nt, tank);
 				gc.getMainRegion().addTank(nt, pos, 0);
-				if(nt == gc.getMe()){
+				if(nt.equals(gc.getMe())){
+					System.err.println("SET MID!");
 					gc.setGamePanelMiddle(pos);
 				}
 				
@@ -90,7 +91,8 @@ public class TankController {
 			Tank tank = new Tank(gc, nt, pos, angle);
 			map.put(nt, tank);
 			gc.getMainRegion().addTank(nt, pos, angle);
-			if(nt == gc.getMe()){
+			if(nt.equals(gc.getMe())){
+				System.err.println("DONE!");
 				gc.setGamePanelMiddle(pos);
 			}
 			return true;
@@ -152,6 +154,7 @@ public class TankController {
 
 	public void destroy(NetworkTarget nt) {
 		Sound.play("unitDown");
+		
 		gc.getMainRegion().destroyTank(nt);
 	}
 
