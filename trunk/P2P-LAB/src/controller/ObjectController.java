@@ -211,7 +211,10 @@ public class ObjectController implements IObjectController{
 	}
 
 
-	public void addMissile(NetworkTarget nt, Point pos, int angle, int range){  
+	public void addMissile(NetworkTarget nt, Point pos, int angle, int range){
+		if(gc.isDead(nt)){
+			return;
+		}
 		if(gc.isRegionController()){
 			MISSILE_CONTROLLER.add(nt, pos, angle, range);
 			NetworkObject no = new NetworkObject();
