@@ -275,12 +275,17 @@ public class ObjectController implements IObjectController{
 
 	public boolean moveTank(NetworkTarget nt, int angle) {
 
-		Point pos = TANK_CONTROLLER.get(nt).getPos();
-
-		if(TANK_CONTROLLER.contains(nt) == false){
+	
+		
+		if(!TANK_CONTROLLER.contains(nt)){
 			return false;
 		}
 
+		if(gc.isDead(nt)){
+			return false;
+		}
+
+		Point pos = TANK_CONTROLLER.get(nt).getPos();
 
 
 		if(gc.isRegionController()){
