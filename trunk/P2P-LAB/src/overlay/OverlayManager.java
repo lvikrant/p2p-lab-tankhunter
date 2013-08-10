@@ -157,7 +157,7 @@ public class OverlayManager {
 
 	}
 
-	public void assignBackup(NetworkTarget nt) {
+	/*public void assignBackup(NetworkTarget nt) {
 
 		if(map.containsKey(nt)) {
 			switch(map.get(nt).getType())
@@ -171,7 +171,7 @@ public class OverlayManager {
 				map.get(nt).setType(2);
 			}
 		}
-	}
+	}*/
 
 
 	public List<NetworkTarget> getBackupRCs() {

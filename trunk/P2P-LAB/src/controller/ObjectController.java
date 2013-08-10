@@ -1,6 +1,8 @@
 package controller;
 
 import java.awt.Point;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import utils.Move;
@@ -26,8 +28,10 @@ public class ObjectController implements IObjectController{
 
 	private final RegionTypes MAP_ELEMENTS;
 	private GameController gc;
-	
+
 	private boolean readyToBecomeRC = false;
+
+	private List<NetworkTarget> list = new LinkedList<NetworkTarget>();
 
 	public ObjectController(GameController gameC, int powerUpLimit,int tankLimit, int missileLimit, int mapID) {
 		gc = gameC;
@@ -252,10 +256,10 @@ public class ObjectController implements IObjectController{
 
 		if(!(TANK_CONTROLLER.get(nt).getPos().equals(pos))){		
 			System.err.println("NOT SYNCHRONISED");
-			
+
 			System.err.println("Server Pos" + pos);
 			System.err.println("Client Pos" + TANK_CONTROLLER.get(nt).getPos());
-			
+
 			TANK_CONTROLLER.jumpTank(nt, angle, pos);
 		}
 
@@ -270,9 +274,9 @@ public class ObjectController implements IObjectController{
 
 
 	public boolean moveTank(NetworkTarget nt, int angle) {
-		
+
 		Point pos = TANK_CONTROLLER.get(nt).getPos();
-		
+
 		if(TANK_CONTROLLER.contains(nt) == false){
 			return false;
 		}
@@ -280,27 +284,27 @@ public class ObjectController implements IObjectController{
 
 
 		if(gc.isRegionController()){
-			
+
 			/*
 
 			if(TANK_CONTROLLER.get(nt).checkIfNewRegion(angle)) {
 				if(gc.getMe().equals(nt)){
 					//Make someone other RC of this Region
-					
-					
-					
+
+
+
 					gc.moveToNextRegion(TANK_CONTROLLER.get(nt).getPos(), angle);
 				} else {
 					//Send nt to new Region
-					
-					
+
+
 				}
 
-			 
+
 
 			}
 
-			*/
+			 */
 			boolean ready = false;
 			switch(angle){
 			case 0: ready = TANK_CONTROLLER.get(nt).moveRight(); break; 
@@ -391,47 +395,51 @@ public class ObjectController implements IObjectController{
 	}
 
 	public void sendExitGameRequest() {	
-		
+
 		if(gc.isRegionController()){
-			
+
 			if(!gc.overlay.getOverlayManager().hasClients()){
 				//TODO send to all RC : EXIT-MESSAGE
 				System.exit(0);
 			}  else {
-				
+
 				NetworkObject no = new NetworkObject();
 				no.type = dataType.ExitRequest;
 				no.dataTarget = gc.getMe();
 				gc.overlay.SendToAllBackupRCs(no);
-				
+
 			}
-			
+
 		} else {
-			
+
 			NetworkObject no = new NetworkObject();
 			no.type = dataType.ExitRequest;
 			no.dataTarget = gc.getMe();
 			gc.overlay.SendToRC(no);
-			
+
 		}	
-		
+
 	}
-	
-	
+
+	public void getBackupRCAck() {
+
+
+	}
+
 	public void getExitGameRequest(NetworkTarget nt) {
 		if(gc.isRegionController()){
 			TANK_CONTROLLER.remove(nt);
-			
+
 			NetworkObject no = new NetworkObject();
 			no.type = dataType.ExitPermission;
-			gc.overlay.SendToOneClien(no,nt);
+			gc.overlay.SendToOneClient(no,nt);
 			gc.overlay.getOverlayManager().deleteEntry(nt);
 		} else {
-			
+
 			NetworkObject no = new NetworkObject();
 			no.type = dataType.ExitPermission;
 			no.dataTarget = gc.getMe();
-			gc.overlay.SendToOneClien(no,nt);
+			gc.overlay.SendToOneClient(no,nt);
 
 		}	
 	}
@@ -446,14 +454,14 @@ public class ObjectController implements IObjectController{
 
 	@Override
 	public void exitGamePermission(NetworkTarget nt) {
-		
+
 		if(readyToBecomeRC == false){
-			
+
 
 			NetworkObject no = new NetworkObject();
 			no.type = dataType.ExitAck;
-	//		no.peers
-			gc.overlay.SendToOneClien(no,nt);
+			//		no.peers
+			gc.overlay.SendToOneClient(no,nt);
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -461,11 +469,15 @@ public class ObjectController implements IObjectController{
 			}
 			System.exit(0);
 		}
+		else {
+
+
+		}
 	}
 
 
 	public void printRegionType() {
-		
+
 	}
 
 
