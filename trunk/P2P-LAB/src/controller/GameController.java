@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.swing.Timer;
 
 import overlay.UpdateGameState;
+import model.DeathManager;
 import model.NetworkTarget;
 import model.PowerUp;
 import model.Tank;
@@ -34,7 +35,6 @@ public class GameController implements ActionListener, KeyListener {
 	private int gameTime = 0; // Game Time in Seconds
 	public GameWindow gameWindow; // Game Window
 
-	private Timer respawn;
 	private final int MAP_WIDTH = 21; // map width in number of fields
 	private final int MAP_HEIGHT = 13; // map height in number of fields
 
@@ -43,8 +43,9 @@ public class GameController implements ActionListener, KeyListener {
 	private boolean regionController;
 
 	public UpdateGameState overlay;
+	
+	private DeathManager  deathManager;
 
-	private NetworkTarget deadPlayer;
 
 	private NetworkTarget server;
 
@@ -60,8 +61,6 @@ public class GameController implements ActionListener, KeyListener {
 		gameWindow = parGameWindow;
 
 		gameTimer = new Timer(100, this);
-		respawn = new Timer(100, this);
-		respawn.setInitialDelay(1000);
 
 		overlay = new UpdateGameState(OBJECT_CONTROLLER, 8080);
 		try {
@@ -71,6 +70,7 @@ public class GameController implements ActionListener, KeyListener {
 		}
 		OBJECT_CONTROLLER.addTankRandom(ME,false);
 		gameTimer.start();
+		deathManager = new DeathManager(this);
 	}
 
 	/***** CLIENT ****************************************************************************************************/
@@ -87,10 +87,6 @@ public class GameController implements ActionListener, KeyListener {
 		gameWindow = parGameWindow;
 		
 		gameTimer = new Timer(100, this);
-		respawn = new Timer(100, this);
-		respawn.setInitialDelay(1000);
-
-		
 		
 		overlay = new UpdateGameState(OBJECT_CONTROLLER, server);
 		try {
@@ -98,13 +94,15 @@ public class GameController implements ActionListener, KeyListener {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		gameTimer.start();	
+		gameTimer.start();
+		deathManager = new DeathManager(this);
 	}
 
 	public void destroyTank(NetworkTarget nt) {
 		OBJECT_CONTROLLER.destroy(nt);
-		deadPlayer = nt;
-		respawn.start();
+		if(isRegionController()){
+			deathManager.destroy(nt);
+		}
 	}
 
 	public int getMapWidth() {
@@ -160,12 +158,9 @@ public class GameController implements ActionListener, KeyListener {
 			}
 			if (gameTime % POWERUP_SPAWNRATE == 0 && regionController) {
 				if (OBJECT_CONTROLLER.getPowerUpMapSize() < POWERUP_LIMIT) {
-				//	OBJECT_CONTROLLER.addPowerUpRandom();
+					OBJECT_CONTROLLER.addPowerUpRandom();
 				}
 			}
-		} else if (e.getSource() == respawn && regionController) {
-			respawn.stop();
-			OBJECT_CONTROLLER.addTankRandom(deadPlayer, false);
 		}
 
 	}
@@ -343,5 +338,19 @@ public class GameController implements ActionListener, KeyListener {
 	
 	public void exitGameRequest(){
 		OBJECT_CONTROLLER.sendExitGameRequest();
+	}
+
+	public void addTankRandom(NetworkTarget nt, boolean init) {
+		OBJECT_CONTROLLER.addTankRandom(nt, init);
+		
+	}
+
+	public Tank getTank(NetworkTarget nt) {
+		return OBJECT_CONTROLLER.getTank(nt);
+		
+	}
+
+	public boolean isDead(NetworkTarget nt) {
+		return deathManager.isDead(nt);
 	}
 }
