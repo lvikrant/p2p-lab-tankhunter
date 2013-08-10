@@ -75,7 +75,7 @@ public class UpdateGameState extends Thread {
 		}
 	}
 	
-	public void SendToOneClien(NetworkObject no, NetworkTarget nt){
+	public void SendToOneClient(NetworkObject no, NetworkTarget nt){
 		man.Send(nt, no);
 	}
 	
@@ -228,6 +228,7 @@ public class UpdateGameState extends Thread {
 				case ExitRequest:
 					if(iAmRC) {
 						controller.getExitGameRequest(no.dataTarget);
+						controller.getBackupRCAck();
 						//TODO remove from Network
 					} else {
 						
