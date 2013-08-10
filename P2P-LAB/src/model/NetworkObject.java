@@ -18,7 +18,7 @@ public class NetworkObject implements Serializable {
 	    MoveRequest, Shoot, Data, Tank, AddPowerUp, 
 	    RemovePowerUp, AddMissile, AddMissileRequest,
 	    ExitPermission,ExitRequest,
-	    RotateTank,ExitAck;
+	    RotateTank,ExitAck, NewRC;
 	}
 	
 	public dataType type = dataType.Data;
@@ -35,8 +35,7 @@ public class NetworkObject implements Serializable {
 	/**
 	 * sender of the message
 	 */
-	public NetworkTarget target;
-	
+		
 	
 	/**
 	 * target of the data (tank or missile)

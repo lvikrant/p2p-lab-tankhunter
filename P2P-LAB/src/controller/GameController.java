@@ -353,4 +353,8 @@ public class GameController implements ActionListener, KeyListener {
 	public boolean isDead(NetworkTarget nt) {
 		return deathManager.isDead(nt);
 	}
+	
+	public void setRC(boolean set) {
+		regionController = set;
+	}
 }

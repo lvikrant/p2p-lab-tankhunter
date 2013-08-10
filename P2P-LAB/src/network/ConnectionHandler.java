@@ -98,7 +98,7 @@ public class ConnectionHandler extends Thread {
 					
 					//System.out.println("Hello4");
 					data = (NetworkObject)(in.readObject());
-					data.target.IP = baseSocket.getInetAddress().getHostAddress();
+					data.dataTarget.IP = baseSocket.getInetAddress().getHostAddress();
 					targetOpenPort = data.openPort;
 							
 					
@@ -128,7 +128,7 @@ public class ConnectionHandler extends Thread {
 						data = toSend.poll();
 						System.out.println("Send: " + data.type);
 						//data.from = baseSocket.getInetAddress().getHostAddress();
-						data.target = new NetworkTarget("", conManger.myServerSocket.getLocalPort());
+						data.dataTarget = new NetworkTarget("", conManger.myServerSocket.getLocalPort());
 						out.writeObject(data);
 						out.flush();
 
