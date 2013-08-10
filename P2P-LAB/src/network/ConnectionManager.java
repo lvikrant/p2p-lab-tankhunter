@@ -82,6 +82,7 @@ public class ConnectionManager extends Thread{
 			{
 				try {
 					h = new ConnectionHandler(new Socket(target.IP, target.PORT), this);
+					h.targetOpenPort = target.PORT;
 					new Thread(h).start();
 				}
 				catch(Exception e) {
@@ -104,7 +105,7 @@ public class ConnectionManager extends Thread{
 	{
 		for(ConnectionHandler h : handlers)
 		{
-			if(h.targetIP == target.IP)
+			if(h.targetIP.equals(target.IP))
 			{
 				if(h.targetOpenPort == target.PORT)
 				{
@@ -160,6 +161,7 @@ public class ConnectionManager extends Thread{
 
 			Socket newConnection = new Socket(host, port);
 			handler = new ConnectionHandler(newConnection, this);
+			handler.targetOpenPort = port;
 
 			synchronized (handlers) {
 				handlers.add(handler);

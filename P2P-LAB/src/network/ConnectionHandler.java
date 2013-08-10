@@ -137,7 +137,7 @@ public class ConnectionHandler extends Thread {
 				
 
 
-				Thread.sleep(100);
+				Thread.sleep(1);
 			}
 			catch (Exception e)
 			{
