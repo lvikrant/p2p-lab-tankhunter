@@ -240,10 +240,14 @@ public class Tank implements ActionListener {
 	}
 
 	public void fire() {
-		if (readyToShoot) {
-			gc.addMissile(NT,new Point(posX,posY), tankAngle, range);
-			restart();
+		
+		if(!gc.isDead(NT)){
+			if (readyToShoot) {
+				gc.addMissile(NT,new Point(posX,posY), tankAngle, range);
+				restart();
+			}
 		}
+		
 	}
 	
 	public void fire(NetworkTarget nt, Point pos, int angle, int range) {
