@@ -1,0 +1,184 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage[english]{babel}					
+\usepackage[protrusion=true,expansion=true]{microtype}	
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage[pdftex]{graphicx}	
+\usepackage{url}
+\usepackage{sectsty}
+\allsectionsfont{\centering \normalfont\scshape}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\fancyhead{}						
+\fancyfoot[L]{}
+\fancyfoot[C]{}					
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}		
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{13.6pt}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}		
+\numberwithin{table}{section}
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} 
+
+\title{
+		%\vspace{-1in} 	
+		\usefont{OT1}{bch}{b}{n}
+		\normalfont \normalsize \textsc{Technische Universitaet Darmstadt} \\ [25pt]
+		\horrule{0.5pt} \\[0.4cm]
+		\huge P2P-Middleware Lab \\
+		\huge SoSe 2013 \\
+		\huge TANK HUNTERS \\
+		\horrule{2pt} \\[0.5cm]
+}
+
+\author{
+		\normalfont 								\normalsize
+        Evgheni Croitor \\[-3pt]		\normalsize
+        Johannes Thomas  \\[-3pt]		\normalsize
+        Sharan Sarathy Rajasekharan  \\[-3pt]		\normalsize
+        Vikrant Lawangare  \\[-3pt]		\normalsize
+        \today
+}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Game Design}
+\paragraph Tank hunters  is a multiplayer 2D action game. In this game every player is in control of a tank which moves around in a single field. The goal of the player is to destroy maximum number of enemy tanks in a predetermined number of rounds or time.
+
+
+\subsection{Screens}
+
+
+\subsubsection{Welcome Window}
+TODO: Insert image
+
+\subsection{Game Modes}
+Multiplayer: The player is assigned a green tank and all other enemies are assigned red tanks. The player can specify the name for the tank. The details of the top three tanks and the players performance record are displayed on the right side of the menu bar and score and positions are displayed to the left of the menu bar.
+
+
+\subsection{Game Objects}
+Currently Tank hunters have 4 different game objects namely, the Tank, the Wall, the Missile and the Power-ups. The Tank is an image of an animated tank icon, which can move around the game screen. The wall is an animated picture of a wall. It surrounds the game area too. The missile is a small moving object which moves around in a particular line to a limited distance.
+
+\subsubsection{Power-Ups}
+The Power-ups are pop on to the at random position every five seconds. There are five different power-ups the Shield, the Speed-up, the Slow-down, the Attack Rate and the Attack Range. Each power-up last for 5-10secs.
+
+TODO: Insert image
+
+\subsection{Game Screen}
+The entire screen is one single image with each field of the image having it’s own attributes. The attributes are the position and the type of the field, the field can be either a tank or a wall or a missile or a power-up or any of the two at the same time.
+
+\subsubsection{Controls}
+TODO: Insert image
+
+\subsection{Implementation}
+Tank hunters is implemented using Java. The project is implemented as a CMV model. The game screen is a label on top of a panel on top of a frame. The labels are created for each tank, power-up and missile. The panel contains the image of the game screen. A two dimensional array called field contains the entire information of the game; it contains the position of all game objects in the game.
+
+\subsubsection{Game Specifications}
+TODO: Insert image
+
+\section{Architecture}
+There are two types of Peers:
+1. Normal peer/user
+2. Region controller
+
+ TODO: Insert image
+TODO: Insert 3 flowcharts
+
+
+\subsection{Components}
+
+1. Game controller (RC)
+Game controller uses Field controller for the information about every peer. A Field Controller
+calls individual Data Structure like tank, map etc. to get all the information.
+2. Network Layer
+still to be decided.
+3. Game Visuals
+Interface which has methods to add tank, add power up, add missiles, etc.
+
+4. Information Visuals
+Interface which has methods for information like missiles, bonus, kills, etc.
+
+subsection{Topology}
+At the start, we assume the whole field is one region with one RC. So, a single field will have only
+one RC. As the fields increase, we have more RCs.
+We also assume the first peer is automatically a RC. So if a new peer joins some new field and no
+peer exist, the he automatically becomes RC.
+A RC controls all the peers in a single field and also keeps the information about all the peers.
+
+\subsection{List of Data Structures}
+
+1. Tank – max size for one region is 20
+2. Power ups
+3. Missiles
+4. Map
+
+\section{Libraries}
+We experimented with below libraries:
+NettyIO: We tried to configure some basic examples and even though we got the examples working, we think it’s too complicated for our purpose.
+JXTA/JXSE: Gives P2P protocol but is outdated and we could not get the examples working. The documentation is very less to follow through the examples. Also, there is very less material available online. We think basic socket programming is sufficient for our purpose.
+
+
+\section{Network management Layout}
+In this Section it explains how connections are initiated, maintained and how data transfer is done. All Classes described extend from the Java-Thread-Class. This allows creating new threads running these classes to maintain specific functions. It is to add that every list or queue used in this section is subject to multi-threaded access. To ensure thread-safety only synchronized lists and queues are used. This results in a lock on a list or queue if an access is needed.
+To initiate this instance of ConnectionManager is created and the thread-function started.
+
+
+\section{ConnectionManager}
+
+This is the main class of the Network classes. First it creates ServerSocket which listens on a port. If no specific port is given it starts on a random port supplied by the OS. Then the ServerSocket is passed to a new instance of IncommingConnectionHandler that is started in a new thread. The ConnectionManager is responsible to handle a list of ConnectionHandler. If a new connection is to be initiated its added to this list. The main loop of the ConnectionManager periodical reads new data from the underlying ConnectionHandlers and interprets basic commands like answering a Ping with a Pong. The other data is stored in a queue and is provided to higher classes on request. The ConnectionManager also relays the data to be send to the corresponding ConnectionHandler.
+
+
+\section{IncommingConnectionHandler}
+This class uses the blocking accept function of a ServerSocket to allow other Sockets to connect. If a new connection is established a new ClientHandler is created and added to the ConnectionHandler list in the ConnectionManager.
+
+\section{ConnectionHandler}
+
+Every instance of a ConnectionHandler is responsibly to maintain one connection. It maintains two queues. One is used for received objects ready to get read by the ConnectionManger. The other is a buffed for objects that are send.
+Whenever an object is send, the current open port, the IncommingConnectionHandler is listening on, is stored in the object. On the other hand, every object received has the IP of its sender added to the object.
+
+TODO: Insert image from lab report 3
+
+\section{Game State Management}
+ Updated the data structures to map for tank, missile and power ups.
+ A lot of bug fixes
+ Cross region movement
+
+We have made few changes in power ups i.e.
+1. How frequently power ups appear in the game.
+2. Working power ups like speed up, range and slow down.
+Right now attack rate and shield have no effect as we are still working on game design and we need to
+pass the information to all peers.
+
+
+\section{Overlay Topology}
+This layer connects the Game State Management and the underlying network. When a new peer joins the game it contacts the Region Controller to retrieve data about the game world and other tanks. The Region Controller imports the data from game state management and sends it across to the new peer.
+The Tank position, missile position and power up positions are the other data which is send between the peer and region controller, these changes are imported/exported from the game controller and updates are send across all the other peers.
+
+TODO: Insert images for Case RC and case Peer from report 5
+
+In addition to this, we have added a new OverlayManager class which will act as a point of contact for all the information of the peers.
+The information is stored in a data structure TreeMap and which has NetworkTarget as the key and values being Pair (peer_type, timestamp).
+*This helps to answer following questions:
+a. Who is the current peer? Is he a normal peer, RC or backup RC?
+b. If the peer is RC then, who are his peers?
+c. RC tasks: 1. When one peer moves from one region to another, he will contact the RC of another region and associate this peer to it. 2. Get the number of peers which are under one RC helping in restricting the peers under one region.
+
+\subsusbsection{ Peer alive?}
+To check this, we associate timestamp for each peer and this is updated every time some kind of message is exchanged between the peer and RC.
+If this timestamp is older than 20 sec, we send a “ping” message. If the peer replies “pong”, we assume he is alive or else dead.
+
+\subsubsection{ Backup}
+
+We call a random function and ask peers to be backup RC. This information is off course updated by the OverlayManager class.
+If current RC fails, automatically the backup RC will take over and all the peers will connected to this new RC.
+
+\subsubsection{Updates:}
+We made changes at the overlay layer to make sure we pass the call for “init” when new peer is identified or if some information is required about the peers. This now all is handled through OverlayManager class.
+Some other tasks which are taken care of:
+ Check timeout of each peer.
+ Assign backup RCs.
+ Export the entire information for RC-RC communication.
+\end{document}
