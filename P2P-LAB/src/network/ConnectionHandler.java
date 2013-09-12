@@ -98,12 +98,15 @@ public class ConnectionHandler extends Thread {
 					
 					//System.out.println("Hello4");
 					data = (NetworkObject)(in.readObject());
-					data.dataTarget.IP = baseSocket.getInetAddress().getHostAddress();
+					data.target.IP = baseSocket.getInetAddress().getHostAddress();
+					data.reciver.PORT = baseSocket.getLocalPort();
+				
 					targetOpenPort = data.openPort;
 							
 					
 					synchronized (recived) {
 						System.out.println("Recieved: " + data.type);
+						data.reciver.PORT = this.baseSocket.getLocalPort();
 						recived.add(data);
 					}
 					
@@ -128,7 +131,8 @@ public class ConnectionHandler extends Thread {
 						data = toSend.poll();
 						System.out.println("Send: " + data.type);
 						//data.from = baseSocket.getInetAddress().getHostAddress();
-						data.dataTarget = new NetworkTarget("", conManger.myServerSocket.getLocalPort());
+						data.target = new NetworkTarget("", conManger.myServerSocket.getLocalPort());
+						data.reciver = new NetworkTarget(this.targetIP , this.targetOpenPort);
 						out.writeObject(data);
 						out.flush();
 

@@ -82,7 +82,6 @@ public class ConnectionManager extends Thread{
 			{
 				try {
 					h = new ConnectionHandler(new Socket(target.IP, target.PORT), this);
-					h.targetOpenPort = target.PORT;
 					new Thread(h).start();
 				}
 				catch(Exception e) {
