@@ -21,12 +21,19 @@ public class OverlayManager {
 	UpdateGameState upGameState;
 	NetworkObject networkObject = new NetworkObject();
 
+	/**
+	 * Constructor to set the UpdateGameState class instance
+	 * @param upGameState instance of UpdateGameState class
+	 */
 	public OverlayManager(UpdateGameState upGameState){
 		this.upGameState = upGameState;
 		map  = new TreeMap<NetworkTarget, Pair>(new NTComparator());
 	}
 
-	
+	/**
+	 * Method to check if the peer has any active connections
+	 * @return
+	 */
 	public boolean hasClients(){
 		System.out.println("Size: "  + map.size());
 		for (Map.Entry<NetworkTarget, Pair> entry : map.entrySet()) {
@@ -85,6 +92,10 @@ public class OverlayManager {
 		map = parMap;
 	}
 	
+	/**
+	 * Method to return the RC of the peer
+	 * @return NetworkTarget of the RC
+	 */
 	public NetworkTarget getRC() {
 		Iterator it = map.entrySet().iterator();
 		while(it.hasNext()) {
@@ -95,6 +106,10 @@ public class OverlayManager {
 		return null;
 	}
 	
+	/**
+	 * Method to return the list of clients
+	 * @return list of NetworkTarget
+	 */
 	public List<NetworkTarget> getClients() {
 		
 		List<NetworkTarget> list = new LinkedList<NetworkTarget>();
@@ -108,8 +123,10 @@ public class OverlayManager {
 		return list;
 	}
 	
-	
-
+	/**
+	 * Checks if a peer is active or not
+	 * @param nt the IP address and port of the peer
+	 */
 	public void checkPeerAlive(NetworkTarget nt) {
 
 		if(map.containsKey(nt)) {
@@ -173,7 +190,10 @@ public class OverlayManager {
 		}
 	}*/
 
-
+	/**
+	 * Method to return a list of backup RC
+	 * @return list of NetworkTarget
+	 */
 	public List<NetworkTarget> getBackupRCs() {
 		
 		List<NetworkTarget> list = new LinkedList<NetworkTarget>();

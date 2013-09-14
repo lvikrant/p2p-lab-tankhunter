@@ -32,6 +32,11 @@ public class ConnectionHandler extends Thread {
 
 	private Queue<NetworkObject> recived = new ConcurrentLinkedQueue<NetworkObject>();
 	private Queue<NetworkObject> toSend = new ConcurrentLinkedQueue<NetworkObject>();
+	/**
+	 * Constructor to set Port number and IP address
+	 * @param s - open port number
+	 * @param manager instance of ConnectionManager class
+	 */
 	public ConnectionHandler(Socket s, ConnectionManager manager) {
 		conManger = manager;
 		running.set(true);
@@ -40,7 +45,10 @@ public class ConnectionHandler extends Thread {
 		
 
 	}
-
+	
+	/**
+	 * Method to initialize Input and Output Streams
+	 */
 	private void init()
 	{
 		try {
@@ -54,15 +62,20 @@ public class ConnectionHandler extends Thread {
 		}
 	}
 	
+	/**
+	 * The Data to be send is added to toSend Queue
+	 * @param data the serialized data to be send
+	 */
 	public void send(NetworkObject data)
 	{
-		
-		System.out.println("Send was called");
 		toSend.add(data);
 		//new Thread(this).start();
 	}
 
-
+	/**
+	 * Method to return received data
+	 * @return data from received queue
+	 */
 	public NetworkObject getNewObject()
 	{
 
@@ -71,7 +84,10 @@ public class ConnectionHandler extends Thread {
 		}
 
 	}
-
+	
+	/**
+	 * Method to close the connection
+	 */
 	public void StopAndClose()
 	{
 		running.set(false);
