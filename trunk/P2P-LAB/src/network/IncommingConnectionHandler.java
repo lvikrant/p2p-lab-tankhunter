@@ -13,6 +13,14 @@ public class IncommingConnectionHandler extends Thread{
 	public int myStartPort;
 	public ConnectionManager myMan;
 	
+	/**
+	 * Constructor to set the ConnectionHandler object, Server port, 
+	 * peers own port and ConnectionManager 
+	 * @param _handlers list of ConnectionHandler
+	 * @param _myServerSocket Server port number
+	 * @param _myStartPort peers port number
+	 * @param _myMan ConnectionManager class instance
+	 */
 	public IncommingConnectionHandler(List<ConnectionHandler> _handlers, ServerSocket _myServerSocket, int _myStartPort, ConnectionManager _myMan)
 	{
 		handlers = _handlers;

@@ -43,13 +43,21 @@ public class ConnectionManager extends Thread{
 	public ServerSocket myServerSocket = null;
 	OverlayManager overlay = null;
 
-
+	/**
+	 * Constructor to set instance of OverlayManager class
+	 * @param overlay instance of OverlayManager Class
+	 */
 	public ConnectionManager(OverlayManager overlay)
 	{
 		this.overlay = overlay;
 		init();
 	}
 
+	/**
+	 * Constructor to set instance of OverlayManager class and port
+	 * @param port the port number
+	 * @param overlay instance of OverlayManager Class
+	 */
 	public ConnectionManager(int port, OverlayManager overlay)
 	{
 		myStartPort = port;
@@ -57,6 +65,9 @@ public class ConnectionManager extends Thread{
 		init();
 	}
 	
+	/**
+	 * Initializes the IncomingConnectionHandler and sets the server socket 
+	 */
 	private void init()
 	{
 		try {
@@ -69,11 +80,21 @@ public class ConnectionManager extends Thread{
 		new Thread(inHandler).start();
 	}
 
+	/**
+	 * Establishes connection to a Network target
+	 * @param target contains the port number and IP address of the target
+	 */
 	private void Connect(NetworkTarget target)
 	{
 		Connect(target.IP, target.PORT);
 	}
 
+	/**
+	 * Sends the data to a specified target
+	 * @param target IP address and port of the target peer
+	 * @param data serialized data to be send across
+	 * @return true/false if success/failure
+	 */
 	public boolean Send(NetworkTarget target, NetworkObject data)
 	{
 		synchronized (handlers) {
@@ -100,6 +121,11 @@ public class ConnectionManager extends Thread{
 		}
 	}
 
+	/**
+	 * Method to retrieve the connectionHandler object for a peer
+	 * @param target address and port number of the target peer
+	 * @return ConnectionHandler instance of target peer
+	 */
 	private ConnectionHandler getHandlerByTarget(NetworkTarget target)
 	{
 		for(ConnectionHandler h : handlers)
@@ -116,11 +142,20 @@ public class ConnectionManager extends Thread{
 		return null;
 	}
 	
+	/**
+	 * Method to return the peers IP address 
+	 * @return NetworkTarget object with port number and IP address
+	 */
 	public NetworkTarget getMe()
 	{
 		return new NetworkTarget(myServerSocket.getInetAddress().toString(), myServerSocket.getLocalPort());
 	}
 
+	/**
+	 * Method to establish connection and save the handler to the peer
+	 * @param host IP address of the target peer
+	 * @param port port number of the target peer
+	 */
 	private void Connect(String host, int port)
 	{
 		ConnectionHandler handler;
@@ -174,7 +209,10 @@ public class ConnectionManager extends Thread{
 		}
 	}
 
-
+	/**
+	 * Method to send data to all the connected peers
+	 * @param data data to be send
+	 */
 	private void sendToAll(NetworkObject data)
 	{
 		synchronized (handlers) {
@@ -226,6 +264,10 @@ public class ConnectionManager extends Thread{
 		return toReturn;
 	}
 	
+	/**
+	 * Method which sends a list of all connected peers
+	 * @return list of NetworkTarget
+	 */
 	public List<NetworkTarget> getAllTargets()
 	{
 		LinkedList<NetworkTarget> toReturn = new LinkedList<NetworkTarget>();
@@ -240,6 +282,10 @@ public class ConnectionManager extends Thread{
 		return toReturn;
 	}
 
+	/**
+	 * Method to return a string containing all the connections
+	 * @return String with all peers information
+	 */
 	public String showAllConnections()
 	{
 		String toReturn = "Here are my connections. My local port is: " + myServerSocket.getLocalPort() + "\n";
