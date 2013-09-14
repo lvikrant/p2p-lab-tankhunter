@@ -3,6 +3,7 @@ package model;
 import java.awt.Point;
 import java.io.Serializable;
 import java.net.InetSocketAddress;
+import java.util.List;
 import java.util.Map;
 
 import utils.Move;
@@ -18,9 +19,8 @@ public class NetworkObject implements Serializable {
 	    MoveRequest, Shoot, Data, Tank, AddPowerUp, 
 	    RemovePowerUp, AddMissile, AddMissileRequest,
 	    ExitPermission,ExitRequest,
-	    RotateTank,ExitAck;
+	    RotateTank,ExitAck, NewRC, BeNewRC, NewRCPing, NewRCPong, Kill;
 	}
-	
 	public dataType type = dataType.Data;
 	
 	/**
@@ -57,5 +57,7 @@ public class NetworkObject implements Serializable {
     public Map<NetworkTarget, MissileInfo>  missileData;
     public int[] regions;
 	public Point point;
+	//List to send list of clients to backup RC
+	public List<NetworkTarget> listOfClients;
 
 }
