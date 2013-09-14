@@ -478,6 +478,10 @@ public class ObjectController implements IObjectController{
 			System.exit(0);
 		}
 		else {
+			readyToBecomeRC = true;
+			NetworkObject no = new NetworkObject();
+			no.type = dataType.NewRCPing;			
+			gc.overlay.SendToOneClient(no,nt);
 
 
 		}
