@@ -28,7 +28,7 @@ public class UpdateGameState extends Thread {
 	//private Queue<NetworkObject> dataToBroadcast = new ConcurrentLinkedQueue<NetworkObject>();
 	int bRCCount = 0;
 	boolean newRCElected = false;
-	
+
 	/**
 	 * Start as client
 	 * @param target NetworkTarget of the RC to connect to
@@ -214,6 +214,13 @@ public class UpdateGameState extends Thread {
 					}
 
 					break;
+				case RotateTank:
+					if(iAmRC) {
+
+					} else {
+						controller.rotateTank(no.dataTarget, no.angle);
+					}
+					break;
 
 				case Ping:
 					//Answer Ping with Pong
@@ -224,37 +231,7 @@ public class UpdateGameState extends Thread {
 					break;
 				case Pong:
 					break;
-				
-				case NewRCPing:	
-					//Answer Ping with Pong
-					NetworkObject tempSend = new NetworkObject();
-					tempSend.type = dataType.NewRCPong;
-					tempSend.dataTarget = controller.getMe();
-					//Assuming dataTarget has RC info
-					//man.Send(no.dataTarget, tempSend);
-					man.Send(no.target, tempSend);
 					
-					break;
-				case NewRCPong:
-					if(!newRCElected) {
-						NetworkObject toSendNewRC = new NetworkObject();
-						toSendNewRC.type = dataType.BeNewRC;
-						toSendNewRC.dataTarget = controller.getMe();
-						toSendNewRC.listOfClients = overlayManager.getClients();
-						//man.Send(no.dataTarget, toSendNewRC);
-						man.Send(no.target, toSendNewRC);
-						newRCElected = true;
-					}
-					//System.exit(0);
-					break;
-				case RotateTank:
-					if(iAmRC) {
-
-					} else {
-						controller.rotateTank(no.dataTarget, no.angle);
-					}
-					break;
-
 				case ExitRequest:
 					if(iAmRC) {
 						controller.getExitGameRequest(no.dataTarget);
@@ -271,12 +248,35 @@ public class UpdateGameState extends Thread {
 						controller.exitGamePermission();
 					}
 					break;
-				
+
+
+				case NewRCPing:	
+					//Answer Ping with Pong
+					NetworkObject tempSend = new NetworkObject();
+					tempSend.type = dataType.NewRCPong;
+					tempSend.dataTarget = controller.getMe();
+					//Assuming dataTarget has RC info
+					//man.Send(no.dataTarget, tempSend);
+					man.Send(no.target, tempSend);
+					break;
+
+				case NewRCPong:
+					if(!newRCElected) {
+						NetworkObject toSendNewRC = new NetworkObject();
+						toSendNewRC.type = dataType.BeNewRC;
+						toSendNewRC.dataTarget = controller.getMe();
+						toSendNewRC.listOfClients = overlayManager.getClients();
+						//man.Send(no.dataTarget, toSendNewRC);
+						man.Send(no.target, toSendNewRC);
+						newRCElected = true;
+					}					
+					break;
+
 				case BeNewRC:
 					if(iAmRC) {
-						
+
 					} else {
-						
+
 						//overlayManager.setType(no.dataTarget, 0);
 						iAmRC = true;
 						for(NetworkTarget nt : no.listOfClients) {
@@ -291,12 +291,12 @@ public class UpdateGameState extends Thread {
 						//man.Send(no.dataTarget, tempNo);
 						man.Send(no.target, tempNo);
 					}
-					
+
 					break;
 
 				case NewRC:
 					if(iAmRC) {
-						
+
 					} 
 					else {
 						overlayManager.deleteEntry(overlayManager.getRC());
@@ -304,9 +304,12 @@ public class UpdateGameState extends Thread {
 						overlayManager.addEntry(no.target, 0, new Date());
 					}
 					break;
-					
+
 				case Kill:
 					System.exit(0);
+					break;
+
+				
 				default:
 					break;
 				}
@@ -316,7 +319,7 @@ public class UpdateGameState extends Thread {
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
-				
+
 				e.printStackTrace();
 			}
 		}
