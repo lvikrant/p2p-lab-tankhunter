@@ -18,6 +18,10 @@ import model.Tank;
 import view.GameRegion;
 import view.GameWindow;
 
+/**
+ * Main class for the game layer. Manages the basic game functions
+ *
+ */
 public class GameController implements ActionListener, KeyListener {
 
 	private NetworkTarget ME;
@@ -55,6 +59,11 @@ public class GameController implements ActionListener, KeyListener {
 
 	/***** SERVER ****************************************************************************************************/
 
+	/**
+	 * Constructor for a server
+	 * @param parGameWindow Reference to the main game windows
+	 * @param server NetworkTarget where the server should listen for new incomming connections
+	 */
 	public GameController(GameWindow parGameWindow, NetworkTarget server) {
 		regionController = true;
 
@@ -79,6 +88,12 @@ public class GameController implements ActionListener, KeyListener {
 
 	/***** CLIENT ****************************************************************************************************/
 
+	/**
+	 * Constructor for a client
+	 * @param parGameWindow Reference to the main game windows
+	 * @param ser Networktarget where the client should connect to
+	 * @param mode Game mode for future use
+	 */
 	public GameController(GameWindow parGameWindow, NetworkTarget ser, int mode) {
 		regionController = false;
 
@@ -102,6 +117,10 @@ public class GameController implements ActionListener, KeyListener {
 		deathManager = new DeathManager(this);
 	}
 
+	/**
+	 * let a tank explore
+	 * @param nt Which tank should explode
+	 */
 	public void destroyTank(NetworkTarget nt) {
 		OBJECT_CONTROLLER.destroy(nt);
 		if(isRegionController()){
@@ -109,15 +128,25 @@ public class GameController implements ActionListener, KeyListener {
 		}
 	}
 
+	/**
+	 * Return the width of the map
+	 * @return Width of the map
+	 */
 	public int getMapWidth() {
 		return MAP_WIDTH;
 	}
 
+	/**
+	 * Return the height of the map
+	 * @return Height of the map
+	 */
 	public int getMapHeight() {
 		return MAP_HEIGHT;
 	}
 	
-	
+	/**
+	 * Method that creates new powerups 
+	 */
 	public void manadgePowerUps(){
 		for (Map.Entry<NetworkTarget, Tank> entry : OBJECT_CONTROLLER.exportTankMap().entrySet()) {
 			if (!(entry.getValue().getStatus().equals("NONE"))) {
@@ -149,6 +178,9 @@ public class GameController implements ActionListener, KeyListener {
 		}
 	}
 
+	/**
+	 * Event loop 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == gameTimer) {
@@ -169,6 +201,9 @@ public class GameController implements ActionListener, KeyListener {
 
 	}
 
+	/**
+	 * When a key is pressed it request of moving a tank is passed up
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 	
@@ -234,6 +269,12 @@ public class GameController implements ActionListener, KeyListener {
 
 	}
 
+	/**
+	 * This method is called when a tank is moved to another region. 
+	 * Future use only
+	 * @param pos Position on the new region
+	 * @param angle Angle the tank faces
+	 */
 	public void moveToNextRegion(Point pos, int angle) {
 		// TODO test if position is free!
 		OBJECT_CONTROLLER.removeTank(ME);
@@ -302,7 +343,9 @@ public class GameController implements ActionListener, KeyListener {
 		OBJECT_CONTROLLER.setRegionType(region);
 	}
 
-	
+	/**
+	 * Console debug output
+	 */
 	public void printTankInfo() {
 
 		for (Map.Entry<NetworkTarget, Tank> entry : OBJECT_CONTROLLER
@@ -316,6 +359,9 @@ public class GameController implements ActionListener, KeyListener {
 		}
 	}
 	
+	/**
+	 * Console debug output
+	 */
 	public void printPowerUpInfo() {
 
 		for (Map.Entry<Point, PowerUp> entry : OBJECT_CONTROLLER.exportPowerUpMap().entrySet()) {
@@ -326,6 +372,10 @@ public class GameController implements ActionListener, KeyListener {
 		}
 	}
 
+	/**
+	 * Sets a new self for the GameController and the gameWindow
+	 * @param networkTarget
+	 */
 	public void setMe(NetworkTarget networkTarget) {
 		gameWindow.myinfo = networkTarget;
 		ME = networkTarget;

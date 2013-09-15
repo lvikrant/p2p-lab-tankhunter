@@ -4,6 +4,10 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.Comparator;
 
+/**
+ * Custom compare function for sorting
+ *
+ */
 public class PointComparator implements Comparator<Point>,Serializable {
 
 	private static final long serialVersionUID = 1L;
