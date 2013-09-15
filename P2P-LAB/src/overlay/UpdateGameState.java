@@ -135,7 +135,9 @@ public class UpdateGameState extends Thread {
 						man.Send(no.target, tmpNo);
 						if(bRCCount<3)
 							overlayManager.addEntry(no.target,2,new Date());
-						overlayManager.addEntry(no.target,1,new Date());
+						else
+							overlayManager.addEntry(no.target,1,new Date());
+
 
 					} else {
 						//controller.setMe(no.dataTarget);
@@ -232,7 +234,7 @@ public class UpdateGameState extends Thread {
 					break;
 				case Pong:
 					break;
-					
+
 				case ExitRequest:
 					if(iAmRC) {
 						controller.getExitGameRequest(no.dataTarget);						
@@ -244,14 +246,14 @@ public class UpdateGameState extends Thread {
 				case ExitPermission:
 					if(iAmRC) {
 						//TODO : Send information to backup RC
-						controller.exitGamePermission(no.dataTarget);
+						//controller.exitGamePermission(no.dataTarget);
 						List <NetworkTarget> bRCList = overlayManager.getBackupRCs();
 						for(NetworkTarget bRC : bRCList) {
 							NetworkObject toSendRC = new NetworkObject();
 							toSendRC.type = dataType.NewRCPing;
 							man.Send(bRC, toSendRC);
 						}
-						
+
 					} else {
 						controller.exitGamePermission();
 					}
@@ -280,6 +282,7 @@ public class UpdateGameState extends Thread {
 					break;
 
 				case BeNewRC:
+					int newBRC = 0;
 					if(iAmRC) {
 
 					} else {
@@ -287,7 +290,13 @@ public class UpdateGameState extends Thread {
 						//overlayManager.setType(no.dataTarget, 0);
 						iAmRC = true;
 						for(NetworkTarget nt : no.listOfClients) {
-							overlayManager.addEntry(nt, 1, new Date());
+							
+							newBRC++;
+							System.out.println("NEW RC no. of clients " + no.listOfClients.size() );
+							if(newBRC<3)
+								overlayManager.addEntry(nt,2,new Date());
+							else
+								overlayManager.addEntry(nt,1,new Date());
 						}
 						NetworkObject tempNo = new NetworkObject();
 						tempNo.type = dataType.NewRC;
@@ -295,8 +304,21 @@ public class UpdateGameState extends Thread {
 						SendToAllClients(tempNo);
 						tempNo = new NetworkObject();
 						tempNo.type = dataType.Kill;
-						//man.Send(no.dataTarget, tempNo);
+						
 						man.Send(no.target, tempNo);
+						overlayManager.deleteEntry(overlayManager.getRC());						
+						overlayManager.addEntry(no.target, 0, new Date());
+						controller.removeTank(overlayManager.getRC());
+					
+						controller.getGc().setRegionController(true);
+						tmpNo = new NetworkObject();
+						tmpNo.type = dataType.NewRC;
+						tmpNo.tankData = controller.exportTankInfo(); 
+						tmpNo.powerUpData = controller.exportPowerUpMap();
+						tmpNo.missileData = controller.exportMissileInfo();
+						tmpNo.regions = controller.getRegionTypes();
+						SendToAllClients(tmpNo);
+						
 					}
 
 					break;
@@ -306,17 +328,24 @@ public class UpdateGameState extends Thread {
 
 					} 
 					else {
+						
 						overlayManager.deleteEntry(overlayManager.getRC());
 						//overlayManager.addEntry(no.dataTarget, 0, new Date());
 						overlayManager.addEntry(no.target, 0, new Date());
+						
+						controller.setNewRegionTypes(no.regions);
+						controller.importTankInfo(no.tankData);
+						controller.importPowerUpMap(no.powerUpData);
+						controller.importMissileInfo(no.missileData);						
 					}
+					
 					break;
 
 				case Kill:
 					System.exit(0);
 					break;
 
-				
+
 				default:
 					break;
 				}

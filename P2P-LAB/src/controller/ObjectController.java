@@ -43,6 +43,16 @@ public class ObjectController implements IObjectController{
 	}
 
 
+	public GameController getGc() {
+		return gc;
+	}
+
+
+	public void setGc(GameController gc) {
+		this.gc = gc;
+	}
+
+
 	/************ POWER_UP_CONTROLLER *******************************************************************************/
 
 	public void addPowerUpRandom(){
@@ -414,7 +424,7 @@ public class ObjectController implements IObjectController{
 				NetworkObject no = new NetworkObject();
 				no.type = dataType.ExitPermission;
 				no.dataTarget = gc.getMe();
-				gc.overlay.SendToAllBackupRCs(no);
+				gc.overlay.SendToOneClient(no, no.dataTarget);
 				
 			}
 

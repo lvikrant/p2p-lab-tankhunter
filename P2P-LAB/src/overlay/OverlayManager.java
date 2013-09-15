@@ -38,7 +38,7 @@ public class OverlayManager {
 		System.out.println("Size: "  + map.size());
 		for (Map.Entry<NetworkTarget, Pair> entry : map.entrySet()) {
 		
-			if(entry.getValue().getType() == 1){
+			if(entry.getValue().getType() == 1 || entry.getValue().getType() == 2){
 				return true;
 			}
 		}
@@ -117,7 +117,7 @@ public class OverlayManager {
 		Iterator it = map.entrySet().iterator();
 		while(it.hasNext()) {
 			Map.Entry data = (Map.Entry)it.next();
-			if(((Pair)(data.getValue())).getType() == 1)
+			if(((Pair)(data.getValue())).getType() == 1 || ((Pair)(data.getValue())).getType() == 2)
 				list.add((NetworkTarget)data.getKey());
 		}
 		return list;

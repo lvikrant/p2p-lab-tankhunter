@@ -3,6 +3,8 @@ package interfaces;
 import java.awt.Point;
 import java.util.Map;
 
+import controller.GameController;
+
 import model.Missile;
 import model.MissileInfo;
 import model.NetworkObject;
@@ -111,4 +113,8 @@ public interface IObjectController {
 	public void exitGamePermission();
 
 	public void exitGamePermission(NetworkTarget dataTarget);
+	
+	public GameController getGc();
+
+	public void setGc(GameController gc);
 }
