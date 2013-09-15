@@ -299,16 +299,19 @@ public class UpdateGameState extends Thread {
 								overlayManager.addEntry(nt,1,new Date());
 						}
 						NetworkObject tempNo = new NetworkObject();
-						tempNo.type = dataType.NewRC;
+						/*tempNo.type = dataType.NewRC;
 						no.dataTarget = controller.getMe();
 						SendToAllClients(tempNo);
+						*/
 						tempNo = new NetworkObject();
 						tempNo.type = dataType.Kill;
-						
 						man.Send(no.target, tempNo);
+						
+						no.target = man.getMe();
+						controller.removeTank(overlayManager.getRC());
 						overlayManager.deleteEntry(overlayManager.getRC());						
 						overlayManager.addEntry(no.target, 0, new Date());
-						controller.removeTank(overlayManager.getRC());
+						
 					
 						controller.getGc().setRegionController(true);
 						tmpNo = new NetworkObject();
@@ -317,6 +320,7 @@ public class UpdateGameState extends Thread {
 						tmpNo.powerUpData = controller.exportPowerUpMap();
 						tmpNo.missileData = controller.exportMissileInfo();
 						tmpNo.regions = controller.getRegionTypes();
+						tmpNo.target = man.getMe();
 						SendToAllClients(tmpNo);
 						
 					}
@@ -332,6 +336,8 @@ public class UpdateGameState extends Thread {
 						overlayManager.deleteEntry(overlayManager.getRC());
 						//overlayManager.addEntry(no.dataTarget, 0, new Date());
 						overlayManager.addEntry(no.target, 0, new Date());
+						
+						controller.setMe(no.reciver);
 						
 						controller.setNewRegionTypes(no.regions);
 						controller.importTankInfo(no.tankData);
