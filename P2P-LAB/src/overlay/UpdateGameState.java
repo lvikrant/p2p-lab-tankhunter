@@ -6,6 +6,7 @@ package overlay;
 
 import java.awt.Point;
 import java.util.Date;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import interfaces.IObjectController;
@@ -178,7 +179,7 @@ public class UpdateGameState extends Thread {
 					if(iAmRC) {
 
 					} else {	
-						System.out.println("Empfangen!");
+						//System.out.println("Empfangen!");
 						controller.addPowerUp(no.powerUp);
 					}
 					break;
@@ -234,21 +235,27 @@ public class UpdateGameState extends Thread {
 					
 				case ExitRequest:
 					if(iAmRC) {
-						controller.getExitGameRequest(no.dataTarget);
-						controller.getBackupRCAck();
+						controller.getExitGameRequest(no.dataTarget);						
 						//TODO remove from Network
-					} else {
-
+					} else { 
+						controller.exitGamePermission();
 					}
 					break;
 				case ExitPermission:
 					if(iAmRC) {
+						//TODO : Send information to backup RC
 						controller.exitGamePermission(no.dataTarget);
+						List <NetworkTarget> bRCList = overlayManager.getBackupRCs();
+						for(NetworkTarget bRC : bRCList) {
+							NetworkObject toSendRC = new NetworkObject();
+							toSendRC.type = dataType.NewRCPing;
+							man.Send(bRC, toSendRC);
+						}
+						
 					} else {
 						controller.exitGamePermission();
 					}
 					break;
-
 
 				case NewRCPing:	
 					//Answer Ping with Pong
