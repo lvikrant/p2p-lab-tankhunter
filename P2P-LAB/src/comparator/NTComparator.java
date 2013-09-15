@@ -5,11 +5,12 @@ import java.util.Comparator;
 
 import model.NetworkTarget;
 
+/**
+ * Custom compare function for sorting
+ *
+ */
 public class NTComparator implements Comparator<NetworkTarget>,Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
