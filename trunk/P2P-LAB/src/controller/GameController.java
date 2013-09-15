@@ -42,6 +42,10 @@ public class GameController implements ActionListener, KeyListener {
 
 	private boolean regionController;
 
+	public void setRegionController(boolean regionController) {
+		this.regionController = regionController;
+	}
+
 	public UpdateGameState overlay;
 	
 	private DeathManager  deathManager;
